@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+/* Base resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--tx);
+  background: var(--bg);
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+/* ═══════════════ PREMIUM ANIMATIONS ═══════════════ */
+
+/* Document float — deeper travel, subtle scale */
+@keyframes docFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-1.5deg) scale(1);
+  }
+  50% {
+    transform: translateY(-14px) rotate(0.5deg) scale(1.01);
+  }
+}
+
+/* Stamp pulse — amber glow ring */
+@keyframes stampPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 16px 4px rgba(245, 158, 11, 0.18);
+  }
+}
+
+/* Shine sweep across CTA buttons */
+@keyframes shineSweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+/* Subtle background grain texture */
+@keyframes grainShift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 0%); }
+  30% { transform: translate(-1%, 1%); }
+  40% { transform: translate(1%, -1%); }
+  50% { transform: translate(-1%, 0%); }
+  60% { transform: translate(1%, 1%); }
+  70% { transform: translate(0%, -1%); }
+  80% { transform: translate(-1%, 1%); }
+  90% { transform: translate(1%, 0%); }
+}
+
+/* Fade up for section entries */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gentle glow pulse for form card */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+  50% {
+    box-shadow: 0 0 40px 8px rgba(245, 158, 11, 0.06);
+  }
+}
+
+/* ═══════════════ FOCUS STATES ═══════════════ */
+
+.focus-amber:focus {
+  outline: none;
+  border-color: var(--am);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12), 0 0 16px rgba(245, 158, 11, 0.06);
+}
+
+/* ═══════════════ CTA SHINE EFFECT ═══════════════ */
+
+.cta-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.cta-shine:hover::after {
+  animation: shineSweep 0.6s ease-out;
+}
+
+/* ═══════════════ RADIX ACCORDION ═══════════════ */
+
+@keyframes slideDown {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes slideUp {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
+/* ═══════════════ UTILITY CLASSES ═══════════════ */
+
+/* Gradient section bg */
+.section-gradient {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+}
+
+/* Soft card with depth */
+.card-elevated {
+  background: var(--bg);
+  border: 1px solid var(--bd);
+  border-radius: var(--r-lg);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.03);
+}
+
+/* Amber gradient text */
+.text-amber-gradient {
+  background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════ SCROLLBAR ═══════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--tx3);
+  border-radius: 3px;
+}
