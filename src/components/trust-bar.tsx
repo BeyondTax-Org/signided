@@ -10,10 +10,11 @@ const items = [
 export function TrustBar() {
   return (
     <div
-      className="border-y px-6 py-4"
+      className="px-6 py-4"
       style={{
-        borderColor: "var(--bd)",
-        background: "linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)",
+        background: "var(--dark2)",
+        borderTop: "1px solid var(--dark-bd)",
+        borderBottom: "1px solid var(--dark-bd)",
       }}
     >
       <div className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-center gap-x-10 gap-y-3">
@@ -21,7 +22,7 @@ export function TrustBar() {
           <div key={item.label} className="flex items-center gap-2.5">
             <div
               className="flex h-7 w-7 items-center justify-center rounded-md"
-              style={{ background: "var(--am-bg)" }}
+              style={{ background: "rgba(245,158,11,0.1)" }}
             >
               <item.icon
                 size={14}
@@ -32,13 +33,13 @@ export function TrustBar() {
             <div className="flex flex-col">
               <span
                 className="text-[11px] font-bold leading-tight"
-                style={{ color: "var(--tx)", letterSpacing: "-0.01em" }}
+                style={{ color: "var(--dark-tx)", letterSpacing: "-0.01em" }}
               >
                 {item.label}
               </span>
               <span
                 className="text-[10px] leading-tight"
-                style={{ color: "var(--tx3)" }}
+                style={{ color: "var(--dark-tx3)" }}
               >
                 {item.sub}
               </span>

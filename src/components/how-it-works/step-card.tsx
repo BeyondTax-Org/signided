@@ -41,18 +41,18 @@ export function StepCard({
         damping: 24,
         delay: index * 0.12,
       }}
-      className="group flex flex-col items-center rounded-[var(--r-lg)] border bg-white p-5 text-center transition-all duration-300"
+      className="group flex flex-col items-center rounded-[var(--r-lg)] border bg-white p-6 text-center transition-all duration-300"
       style={{
         borderColor: "var(--bd)",
-        boxShadow: "var(--shadow-sm)",
+        boxShadow: "var(--shadow-md)",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-lg)";
         (e.currentTarget as HTMLElement).style.borderColor = colorLight;
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+        (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-sm)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)";
         (e.currentTarget as HTMLElement).style.borderColor = "var(--bd)";
         (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
       }}

@@ -1,7 +1,7 @@
 :root {
   /* Sign IDed amber brand — extended */
   --am: #F59E0B;
-  --am-hover: #B45309;
+  --am-hover: #D97706;
   --am-dark: #92400E;
   --am-light: #FEF3C7;
   --am-bg: #FFFBEB;
@@ -28,6 +28,15 @@
   --tx3: #A8A29E;
   --bd: rgba(0, 0, 0, 0.08);
   --bd-strong: rgba(0, 0, 0, 0.12);
+
+  /* Dark surface tokens */
+  --dark: #0C0A09;
+  --dark2: #1C1917;
+  --dark3: #292524;
+  --dark-bd: rgba(255, 255, 255, 0.06);
+  --dark-tx: rgba(255, 255, 255, 0.92);
+  --dark-tx2: rgba(255, 255, 255, 0.6);
+  --dark-tx3: rgba(255, 255, 255, 0.35);
 
   /* Radius */
   --r-sm: 8px;

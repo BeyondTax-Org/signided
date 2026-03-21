@@ -5,10 +5,12 @@ export function SiteHeader() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full",
-        "bg-white/90 backdrop-blur-[12px]",
-        "border-b"
+        "backdrop-blur-[12px]"
       )}
-      style={{ borderColor: "var(--bd)" }}
+      style={{
+        background: "rgba(12,10,9,0.95)",
+        borderBottom: "1px solid var(--dark-bd)",
+      }}
     >
       <div className="mx-auto flex h-14 max-w-[1120px] items-center justify-between px-6">
         {/* Left: Logo */}
@@ -16,7 +18,7 @@ export function SiteHeader() {
           <a href="/" className="flex items-center gap-2.5 group">
             <ShieldMark />
             <span className="text-[15px] tracking-[-0.01em]">
-              <span className="font-semibold text-[var(--tx)]">Sign</span>
+              <span className="font-semibold" style={{ color: "#fff" }}>Sign</span>
               <span className="font-bold" style={{ color: "var(--am)" }}>
                 IDed
               </span>
@@ -42,12 +44,12 @@ export function SiteHeader() {
           <a
             href="#how-it-works"
             className="hidden text-[13px] font-medium transition-colors sm:block"
-            style={{ color: "var(--tx2)" }}
+            style={{ color: "var(--dark-tx2)" }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "var(--tx)")
+              (e.currentTarget.style.color = "#fff")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "var(--tx2)")
+              (e.currentTarget.style.color = "var(--dark-tx2)")
             }
           >
             How it works
@@ -55,12 +57,12 @@ export function SiteHeader() {
           <a
             href="#faq"
             className="hidden text-[13px] font-medium transition-colors sm:block"
-            style={{ color: "var(--tx2)" }}
+            style={{ color: "var(--dark-tx2)" }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "var(--tx)")
+              (e.currentTarget.style.color = "#fff")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "var(--tx2)")
+              (e.currentTarget.style.color = "var(--dark-tx2)")
             }
           >
             FAQs
