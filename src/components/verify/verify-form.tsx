@@ -26,8 +26,8 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
       id="verify"
       className="border-y px-6 py-16"
       style={{
-        background: "linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)",
-        borderColor: "var(--bd)",
+        background: "linear-gradient(180deg, var(--muted) 0%, var(--background) 100%)",
+        borderColor: "var(--border)",
       }}
     >
       <div className="mx-auto max-w-[1120px]">
@@ -38,14 +38,14 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
               fontSize: "clamp(22px, 3vw, 28px)",
               fontWeight: 700,
               letterSpacing: "-0.03em",
-              color: "var(--tx)",
+              color: "var(--foreground)",
             }}
           >
             Verify a signed document
           </h2>
           <p
             className="mt-2"
-            style={{ fontSize: "15px", color: "var(--tx2)" }}
+            style={{ fontSize: "15px", color: "var(--muted-foreground)" }}
           >
             Enter the unique verification code or upload the signed PDF.
           </p>
@@ -54,39 +54,25 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
         {/* Form card */}
         <div className="mx-auto max-w-[480px]">
           <div
-            className="group relative rounded-[var(--r-lg)] border bg-white p-6 transition-all duration-300"
+            className="group relative rounded-[var(--radius-card)] border bg-white p-6 transition-all duration-300"
             style={{
-              borderColor: "var(--bd)",
+              borderColor: "var(--border)",
               boxShadow: "var(--shadow-md)",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow =
-                "0 4px 16px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.06), 0 0 0 1px rgba(245,158,11,0.1), 0 0 40px rgba(245,158,11,0.06)";
-              e.currentTarget.style.borderColor = "rgba(245,158,11,0.2)";
+                "0 4px 16px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.06), 0 0 0 1px color-mix(in srgb, var(--primary) 15%, transparent)";
+              e.currentTarget.style.borderColor = "color-mix(in srgb, var(--primary) 25%, var(--border))";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.boxShadow = "var(--shadow-md)";
-              e.currentTarget.style.borderColor = "var(--bd)";
+              e.currentTarget.style.borderColor = "var(--border)";
             }}
           >
-            {/* Ambient glow border on hover */}
-            <div
-              className="pointer-events-none absolute inset-0 rounded-[var(--r-lg)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(245,158,11,0.25) 0%, transparent 50%, rgba(245,158,11,0.1) 100%)",
-                mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                maskComposite: "exclude",
-                WebkitMaskComposite: "xor",
-                padding: "1.5px",
-                borderRadius: "var(--r-lg)",
-              }}
-            />
-
             {/* Tabs */}
             <div
               className="mb-5 flex border-b"
-              style={{ borderColor: "var(--bd)" }}
+              style={{ borderColor: "var(--border)" }}
             >
               {([
                 { key: "uvc" as Tab, icon: Hash, label: "UVC Code" },
@@ -103,8 +89,8 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
                   )}
                   style={{
                     borderColor:
-                      tab === t.key ? "var(--am)" : "transparent",
-                    color: tab === t.key ? "var(--tx)" : "var(--tx2)",
+                      tab === t.key ? "var(--primary)" : "transparent",
+                    color: tab === t.key ? "var(--foreground)" : "var(--muted-foreground)",
                   }}
                 >
                   <t.icon size={14} />
@@ -123,7 +109,7 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
             {/* Security note */}
             <div
               className="mt-4 flex items-start gap-2 rounded-[var(--r-sm)] p-3"
-              style={{ background: "var(--bg2)" }}
+              style={{ background: "var(--muted)" }}
             >
               <Lock
                 size={12}
@@ -161,7 +147,7 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
               <div key={item.title} className="text-center">
                 <p
                   className="text-[11px] font-semibold"
-                  style={{ color: "var(--tx)" }}
+                  style={{ color: "var(--foreground)" }}
                 >
                   {item.title}
                 </p>

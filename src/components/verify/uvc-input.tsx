@@ -36,7 +36,7 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
     <form onSubmit={handleSubmit} className="space-y-3">
       <div>
         <div
-          className="flex items-center overflow-hidden rounded-[var(--r-md)] border transition-all duration-200 focus-within:border-[var(--am)] focus-within:shadow-[0_0_0_3px_rgba(245,158,11,0.1)]"
+          className="flex items-center overflow-hidden rounded-[var(--r-md)] border transition-all duration-200 focus-within:border-[var(--primary)] focus-within:shadow-[0_0_0_3px_rgba(99,102,241,0.1)]"
           style={{
             borderColor: error ? "var(--revoked)" : "var(--bd-strong)",
             borderWidth: "1.5px",
@@ -55,7 +55,7 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
               fontFamily: "var(--mono)",
               fontSize: "15px",
               letterSpacing: "0.04em",
-              color: "var(--tx)",
+              color: "var(--foreground)",
             }}
             autoComplete="off"
             spellCheck={false}
@@ -75,18 +75,16 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
         type="submit"
         className="cta-shine flex w-full items-center justify-center gap-2 rounded-[var(--r-md)] py-3.5 text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[2px] cursor-pointer"
         style={{
-          background: "var(--am)",
-          color: "var(--am-cta-fg)",
+          background: "var(--primary)",
+          color: "var(--primary-cta-fg)",
           boxShadow: "var(--shadow-sm)",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = "var(--am-hover)";
-          e.currentTarget.style.color = "#fff";
-          e.currentTarget.style.boxShadow = "var(--shadow-am)";
+          e.currentTarget.style.background = "var(--primary-hover)";
+          e.currentTarget.style.boxShadow = "var(--shadow-primary)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = "var(--am)";
-          e.currentTarget.style.color = "var(--am-cta-fg)";
+          e.currentTarget.style.background = "var(--primary)";
           e.currentTarget.style.boxShadow = "var(--shadow-sm)";
         }}
       >
@@ -99,7 +97,7 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
         onClick={onOpenHelp}
         className="flex items-center gap-1.5 text-[12px] font-medium transition-colors cursor-pointer"
         style={{ color: "var(--tx3)" }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--am-hover)")}
+        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
         onMouseLeave={(e) => (e.currentTarget.style.color = "var(--tx3)")}
       >
         <Info size={12} />

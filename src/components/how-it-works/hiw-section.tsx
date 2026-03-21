@@ -16,7 +16,7 @@ const phase1Steps = [
     icon: <Hash size={20} />,
     title: "Enter the UVC",
     description:
-      "Type the unique verification code from the signed PDF — or upload the file.",
+      "Type the unique verification code from the signed PDF \u2014 or upload the file.",
     who: "YOU" as const,
   },
   {
@@ -32,7 +32,7 @@ const phase1Steps = [
     icon: <ShieldCheck size={20} />,
     title: "See the result",
     description:
-      "Instant status: verified, expired, or revoked — plus the SHA-256 fingerprint.",
+      "Instant status: verified, expired, or revoked \u2014 plus the SHA-256 fingerprint.",
     who: "AUTOMATIC" as const,
   },
 ];
@@ -69,7 +69,7 @@ function StepConnector() {
     <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 translate-x-1/2 md:flex">
       <div
         className="flex h-6 w-6 items-center justify-center rounded-full"
-        style={{ background: "var(--bg)", border: "1px solid var(--bd)" }}
+        style={{ background: "var(--background)", border: "1px solid var(--border)" }}
       >
         <ChevronRight size={12} style={{ color: "var(--tx3)" }} />
       </div>
@@ -83,7 +83,7 @@ export function HiwSection() {
       id="how-it-works"
       className="relative px-6 py-20"
       style={{
-        background: "linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%)",
+        background: "linear-gradient(180deg, var(--background) 0%, var(--muted) 50%, var(--background) 100%)",
       }}
     >
       <div className="mx-auto max-w-[1120px]">
@@ -100,12 +100,12 @@ export function HiwSection() {
               fontSize: "clamp(22px, 3vw, 28px)",
               fontWeight: 700,
               letterSpacing: "-0.03em",
-              color: "var(--tx)",
+              color: "var(--foreground)",
             }}
           >
             How it works
           </h2>
-          <p className="mt-2 text-[15px]" style={{ color: "var(--tx2)" }}>
+          <p className="mt-2 text-[15px]" style={{ color: "var(--muted-foreground)" }}>
             Two phases. Six steps. Under a minute.
           </p>
         </motion.div>
@@ -131,7 +131,7 @@ export function HiwSection() {
             </span>
             <span
               className="text-[18px] font-bold"
-              style={{ letterSpacing: "-0.02em" }}
+              style={{ letterSpacing: "-0.02em", color: "var(--foreground)" }}
             >
               Verify the signature
             </span>
@@ -162,21 +162,21 @@ export function HiwSection() {
         >
           <div
             className="flex-1 border-t"
-            style={{ borderColor: "var(--bd)" }}
+            style={{ borderColor: "var(--border)" }}
           />
           <span
             className="rounded-full border px-4 py-2 text-[11px] font-semibold"
             style={{
-              background: "var(--am-bg)",
-              borderColor: "rgba(245,158,11,0.2)",
-              color: "var(--am-dark)",
+              background: "var(--primary-bg)",
+              borderColor: "color-mix(in srgb, var(--primary) 20%, transparent)",
+              color: "var(--primary-dark)",
             }}
           >
-            Document verified — want to see it?
+            Document verified \u2014 want to see it?
           </span>
           <div
             className="flex-1 border-t"
-            style={{ borderColor: "var(--bd)" }}
+            style={{ borderColor: "var(--border)" }}
           />
         </motion.div>
 
@@ -192,8 +192,8 @@ export function HiwSection() {
             <span
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.04em]"
               style={{
-                background: "var(--am-light)",
-                color: "var(--am-dark)",
+                background: "var(--primary-light)",
+                color: "var(--primary-dark)",
               }}
             >
               <Eye size={12} />
@@ -201,7 +201,7 @@ export function HiwSection() {
             </span>
             <span
               className="text-[18px] font-bold"
-              style={{ letterSpacing: "-0.02em" }}
+              style={{ letterSpacing: "-0.02em", color: "var(--foreground)" }}
             >
               Preview the document
             </span>
@@ -212,8 +212,8 @@ export function HiwSection() {
               <div key={step.num} className="relative">
                 <StepCard
                   {...step}
-                  color="var(--am)"
-                  colorLight="var(--am-light)"
+                  color="var(--primary)"
+                  colorLight="var(--primary-light)"
                   index={i}
                 />
                 {i < phase2Steps.length - 1 && <StepConnector />}
@@ -234,18 +234,16 @@ export function HiwSection() {
             href="#verify"
             className="cta-shine inline-flex items-center rounded-[var(--r-md)] px-7 py-3.5 text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[2px]"
             style={{
-              background: "var(--am)",
-              color: "var(--am-cta-fg)",
+              background: "var(--primary)",
+              color: "var(--primary-cta-fg)",
               boxShadow: "var(--shadow-sm)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--am-hover)";
-              e.currentTarget.style.color = "#fff";
-              e.currentTarget.style.boxShadow = "var(--shadow-am)";
+              e.currentTarget.style.background = "var(--primary-hover)";
+              e.currentTarget.style.boxShadow = "var(--shadow-primary)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--am)";
-              e.currentTarget.style.color = "var(--am-cta-fg)";
+              e.currentTarget.style.background = "var(--primary)";
               e.currentTarget.style.boxShadow = "var(--shadow-sm)";
             }}
           >

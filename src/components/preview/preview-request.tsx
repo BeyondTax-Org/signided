@@ -26,18 +26,18 @@ export function PreviewRequest() {
       className="mx-auto max-w-[480px]"
     >
       <div
-        className="rounded-[var(--r-lg)] border bg-white p-6"
-        style={{ borderColor: "var(--bd)", boxShadow: "var(--shadow-md)" }}
+        className="rounded-[var(--radius-card)] border bg-white p-6"
+        style={{ borderColor: "var(--border)", boxShadow: "var(--shadow-md)" }}
       >
         <h3
           className="mb-4 text-center text-[18px] font-bold"
-          style={{ letterSpacing: "-0.02em" }}
+          style={{ letterSpacing: "-0.02em", color: "var(--foreground)" }}
         >
           Request document preview
         </h3>
         <p
           className="mb-6 text-center text-[13px] leading-[1.6]"
-          style={{ color: "var(--tx2)" }}
+          style={{ color: "var(--muted-foreground)" }}
         >
           The document owner will receive a one-time passcode. Once they
           approve, you get 15 minutes of read-only access.
@@ -52,15 +52,19 @@ export function PreviewRequest() {
             <div
               key={i}
               className="flex items-center gap-3 rounded-[var(--r-sm)] p-3"
-              style={{ background: "var(--bg2)" }}
+              style={{ background: "var(--muted)" }}
             >
               <div
                 className="flex h-7 w-7 items-center justify-center rounded-md"
-                style={{ background: "var(--am-bg)", color: "var(--am)", flexShrink: 0 }}
+                style={{
+                  background: "var(--primary-bg)",
+                  color: "var(--primary)",
+                  flexShrink: 0,
+                }}
               >
                 {step.icon}
               </div>
-              <span className="text-[12px]" style={{ color: "var(--tx2)" }}>
+              <span className="text-[12px]" style={{ color: "var(--muted-foreground)" }}>
                 {step.text}
               </span>
             </div>
@@ -71,18 +75,16 @@ export function PreviewRequest() {
           onClick={handleRequest}
           className="cta-shine w-full rounded-[var(--r-md)] py-3.5 text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[2px] cursor-pointer"
           style={{
-            background: "var(--am)",
-            color: "var(--am-cta-fg)",
+            background: "var(--primary)",
+            color: "var(--primary-cta-fg)",
             boxShadow: "var(--shadow-sm)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "var(--am-hover)";
-            e.currentTarget.style.color = "#fff";
-            e.currentTarget.style.boxShadow = "var(--shadow-am)";
+            e.currentTarget.style.background = "var(--primary-hover)";
+            e.currentTarget.style.boxShadow = "var(--shadow-primary)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "var(--am)";
-            e.currentTarget.style.color = "var(--am-cta-fg)";
+            e.currentTarget.style.background = "var(--primary)";
             e.currentTarget.style.boxShadow = "var(--shadow-sm)";
           }}
         >
@@ -93,10 +95,10 @@ export function PreviewRequest() {
           onClick={() => dispatch({ type: "RESET" })}
           className="mt-3 w-full py-2 text-[13px] font-medium transition-colors cursor-pointer"
           style={{ color: "var(--tx3)" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--tx2)")}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--muted-foreground)")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "var(--tx3)")}
         >
-          Cancel \u2014 verify another
+          Cancel — verify another
         </button>
       </div>
     </motion.div>

@@ -11,8 +11,8 @@ export function FaqSection() {
       id="faq"
       className="border-y px-6 py-20"
       style={{
-        background: "linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)",
-        borderColor: "var(--bd)",
+        background: "linear-gradient(180deg, var(--muted) 0%, var(--background) 100%)",
+        borderColor: "var(--border)",
       }}
     >
       <div className="mx-auto max-w-[560px]">
@@ -28,12 +28,12 @@ export function FaqSection() {
               fontSize: "clamp(22px, 3vw, 28px)",
               fontWeight: 700,
               letterSpacing: "-0.03em",
-              color: "var(--tx)",
+              color: "var(--foreground)",
             }}
           >
             Common questions
           </h2>
-          <p className="mt-2 text-[15px]" style={{ color: "var(--tx2)" }}>
+          <p className="mt-2 text-[15px]" style={{ color: "var(--muted-foreground)" }}>
             Everything you need to know about verifying documents.
           </p>
         </motion.div>
@@ -58,10 +58,10 @@ export function FaqSection() {
                   className="overflow-hidden rounded-[var(--r-md)] border bg-white transition-all duration-200"
                   style={{
                     borderColor: isOpen
-                      ? "rgba(245,158,11,0.3)"
-                      : "var(--bd)",
+                      ? "color-mix(in srgb, var(--primary) 30%, var(--border))"
+                      : "var(--border)",
                     boxShadow: isOpen
-                      ? "0 4px 16px rgba(245,158,11,0.06)"
+                      ? "0 4px 16px rgba(99,102,241,0.06)"
                       : "var(--shadow-sm)",
                   }}
                 >
@@ -69,18 +69,18 @@ export function FaqSection() {
                     onClick={() => setOpenIndex(isOpen ? null : i)}
                     className="flex w-full items-center justify-between px-5 py-4 text-left text-[13px] font-semibold transition-colors duration-200 cursor-pointer"
                     style={{
-                      color: "var(--tx)",
+                      color: "var(--foreground)",
                       letterSpacing: "-0.01em",
                     }}
                     onMouseEnter={(e) => {
                       if (!isOpen)
                         (e.currentTarget.parentElement as HTMLElement).style.borderColor =
-                          "rgba(245,158,11,0.2)";
+                          "color-mix(in srgb, var(--primary) 20%, var(--border))";
                     }}
                     onMouseLeave={(e) => {
                       if (!isOpen)
                         (e.currentTarget.parentElement as HTMLElement).style.borderColor =
-                          "var(--bd)";
+                          "var(--border)";
                     }}
                   >
                     {item.question}
@@ -94,7 +94,7 @@ export function FaqSection() {
                     >
                       <ChevronDown
                         size={16}
-                        style={{ color: isOpen ? "var(--am)" : "var(--tx3)" }}
+                        style={{ color: isOpen ? "var(--primary)" : "var(--tx3)" }}
                       />
                     </motion.div>
                   </button>
@@ -118,13 +118,13 @@ export function FaqSection() {
                         <div
                           className="border-t px-5 py-4"
                           style={{
-                            borderColor: "rgba(245,158,11,0.15)",
-                            background: "var(--bg2)",
+                            borderColor: "color-mix(in srgb, var(--primary) 12%, transparent)",
+                            background: "var(--muted)",
                           }}
                         >
                           <p
                             className="text-[13px] leading-[1.7]"
-                            style={{ color: "var(--tx2)" }}
+                            style={{ color: "var(--muted-foreground)" }}
                           >
                             {item.answer}
                           </p>

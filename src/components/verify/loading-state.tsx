@@ -18,8 +18,8 @@ export function LoadingState() {
       className="mx-auto max-w-[400px] py-8"
     >
       <div
-        className="rounded-[var(--r-lg)] border bg-white p-8"
-        style={{ borderColor: "var(--bd)", boxShadow: "var(--shadow-md)" }}
+        className="rounded-[var(--radius-card)] border bg-white p-8"
+        style={{ borderColor: "var(--border)", boxShadow: "var(--shadow-md)" }}
       >
         {/* Animated shield */}
         <div className="mb-6 flex justify-center">
@@ -27,15 +27,15 @@ export function LoadingState() {
             animate={{ scale: [1, 1.08, 1] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             className="flex h-14 w-14 items-center justify-center rounded-2xl"
-            style={{ background: "var(--am-bg)" }}
+            style={{ background: "var(--primary-bg)" }}
           >
-            <Shield size={28} style={{ color: "var(--am)" }} />
+            <Shield size={28} style={{ color: "var(--primary)" }} />
           </motion.div>
         </div>
 
         <h3
           className="mb-6 text-center text-[16px] font-bold"
-          style={{ letterSpacing: "-0.02em", color: "var(--tx)" }}
+          style={{ letterSpacing: "-0.02em", color: "var(--foreground)" }}
         >
           Verifying document
         </h3>
@@ -60,7 +60,7 @@ export function LoadingState() {
                   damping: 15,
                 }}
                 className="flex h-5 w-5 items-center justify-center rounded-full"
-                style={{ background: "var(--am)", flexShrink: 0 }}
+                style={{ background: "var(--primary)", flexShrink: 0 }}
               >
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                   <path
@@ -72,7 +72,7 @@ export function LoadingState() {
                   />
                 </svg>
               </motion.div>
-              <span className="text-[13px]" style={{ color: "var(--tx2)" }}>
+              <span className="text-[13px]" style={{ color: "var(--muted-foreground)" }}>
                 {s}
               </span>
             </motion.div>
@@ -82,7 +82,7 @@ export function LoadingState() {
         {/* Progress bar */}
         <div
           className="mt-6 h-1 overflow-hidden rounded-full"
-          style={{ background: "var(--bg2)" }}
+          style={{ background: "var(--muted)" }}
         >
           <motion.div
             initial={{ width: "0%" }}
@@ -90,7 +90,7 @@ export function LoadingState() {
             transition={{ duration: 2.4, ease: "easeInOut" }}
             className="h-full rounded-full"
             style={{
-              background: "linear-gradient(90deg, var(--am), var(--am-hover))",
+              background: "linear-gradient(90deg, var(--primary), var(--primary-hover))",
             }}
           />
         </div>

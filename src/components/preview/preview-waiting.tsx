@@ -12,26 +12,26 @@ export function PreviewWaiting() {
       className="mx-auto max-w-[480px]"
     >
       <div
-        className="rounded-[var(--r-lg)] border bg-white p-8 text-center"
-        style={{ borderColor: "var(--bd)", boxShadow: "var(--shadow-md)" }}
+        className="rounded-[var(--radius-card)] border bg-white p-8 text-center"
+        style={{ borderColor: "var(--border)", boxShadow: "var(--shadow-md)" }}
       >
         <div className="mb-5 flex justify-center">
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="flex h-14 w-14 items-center justify-center rounded-2xl"
-            style={{ background: "var(--am-bg)" }}
+            style={{ background: "var(--primary-bg)" }}
           >
-            <Smartphone size={28} style={{ color: "var(--am)" }} />
+            <Smartphone size={28} style={{ color: "var(--primary)" }} />
           </motion.div>
         </div>
         <h3
           className="mb-2 text-[18px] font-bold"
-          style={{ letterSpacing: "-0.02em" }}
+          style={{ letterSpacing: "-0.02em", color: "var(--foreground)" }}
         >
           Waiting for owner approval
         </h3>
-        <p className="text-[13px] leading-[1.6]" style={{ color: "var(--tx2)" }}>
+        <p className="text-[13px] leading-[1.6]" style={{ color: "var(--muted-foreground)" }}>
           We've sent a one-time passcode to the document owner.
           This usually takes a few seconds.
         </p>
@@ -41,7 +41,7 @@ export function PreviewWaiting() {
             <motion.div
               key={i}
               className="h-2 w-2 rounded-full"
-              style={{ background: "var(--am)" }}
+              style={{ background: "var(--primary)" }}
               animate={{ opacity: [0.3, 1, 0.3] }}
               transition={{
                 duration: 1.2,

@@ -1,15 +1,23 @@
 :root {
-  /* Sign IDed amber brand — extended */
+  /* ═══════════════ PRIMARY (INDIGO) ═══════════════ */
+  --primary: #6366F1;
+  --primary-hover: #4F46E5;
+  --primary-dark: #3730A3;
+  --primary-light: #E0E7FF;
+  --primary-bg: #EEF2FF;
+  --primary-cta-fg: #FFFFFF;
+  --primary-glow: rgba(99, 102, 241, 0.15);
+  --primary-glow-strong: rgba(99, 102, 241, 0.25);
+
+  /* Amber accent (secondary — Aiyug brand) */
   --am: #F59E0B;
   --am-hover: #D97706;
   --am-dark: #92400E;
   --am-light: #FEF3C7;
   --am-bg: #FFFBEB;
   --am-cta-fg: #1C1917;
-  --am-glow: rgba(245, 158, 11, 0.15);
-  --am-glow-strong: rgba(245, 158, 11, 0.25);
 
-  /* Status colors (semantic, NOT brand) */
+  /* ═══════════════ STATUS COLORS ═══════════════ */
   --verified: #22C55E;
   --verified-light: #DCFCE7;
   --expired: #F97316;
@@ -19,38 +27,71 @@
   --info: #3B82F6;
   --info-light: #EFF6FF;
 
-  /* Neutrals — refined scale */
-  --bg: #FFFFFF;
-  --bg2: #FAFAF9;
-  --bg3: #F5F5F4;
-  --tx: #0C0A09;
-  --tx2: #57534E;
-  --tx3: #A8A29E;
-  --bd: rgba(0, 0, 0, 0.08);
-  --bd-strong: rgba(0, 0, 0, 0.12);
+  /* ═══════════════ NEUTRALS ═══════════════ */
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --muted: #F8FAFC;
+  --muted-foreground: #64748B;
+  --border: #E2E8F0;
+  --input-background: #F8FAFC;
+  --ring: var(--primary);
 
-  /* Dark surface tokens */
-  --dark: #0C0A09;
-  --dark2: #1C1917;
-  --dark3: #292524;
-  --dark-bd: rgba(255, 255, 255, 0.06);
-  --dark-tx: rgba(255, 255, 255, 0.92);
-  --dark-tx2: rgba(255, 255, 255, 0.6);
-  --dark-tx3: rgba(255, 255, 255, 0.35);
+  /* Legacy aliases */
+  --bg: var(--background);
+  --bg2: var(--muted);
+  --bg3: #F1F5F9;
+  --tx: var(--foreground);
+  --tx2: var(--muted-foreground);
+  --tx3: #94A3B8;
+  --bd: var(--border);
+  --bd-strong: #CBD5E1;
 
-  /* Radius */
-  --r-sm: 8px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --r-xl: 20px;
+  /* ═══════════════ RADIUS ═══════════════ */
+  --radius: 12px;
+  --radius-card: 16px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --r-sm: var(--radius-sm);
+  --r-md: var(--radius-md);
+  --r-lg: var(--radius-lg);
+  --r-xl: var(--radius-xl);
 
-  /* Font families */
+  /* ═══════════════ TYPOGRAPHY ═══════════════ */
   --font: 'Geist', system-ui, -apple-system, sans-serif;
   --mono: 'Geist Mono', 'SF Mono', monospace;
 
-  /* Shadows */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* ═══════════════ SHADOWS ═══════════════ */
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-  --shadow-md: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
-  --shadow-lg: 0 4px 8px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.08);
+  --shadow-md: 0 2px 4px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.05);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,0.03), 0 16px 48px rgba(0,0,0,0.06);
+  --shadow-primary: 0 8px 24px rgba(99,102,241,0.2);
   --shadow-am: 0 8px 24px rgba(245,158,11,0.2);
+
+  /* Chart colors */
+  --chart-1: #6366F1;
+  --chart-2: #8B5CF6;
+  --chart-3: #A78BFA;
+  --chart-4: #C4B5FD;
+  --chart-5: #DDD6FE;
 }

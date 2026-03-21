@@ -86,7 +86,7 @@ export function ResultCard({ result }: { result: QuickResult }) {
       className="mx-auto max-w-[480px]"
     >
       <div
-        className="overflow-hidden rounded-[var(--r-lg)]"
+        className="overflow-hidden rounded-[var(--radius-card)]"
         style={{ boxShadow: "var(--shadow-lg)" }}
       >
         {/* Status banner */}
@@ -96,8 +96,8 @@ export function ResultCard({ result }: { result: QuickResult }) {
             background: config.bg,
             borderColor: config.borderColor,
             borderBottom: "none",
-            borderTopLeftRadius: "var(--r-lg)",
-            borderTopRightRadius: "var(--r-lg)",
+            borderTopLeftRadius: "var(--radius-card)",
+            borderTopRightRadius: "var(--radius-card)",
           }}
         >
           <div className="flex items-start gap-3">
@@ -115,7 +115,7 @@ export function ResultCard({ result }: { result: QuickResult }) {
               >
                 {config.label}
               </span>
-              <p className="mt-1 text-[13px] leading-[1.6]" style={{ color: "var(--tx2)" }}>
+              <p className="mt-1 text-[13px] leading-[1.6]" style={{ color: "var(--muted-foreground)" }}>
                 {config.description}
               </p>
             </div>
@@ -128,15 +128,15 @@ export function ResultCard({ result }: { result: QuickResult }) {
             className="border border-t-0 bg-white p-5"
             style={{
               borderColor: config.borderColor,
-              borderBottomLeftRadius: "var(--r-lg)",
-              borderBottomRightRadius: "var(--r-lg)",
+              borderBottomLeftRadius: "var(--radius-card)",
+              borderBottomRightRadius: "var(--radius-card)",
             }}
           >
             <div className="space-y-4">
               {/* Fingerprint */}
               <div
                 className="flex items-center justify-between rounded-[var(--r-sm)] p-3"
-                style={{ background: "var(--bg2)" }}
+                style={{ background: "var(--muted)" }}
               >
                 <div>
                   <p
@@ -147,7 +147,7 @@ export function ResultCard({ result }: { result: QuickResult }) {
                   </p>
                   <p
                     className="mt-1 text-[13px]"
-                    style={{ fontFamily: "var(--mono)", color: "var(--tx)" }}
+                    style={{ fontFamily: "var(--mono)", color: "var(--foreground)" }}
                   >
                     {result.fingerprint}
                   </p>
@@ -178,18 +178,16 @@ export function ResultCard({ result }: { result: QuickResult }) {
                 onClick={() => dispatch({ type: "REQUEST_PREVIEW" })}
                 className="cta-shine mt-1 flex w-full items-center justify-center gap-2 rounded-[var(--r-md)] py-3.5 text-[13px] font-semibold transition-all duration-200 hover:-translate-y-px cursor-pointer"
                 style={{
-                  background: "var(--am)",
-                  color: "var(--am-cta-fg)",
+                  background: "var(--primary)",
+                  color: "var(--primary-cta-fg)",
                   boxShadow: "var(--shadow-sm)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "var(--am-hover)";
-                  e.currentTarget.style.color = "#fff";
-                  e.currentTarget.style.boxShadow = "var(--shadow-am)";
+                  e.currentTarget.style.background = "var(--primary-hover)";
+                  e.currentTarget.style.boxShadow = "var(--shadow-primary)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "var(--am)";
-                  e.currentTarget.style.color = "var(--am-cta-fg)";
+                  e.currentTarget.style.background = "var(--primary)";
                   e.currentTarget.style.boxShadow = "var(--shadow-sm)";
                 }}
               >
@@ -206,15 +204,15 @@ export function ResultCard({ result }: { result: QuickResult }) {
             className="border border-t-0 bg-white p-5"
             style={{
               borderColor: config.borderColor,
-              borderBottomLeftRadius: "var(--r-lg)",
-              borderBottomRightRadius: "var(--r-lg)",
+              borderBottomLeftRadius: "var(--radius-card)",
+              borderBottomRightRadius: "var(--radius-card)",
             }}
           >
             <div className="flex gap-3">
               <button
                 onClick={() => dispatch({ type: "RESET" })}
                 className="flex flex-1 items-center justify-center gap-2 rounded-[var(--r-md)] border py-3 text-[13px] font-medium transition-all hover:-translate-y-px cursor-pointer"
-                style={{ borderColor: "var(--bd-strong)", color: "var(--tx)" }}
+                style={{ borderColor: "var(--bd-strong)", color: "var(--foreground)" }}
               >
                 <RotateCcw size={14} />
                 Try again
@@ -241,7 +239,7 @@ function MetaField({ label, value }: { label: string; value?: string }) {
   return (
     <div
       className="rounded-[var(--r-sm)] p-3"
-      style={{ background: "var(--bg2)" }}
+      style={{ background: "var(--muted)" }}
     >
       <p
         className="text-[9px] font-bold uppercase tracking-widest"
@@ -249,7 +247,7 @@ function MetaField({ label, value }: { label: string; value?: string }) {
       >
         {label}
       </p>
-      <p className="mt-1 text-[13px] font-medium" style={{ color: "var(--tx)" }}>
+      <p className="mt-1 text-[13px] font-medium" style={{ color: "var(--foreground)" }}>
         {value}
       </p>
     </div>

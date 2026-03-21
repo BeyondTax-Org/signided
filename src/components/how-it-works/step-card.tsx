@@ -13,7 +13,7 @@ interface StepCardProps {
 }
 
 const whoColors: Record<StepCardProps["who"], { bg: string; text: string }> = {
-  YOU: { bg: "var(--am-light)", text: "var(--am-dark)" },
+  YOU: { bg: "var(--primary-light)", text: "var(--primary-dark)" },
   AUTOMATIC: { bg: "var(--info-light)", text: "var(--info)" },
   OWNER: { bg: "var(--verified-light)", text: "#166534" },
 };
@@ -41,19 +41,19 @@ export function StepCard({
         damping: 24,
         delay: index * 0.12,
       }}
-      className="group flex flex-col items-center rounded-[var(--r-lg)] border bg-white p-6 text-center transition-all duration-300"
+      className="group flex flex-col items-center rounded-[var(--radius-card)] border bg-white p-6 text-center transition-all duration-300"
       style={{
-        borderColor: "var(--bd)",
-        boxShadow: "var(--shadow-md)",
+        borderColor: "var(--border)",
+        boxShadow: "var(--shadow-sm)",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-lg)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)";
         (e.currentTarget as HTMLElement).style.borderColor = colorLight;
         (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)";
-        (e.currentTarget as HTMLElement).style.borderColor = "var(--bd)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-sm)";
+        (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
         (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
       }}
     >
@@ -84,13 +84,13 @@ export function StepCard({
       {/* Text */}
       <h4
         className="mb-1.5 text-[13px] font-semibold"
-        style={{ letterSpacing: "-0.01em", color: "var(--tx)" }}
+        style={{ letterSpacing: "-0.01em", color: "var(--foreground)" }}
       >
         {title}
       </h4>
       <p
         className="text-[12px] leading-[1.6]"
-        style={{ color: "var(--tx2)", maxWidth: 200 }}
+        style={{ color: "var(--muted-foreground)", maxWidth: 200 }}
       >
         {description}
       </p>

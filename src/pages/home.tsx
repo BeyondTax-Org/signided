@@ -21,8 +21,8 @@ function VerifySection({ children }: { children: React.ReactNode }) {
     <div
       className="border-y px-6 py-16"
       style={{
-        background: "linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)",
-        borderColor: "var(--bd)",
+        background: "linear-gradient(180deg, var(--muted) 0%, var(--background) 100%)",
+        borderColor: "var(--border)",
       }}
     >
       {children}

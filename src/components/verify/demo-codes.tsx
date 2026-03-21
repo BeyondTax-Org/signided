@@ -28,7 +28,7 @@ export function DemoCodes() {
           className="group flex items-center gap-1.5 rounded-full border px-3 py-1 transition-all duration-200 hover:-translate-y-px cursor-pointer"
           style={{
             borderColor: d.bg,
-            background: "var(--bg)",
+            background: "var(--background)",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = d.color;
@@ -36,7 +36,7 @@ export function DemoCodes() {
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = d.bg;
-            e.currentTarget.style.background = "var(--bg)";
+            e.currentTarget.style.background = "var(--background)";
           }}
         >
           <code
