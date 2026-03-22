@@ -9,7 +9,7 @@ import {
   Eye,
 } from "lucide-react";
 
-const allSteps = [
+const verifySteps = [
   {
     num: 1,
     icon: <Hash size={20} />,
@@ -34,6 +34,9 @@ const allSteps = [
       "Instant status: verified, expired, or revoked \u2014 plus the SHA-256 fingerprint.",
     who: "AUTOMATIC" as const,
   },
+];
+
+const previewSteps = [
   {
     num: 4,
     icon: <Lock size={20} />,
@@ -66,7 +69,8 @@ export function HiwSection() {
       id="how-it-works"
       className="relative px-6 py-20"
       style={{
-        background: "linear-gradient(180deg, var(--background) 0%, var(--muted) 50%, var(--background) 100%)",
+        background:
+          "linear-gradient(180deg, var(--background) 0%, var(--muted) 50%, var(--background) 100%)",
       }}
     >
       <div className="mx-auto max-w-[1120px]">
@@ -88,14 +92,35 @@ export function HiwSection() {
           >
             How it works
           </h2>
-          <p className="mt-2 text-[15px]" style={{ color: "var(--muted-foreground)" }}>
+          <p
+            className="mt-2 text-[15px]"
+            style={{ color: "var(--muted-foreground)" }}
+          >
             Two phases. Six steps. Under a minute.
           </p>
         </motion.div>
 
-        {/* 2-column grid of all 6 steps */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          {allSteps.map((step, i) => (
+        {/* Phase 1: Verify */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-4"
+        >
+          <span
+            className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider"
+            style={{
+              background: "var(--am-bg)",
+              color: "var(--am)",
+            }}
+          >
+            Phase 1 &mdash; Verify
+          </span>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {verifySteps.map((step, i) => (
             <StepCard
               key={step.num}
               {...step}
@@ -106,7 +131,7 @@ export function HiwSection() {
           ))}
         </div>
 
-        {/* Divider */}
+        {/* Phase divider */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -130,13 +155,44 @@ export function HiwSection() {
           </div>
         </motion.div>
 
+        {/* Phase 2: Preview */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-4"
+        >
+          <span
+            className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider"
+            style={{
+              background: "var(--am-bg)",
+              color: "var(--am)",
+            }}
+          >
+            Phase 2 &mdash; Preview
+          </span>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {previewSteps.map((step, i) => (
+            <StepCard
+              key={step.num}
+              {...step}
+              color="var(--am)"
+              colorLight="var(--am-light)"
+              index={i}
+            />
+          ))}
+        </div>
+
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="text-center"
+          className="mt-14 text-center"
         >
           <a
             href="#verify"

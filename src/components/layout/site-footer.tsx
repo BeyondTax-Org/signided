@@ -87,7 +87,7 @@ export function SiteFooter() {
         >
           <p
             className="text-center text-[11px]"
-            style={{ color: "var(--dark-tx3)" }}
+            style={{ color: "var(--dark-tx2)" }}
           >
             &copy; {new Date().getFullYear()} Aiyug Technologies Pvt. Ltd. All
             rights reserved.

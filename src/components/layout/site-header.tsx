@@ -1,12 +1,19 @@
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const navLinks = [
+  { label: "How it works", href: "#how-it-works" },
+  { label: "FAQs", href: "#faq" },
+];
+
 export function SiteHeader() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header
-      className={cn(
-        "sticky top-0 z-50 w-full",
-        "backdrop-blur-[12px]"
-      )}
+      className={cn("sticky top-0 z-50 w-full", "backdrop-blur-[12px]")}
       style={{
         background: "color-mix(in srgb, var(--background) 92%, transparent)",
         borderBottom: "1px solid var(--border)",
@@ -17,47 +24,43 @@ export function SiteHeader() {
         <a href="/" className="flex items-center gap-2 group">
           <ShieldMark />
           <span className="text-[15px] tracking-[-0.01em]">
-            <span className="font-bold" style={{ color: "var(--foreground)" }}>
+            <span
+              className="font-bold"
+              style={{ color: "var(--foreground)" }}
+            >
               Sign
             </span>
             <span className="font-bold" style={{ color: "var(--am)" }}>
               IDed
             </span>
           </span>
-          <span className="text-[11px]" style={{ color: "var(--muted-foreground)" }}>
+          <span
+            className="text-[11px]"
+            style={{ color: "var(--muted-foreground)" }}
+          >
             by
           </span>
           <AiyugMark />
         </a>
 
-        {/* Right: Nav */}
-        <nav className="flex items-center gap-5">
-          <a
-            href="#how-it-works"
-            className="hidden text-[13px] font-medium transition-colors sm:block"
-            style={{ color: "var(--muted-foreground)" }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "var(--foreground)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "var(--muted-foreground)")
-            }
-          >
-            How it works
-          </a>
-          <a
-            href="#faq"
-            className="hidden text-[13px] font-medium transition-colors sm:block"
-            style={{ color: "var(--muted-foreground)" }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "var(--foreground)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "var(--muted-foreground)")
-            }
-          >
-            FAQs
-          </a>
+        {/* Right: Desktop nav */}
+        <nav className="hidden items-center gap-5 sm:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-[13px] font-medium transition-colors"
+              style={{ color: "var(--muted-foreground)" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--foreground)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--muted-foreground)")
+              }
+            >
+              {link.label}
+            </a>
+          ))}
           <a
             href="#verify"
             className="cta-shine rounded-[var(--r-sm)] px-[18px] py-[7px] text-[12px] font-semibold transition-all duration-200 hover:-translate-y-px"
@@ -75,7 +78,69 @@ export function SiteHeader() {
             Verify now
           </a>
         </nav>
+
+        {/* Mobile: CTA + hamburger */}
+        <div className="flex items-center gap-3 sm:hidden">
+          <a
+            href="#verify"
+            className="cta-shine rounded-[var(--r-sm)] px-[14px] py-[6px] text-[12px] font-semibold"
+            style={{
+              background: "var(--cta)",
+              color: "var(--cta-fg)",
+            }}
+          >
+            Verify
+          </a>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="flex h-9 w-9 items-center justify-center rounded-[var(--r-sm)] transition-colors cursor-pointer"
+            style={{
+              color: "var(--foreground)",
+              background: mobileOpen ? "var(--muted)" : "transparent",
+            }}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile dropdown menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="overflow-hidden sm:hidden"
+            style={{
+              background: "var(--background)",
+              borderBottom: "1px solid var(--border)",
+            }}
+          >
+            <nav className="flex flex-col gap-1 px-6 py-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-[var(--r-sm)] px-3 py-2.5 text-[14px] font-medium transition-colors"
+                  style={{ color: "var(--foreground)" }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.background = "var(--muted)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.background = "transparent")
+                  }
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
