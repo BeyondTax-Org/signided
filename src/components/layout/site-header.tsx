@@ -22,7 +22,11 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-[1120px] items-center justify-between px-6">
         {/* Left: Logo */}
         <a href="/" className="flex items-center gap-2 group">
-          <ShieldMark />
+          <img
+            src="/brand/signided-mark-color-light.svg"
+            alt=""
+            className="h-7 w-7 transition-transform duration-200 group-hover:scale-[1.08]"
+          />
           <span className="text-[15px] tracking-[-0.01em]">
             <span
               className="font-bold"
@@ -40,7 +44,17 @@ export function SiteHeader() {
           >
             by
           </span>
-          <AiyugMark />
+          <img
+            src="/brand/aiyug-mark-spectrum-light.svg"
+            alt="Aiyug"
+            className="h-4"
+          />
+          <span
+            className="text-[11px] font-semibold"
+            style={{ color: "var(--muted-foreground)" }}
+          >
+            aiyug
+          </span>
         </a>
 
         {/* Right: Desktop nav */}

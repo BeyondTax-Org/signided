@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="310" height="44" viewBox="0 0 310 44">
+  <g transform="translate(4,2)">
+    <path d="M18 4 L32 10 L32 22 Q32 32 18 38 Q4 32 4 22 L4 10 Z" fill="none" stroke="#B45309" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="18" cy="15" r="3.5" fill="none" stroke="#B45309" stroke-width="1.2" opacity="0.45"/>
+    <circle cx="18" cy="15" r="1.2" fill="#B45309" opacity="0.55"/>
+    <line x1="8" y1="28" x2="14" y2="28" stroke="#B45309" stroke-width="1.6" stroke-linecap="round" opacity="0.6"/>
+    <line x1="16" y1="28" x2="22" y2="28" stroke="#B45309" stroke-width="1.6" stroke-linecap="round" opacity="0.38"/>
+    <line x1="24" y1="28" x2="30" y2="28" stroke="#B45309" stroke-width="1.6" stroke-linecap="round" opacity="0.2"/>
+  </g>
+  <text x="44" y="24" dominant-baseline="central" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="19" font-weight="500" letter-spacing="0.3" fill="#1A1A1A">Sign</text>
+  <text x="78" y="24" dominant-baseline="central" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="19" font-weight="500" letter-spacing="0.3" fill="#B45309">IDed</text>
+  <text x="130" y="24" dominant-baseline="central" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#999999">by</text>
+  <g transform="translate(150,9)">
+    <path d="M4 22 A18 18 0 0 1 22 4" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M4 22 A13.5 13.5 0 0 1 17.5 8.5" fill="none" stroke="#5B46C9" stroke-width="2.2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M4 22 A9 9 0 0 1 13 13" fill="none" stroke="#8B4FC6" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
+  </g>
+  <text x="180" y="24" dominant-baseline="central" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" letter-spacing="0.5" fill="#1A1A1A">aiyug</text>
+</svg>

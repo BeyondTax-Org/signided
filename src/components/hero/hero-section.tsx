@@ -34,25 +34,11 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-5 flex justify-center"
         >
-          <div
-            className="flex h-14 w-14 items-center justify-center rounded-2xl"
-            style={{ background: "var(--am-bg)" }}
-          >
-            <svg width="36" height="36" viewBox="0 0 28 28" fill="none">
-              <path
-                d="M14 3L5 7.5V14C5 20 8.5 25 14 27C19.5 25 23 20 23 14V7.5L14 3Z"
-                fill="var(--am)"
-                opacity="0.85"
-              />
-              <path
-                d="M11 14.5L13 16.5L17.5 12"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+          <img
+            src="/brand/signided-mark-color-light.svg"
+            alt="Sign IDed"
+            className="h-14 w-14"
+          />
         </motion.div>
 
         {/* H1 */}

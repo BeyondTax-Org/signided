@@ -12,21 +12,11 @@ export function SiteFooter() {
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           {/* Left: Logo + tagline */}
           <div className="flex items-center gap-2.5">
-            <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
-              <rect width="28" height="28" rx="6" fill="var(--am)" opacity="0.15" />
-              <path
-                d="M14 5L7 8.5V13.5C7 18.2 9.9 22.5 14 23.5C18.1 22.5 21 18.2 21 13.5V8.5L14 5Z"
-                fill="var(--am)"
-                opacity="0.9"
-              />
-              <path
-                d="M12 14.5L13.5 16L17 12.5"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <img
+              src="/brand/signided-mark-color-dark.svg"
+              alt=""
+              className="h-6 w-6"
+            />
             <span className="text-[13px]" style={{ color: "var(--dark-tx2)" }}>
               <span
                 className="font-semibold"
