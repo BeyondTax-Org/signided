@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { DocumentMockup } from "./document-mockup";
 
 export function HeroSection() {
   return (
@@ -82,7 +83,7 @@ export function HeroSection() {
             fontWeight: 500,
             letterSpacing: "-0.02em",
             lineHeight: 1.25,
-            color: "var(--muted-foreground)",
+            color: "var(--am)",
           }}
         >
           Verify it in seconds.
@@ -106,24 +107,30 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.55 }}
         >
-          <a
+          <motion.a
             href="#verify"
-            className="cta-shine inline-flex items-center rounded-[var(--r-md)] px-8 py-4 text-[15px] font-semibold transition-all duration-200 hover:-translate-y-[2px]"
+            className="cta-shine inline-flex items-center rounded-[var(--radius)] px-7 py-3 text-[15px] font-medium"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
             style={{
-              background: "var(--cta)",
-              color: "var(--cta-fg)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--cta-hover)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--cta)";
+              background: "var(--foreground)",
+              color: "var(--background)",
             }}
           >
             Verify a document
-          </a>
+          </motion.a>
         </motion.div>
       </div>
+
+      {/* Document mockup — desktop only */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.65 }}
+        className="mx-auto mt-12 hidden max-w-[360px] sm:block"
+      >
+        <DocumentMockup />
+      </motion.div>
     </section>
   );
 }
