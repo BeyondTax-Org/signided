@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -19,42 +18,14 @@ export function SiteHeader() {
         borderBottom: "1px solid var(--border)",
       }}
     >
-      <div className="mx-auto flex h-14 max-w-[1120px] items-center justify-between px-6">
+      <div className="mx-auto flex h-14 max-w-[1120px] items-center justify-between px-4">
         {/* Left: Logo */}
-        <a href="/" className="flex items-center gap-2 group">
+        <a href="/" className="flex items-center group">
           <img
-            src="/brand/signided-mark-color-light.svg"
-            alt=""
-            className="h-7 w-7 transition-transform duration-200 group-hover:scale-[1.08]"
+            src="/brand/signided-by-aiyug-color-light.svg"
+            alt="Sign IDed by Aiyug"
+            className="h-7 transition-transform duration-200 group-hover:scale-[1.02]"
           />
-          <span className="text-[15px] tracking-[-0.01em]">
-            <span
-              className="font-bold"
-              style={{ color: "var(--foreground)" }}
-            >
-              Sign
-            </span>
-            <span className="font-bold" style={{ color: "var(--am)" }}>
-              IDed
-            </span>
-          </span>
-          <span
-            className="text-[11px]"
-            style={{ color: "var(--muted-foreground)" }}
-          >
-            by
-          </span>
-          <img
-            src="/brand/aiyug-mark-spectrum-light.svg"
-            alt="Aiyug"
-            className="h-4"
-          />
-          <span
-            className="text-[11px] font-semibold"
-            style={{ color: "var(--muted-foreground)" }}
-          >
-            aiyug
-          </span>
         </a>
 
         {/* Right: Desktop nav */}
@@ -122,14 +93,12 @@ export function SiteHeader() {
           </a>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-[var(--r-sm)] transition-colors cursor-pointer"
-            style={{
-              color: "var(--foreground)",
-              background: mobileOpen ? "var(--muted)" : "transparent",
-            }}
+            className="relative w-8 h-8 flex flex-col items-center justify-center gap-[5px] cursor-pointer"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            <span className={`block h-[2px] w-5 rounded-full transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""}`} style={{ background: "var(--foreground)" }} />
+            <span className={`block h-[2px] w-5 rounded-full transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} style={{ background: "var(--foreground)" }} />
+            <span className={`block h-[2px] w-5 rounded-full transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} style={{ background: "var(--foreground)" }} />
           </button>
         </div>
       </div>
