@@ -62,6 +62,20 @@ export function SiteHeader() {
             </a>
           ))}
           <a
+            href="https://aiyugtech.com"
+            className="text-[13px] font-medium transition-colors flex items-center gap-1"
+            style={{ color: "var(--muted-foreground)" }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "var(--foreground)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "var(--muted-foreground)")
+            }
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Aiyug Tech
+          </a>
+          <a
             href="#verify"
             className="cta-shine rounded-[var(--r-sm)] px-[18px] py-[7px] text-[12px] font-semibold transition-all duration-200 hover:-translate-y-px"
             style={{
@@ -137,6 +151,19 @@ export function SiteHeader() {
                   {link.label}
                 </a>
               ))}
+              <div
+                className="mt-1 pt-2"
+                style={{ borderTop: "1px solid var(--border)" }}
+              >
+                <a
+                  href="https://aiyugtech.com"
+                  className="flex items-center gap-1.5 rounded-[var(--r-sm)] px-3 py-2.5 text-[13px] font-medium transition-colors"
+                  style={{ color: "var(--muted-foreground)" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                  Back to Aiyug Tech
+                </a>
+              </div>
             </nav>
           </motion.div>
         )}
