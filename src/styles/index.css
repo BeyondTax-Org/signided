@@ -25,6 +25,18 @@ body {
   font-size: 16px;
 }
 
+/* ═══════════════ FADE-IN (CSS fallback for motion) ═══════════════ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
 /* ═══════════════ ANIMATIONS ═══════════════ */
 
 @keyframes shineSweep {
