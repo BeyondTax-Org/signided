@@ -196,16 +196,17 @@ export function HiwSection() {
         >
           <a
             href="#verify"
-            className="cta-shine inline-flex items-center rounded-[var(--r-md)] px-8 py-4 text-[15px] font-semibold transition-all duration-200 hover:-translate-y-[2px]"
+            className="cta-shine inline-flex items-center rounded-xl px-8 py-3.5 text-[15px] font-semibold transition-all duration-200 hover:-translate-y-[2px] no-underline"
             style={{
-              background: "var(--cta)",
-              color: "var(--cta-fg)",
+              background: "#1C1917",
+              color: "#FFFFFF",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--cta-hover)";
+              e.currentTarget.style.background = "#0C0A09";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--cta)";
+              e.currentTarget.style.background = "#1C1917";
             }}
           >
             Verify a document

@@ -109,12 +109,13 @@ export function HeroSection() {
         >
           <motion.a
             href="#verify"
-            className="cta-shine inline-flex items-center rounded-[var(--radius)] px-7 py-3 text-[15px] font-medium"
-            whileHover={{ scale: 1.04 }}
+            className="cta-shine inline-flex items-center rounded-xl px-8 py-3.5 text-[15px] font-semibold no-underline"
+            whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             style={{
-              background: "var(--foreground)",
-              color: "var(--background)",
+              background: "#1C1917",
+              color: "#FFFFFF",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
             }}
           >
             Verify a document

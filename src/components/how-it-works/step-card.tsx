@@ -47,8 +47,12 @@ export function StepCard({
       <div className="flex items-start gap-4">
         {/* Step number */}
         <div
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[14px] font-bold text-white"
-          style={{ background: "var(--am)" }}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[14px] font-bold"
+          style={{
+            background: "rgba(180, 83, 9, 0.1)",
+            color: "#B45309",
+            border: "2px solid rgba(180, 83, 9, 0.25)",
+          }}
         >
           {num}
         </div>

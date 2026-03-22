@@ -53,19 +53,25 @@ export function SiteFooter() {
             </span>
           </div>
 
-          {/* Right: Nav links */}
-          <nav
-            className="flex items-center gap-6 text-[13px]"
-            style={{ color: "var(--dark-tx2)" }}
-          >
-            {[
-              { label: "Privacy", href: "/privacy" },
-              { label: "Terms", href: "/terms" },
-              { label: "Security", href: "/security" },
-            ].map((link) => (
+          {/* Right: Links */}
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <a
+              href="#verify"
+              className="rounded-lg px-5 py-2 text-[13px] font-semibold no-underline transition-colors"
+              style={{
+                background: "rgba(180, 83, 9, 0.15)",
+                color: "#F59E0B",
+                border: "1px solid rgba(180, 83, 9, 0.25)",
+              }}
+            >
+              Verify a document
+            </a>
+            <nav
+              className="flex items-center gap-5 text-[13px]"
+              style={{ color: "var(--dark-tx2)" }}
+            >
               <a
-                key={link.href}
-                href={link.href}
+                href="https://doclate.aiyugtech.com"
                 className="transition-colors"
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.color = "var(--dark-tx)")
@@ -74,10 +80,28 @@ export function SiteFooter() {
                   (e.currentTarget.style.color = "var(--dark-tx2)")
                 }
               >
-                {link.label}
+                Doclate
               </a>
-            ))}
-          </nav>
+              {[
+                { label: "Privacy", href: "/privacy" },
+                { label: "Terms", href: "/terms" },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="transition-colors"
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--dark-tx)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "var(--dark-tx2)")
+                  }
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
         </div>
 
         {/* Bottom divider + copyright */}

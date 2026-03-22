@@ -62,22 +62,22 @@ export function TrustBar() {
             <div className="flex items-start gap-4">
               {/* Icon */}
               <div
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
-                style={{ background: "var(--am-bg)" }}
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                style={{ background: "rgba(180, 83, 9, 0.12)" }}
               >
-                <feature.icon size={20} strokeWidth={2} style={{ color: "var(--am)" }} />
+                <feature.icon size={22} strokeWidth={2} style={{ color: "#B45309" }} />
               </div>
 
               {/* Text */}
               <div>
                 <h3
-                  className="mb-1 text-[14px] font-semibold"
+                  className="mb-1 text-[15px] font-semibold"
                   style={{ color: "var(--foreground)", letterSpacing: "-0.01em" }}
                 >
                   {feature.title}
                 </h3>
                 <p
-                  className="text-[13px] leading-[1.6]"
+                  className="text-[13px] leading-[1.65]"
                   style={{ color: "var(--muted-foreground)" }}
                 >
                   {feature.description}
