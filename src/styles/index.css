@@ -25,6 +25,10 @@ body {
   font-size: 16px;
 }
 
+/* ═══════════════ TAILWIND v4 COMPAT ═══════════════ */
+/* mx-auto not applying in Tailwind v4 — force it globally */
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
 /* ═══════════════ FADE-IN (CSS fallback for motion) ═══════════════ */
 
 @keyframes fadeInUp {
