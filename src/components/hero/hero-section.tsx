@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 import { DocumentMockup } from "./document-mockup";
 
+const vp = { once: true, amount: 0.1 as const };
+
 export function HeroSection() {
   return (
     <section
@@ -11,7 +13,8 @@ export function HeroSection() {
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5"
           style={{
@@ -30,7 +33,8 @@ export function HeroSection() {
         {/* Shield mark */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={vp}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-5 flex justify-center"
         >
@@ -44,7 +48,8 @@ export function HeroSection() {
         {/* H1 */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-4"
           style={{
@@ -61,7 +66,8 @@ export function HeroSection() {
         {/* Sub */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
           transition={{ duration: 0.5, delay: 0.35 }}
           className="mb-5"
           style={{
@@ -78,7 +84,8 @@ export function HeroSection() {
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
           transition={{ duration: 0.5, delay: 0.45 }}
           className="mx-auto mb-6 max-w-[480px] leading-[1.7]"
           style={{ fontSize: "15px", color: "var(--muted-foreground)" }}
@@ -90,7 +97,8 @@ export function HeroSection() {
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
           transition={{ duration: 0.5, delay: 0.55 }}
         >
           <motion.a
@@ -109,10 +117,11 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Document mockup — desktop only */}
+      {/* Document mockup */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={vp}
         transition={{ duration: 0.7, delay: 0.65 }}
         className="mx-auto mt-10 max-w-[320px] sm:max-w-[360px]"
       >
