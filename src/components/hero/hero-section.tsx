@@ -4,19 +4,8 @@ export function HeroSection() {
   return (
     <section
       className="relative overflow-hidden px-6 pt-24 pb-20"
-      style={{
-        background: "linear-gradient(180deg, var(--primary-bg) 0%, var(--background) 100%)",
-      }}
+      style={{ background: "var(--background)" }}
     >
-      {/* Ambient indigo glow */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 0%, color-mix(in srgb, var(--primary) 8%, transparent), transparent 70%)",
-        }}
-      />
-
       <div className="relative mx-auto max-w-[680px] text-center">
         {/* Badge */}
         <motion.div
@@ -25,26 +14,44 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5"
           style={{
-            background: "color-mix(in srgb, var(--primary) 8%, transparent)",
-            borderColor: "color-mix(in srgb, var(--primary) 18%, transparent)",
+            background: "var(--muted)",
+            borderColor: "var(--border)",
           }}
         >
-          <span className="relative flex h-2 w-2">
-            <span
-              className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-              style={{ background: "var(--primary)" }}
-            />
-            <span
-              className="relative inline-flex h-2 w-2 rounded-full"
-              style={{ background: "var(--primary)" }}
-            />
-          </span>
           <span
             className="text-[11px] font-semibold tracking-wide"
-            style={{ color: "var(--primary)" }}
+            style={{ color: "var(--muted-foreground)" }}
           >
             Public verification portal
           </span>
+        </motion.div>
+
+        {/* Shield mark */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-6 flex justify-center"
+        >
+          <div
+            className="flex h-16 w-16 items-center justify-center rounded-2xl"
+            style={{ background: "var(--am-bg)" }}
+          >
+            <svg width="36" height="36" viewBox="0 0 28 28" fill="none">
+              <path
+                d="M14 3L5 7.5V14C5 20 8.5 25 14 27C19.5 25 23 20 23 14V7.5L14 3Z"
+                fill="var(--am)"
+                opacity="0.85"
+              />
+              <path
+                d="M11 14.5L13 16.5L17.5 12"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </motion.div>
 
         {/* H1 */}
@@ -61,8 +68,7 @@ export function HeroSection() {
             color: "var(--foreground)",
           }}
         >
-          Is that signed document{" "}
-          <span className="text-primary-gradient">real</span>?
+          Is that signed document real?
         </motion.h1>
 
         {/* Sub */}
@@ -94,51 +100,27 @@ export function HeroSection() {
           — or upload the file directly. Instant results. No account needed.
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.55 }}
-          className="flex items-center justify-center gap-3"
         >
           <a
             href="#verify"
-            className="cta-shine inline-flex items-center rounded-[var(--r-md)] px-7 py-3.5 text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[2px]"
+            className="cta-shine inline-flex items-center rounded-[var(--r-md)] px-8 py-4 text-[15px] font-semibold transition-all duration-200 hover:-translate-y-[2px]"
             style={{
-              background: "var(--primary)",
-              color: "var(--primary-cta-fg)",
-              boxShadow: "var(--shadow-primary)",
+              background: "var(--cta)",
+              color: "var(--cta-fg)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--primary-hover)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 32px rgba(99,102,241,0.3)";
+              e.currentTarget.style.background = "var(--cta-hover)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--primary)";
-              e.currentTarget.style.boxShadow = "var(--shadow-primary)";
+              e.currentTarget.style.background = "var(--cta)";
             }}
           >
             Verify a document
-          </a>
-          <a
-            href="#how-it-works"
-            className="inline-flex items-center rounded-[var(--r-md)] border px-6 py-3.5 text-[14px] font-medium transition-all duration-200 hover:-translate-y-px"
-            style={{
-              borderColor: "var(--border)",
-              color: "var(--muted-foreground)",
-              background: "var(--background)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--primary)";
-              e.currentTarget.style.color = "var(--primary)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "var(--border)";
-              e.currentTarget.style.color = "var(--muted-foreground)";
-            }}
-          >
-            How it works
           </a>
         </motion.div>
       </div>

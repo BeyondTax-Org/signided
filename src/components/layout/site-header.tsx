@@ -14,32 +14,21 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-14 max-w-[1120px] items-center justify-between px-6">
         {/* Left: Logo */}
-        <div className="flex items-center gap-2.5">
-          <a href="/" className="flex items-center gap-2.5 group">
-            <ShieldMark />
-            <span className="text-[15px] tracking-[-0.01em]">
-              <span className="font-semibold" style={{ color: "var(--foreground)" }}>
-                Sign
-              </span>
-              <span className="font-bold" style={{ color: "var(--primary)" }}>
-                IDed
-              </span>
+        <a href="/" className="flex items-center gap-2 group">
+          <ShieldMark />
+          <span className="text-[15px] tracking-[-0.01em]">
+            <span className="font-bold" style={{ color: "var(--foreground)" }}>
+              Sign
             </span>
-          </a>
-          <a
-            href="https://aiyugtech.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.04em] transition-all hover:opacity-80"
-            style={{
-              background: "color-mix(in srgb, var(--primary) 8%, transparent)",
-              borderColor: "color-mix(in srgb, var(--primary) 15%, transparent)",
-              color: "var(--primary-dark)",
-            }}
-          >
-            By Aiyug Tech
-          </a>
-        </div>
+            <span className="font-bold" style={{ color: "var(--am)" }}>
+              IDed
+            </span>
+          </span>
+          <span className="text-[11px]" style={{ color: "var(--muted-foreground)" }}>
+            by
+          </span>
+          <AiyugMark />
+        </a>
 
         {/* Right: Nav */}
         <nav className="flex items-center gap-5">
@@ -73,16 +62,14 @@ export function SiteHeader() {
             href="#verify"
             className="cta-shine rounded-[var(--r-sm)] px-[18px] py-[7px] text-[12px] font-semibold transition-all duration-200 hover:-translate-y-px"
             style={{
-              background: "var(--primary)",
-              color: "var(--primary-cta-fg)",
+              background: "var(--cta)",
+              color: "var(--cta-fg)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--primary-hover)";
-              e.currentTarget.style.boxShadow = "var(--shadow-primary)";
+              e.currentTarget.style.background = "var(--cta-hover)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--primary)";
-              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.background = "var(--cta)";
             }}
           >
             Verify now
@@ -103,10 +90,10 @@ function ShieldMark() {
       xmlns="http://www.w3.org/2000/svg"
       className="transition-transform duration-200 group-hover:scale-[1.08]"
     >
-      <rect width="28" height="28" rx="6" fill="var(--primary-bg)" />
+      <rect width="28" height="28" rx="6" fill="var(--am-bg)" />
       <path
         d="M14 5L7 8.5V13.5C7 18.2 9.9 22.5 14 23.5C18.1 22.5 21 18.2 21 13.5V8.5L14 5Z"
-        fill="var(--primary)"
+        fill="var(--am)"
         opacity="0.9"
       />
       <path
@@ -116,6 +103,29 @@ function ShieldMark() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+function AiyugMark() {
+  return (
+    <svg
+      width="50"
+      height="16"
+      viewBox="0 0 50 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <text
+        x="0"
+        y="12"
+        fill="var(--muted-foreground)"
+        fontSize="11"
+        fontWeight="600"
+        fontFamily="var(--font)"
+      >
+        Aiyug
+      </text>
     </svg>
   );
 }

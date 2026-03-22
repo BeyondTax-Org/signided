@@ -27,9 +27,9 @@ export function LoadingState() {
             animate={{ scale: [1, 1.08, 1] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             className="flex h-14 w-14 items-center justify-center rounded-2xl"
-            style={{ background: "var(--primary-bg)" }}
+            style={{ background: "var(--am-bg)" }}
           >
-            <Shield size={28} style={{ color: "var(--primary)" }} />
+            <Shield size={28} style={{ color: "var(--am)" }} />
           </motion.div>
         </div>
 
@@ -60,7 +60,7 @@ export function LoadingState() {
                   damping: 15,
                 }}
                 className="flex h-5 w-5 items-center justify-center rounded-full"
-                style={{ background: "var(--primary)", flexShrink: 0 }}
+                style={{ background: "var(--am)", flexShrink: 0 }}
               >
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                   <path
@@ -90,7 +90,7 @@ export function LoadingState() {
             transition={{ duration: 2.4, ease: "easeInOut" }}
             className="h-full rounded-full"
             style={{
-              background: "linear-gradient(90deg, var(--primary), var(--primary-hover))",
+              background: "linear-gradient(90deg, var(--am), var(--am-hover))",
             }}
           />
         </div>

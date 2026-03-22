@@ -11,7 +11,7 @@ export function DocumentMockup() {
           width: 300,
           height: 300,
           background:
-            "radial-gradient(circle, rgba(245,158,11,0.14) 0%, rgba(245,158,11,0.06) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(180,83,9,0.14) 0%, rgba(180,83,9,0.06) 40%, transparent 70%)",
           borderRadius: "50%",
           filter: "blur(20px)",
         }}
@@ -48,7 +48,7 @@ export function DocumentMockup() {
             className="pointer-events-none absolute inset-x-0 top-0 h-px rounded-t-lg"
             style={{
               background:
-                "linear-gradient(90deg, transparent, rgba(245,158,11,0.3), transparent)",
+                "linear-gradient(90deg, transparent, rgba(180,83,9,0.3), transparent)",
             }}
           />
 

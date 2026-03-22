@@ -7,10 +7,9 @@ import {
   Lock,
   Smartphone,
   Eye,
-  ChevronRight,
 } from "lucide-react";
 
-const phase1Steps = [
+const allSteps = [
   {
     num: 1,
     icon: <Hash size={20} />,
@@ -35,9 +34,6 @@ const phase1Steps = [
       "Instant status: verified, expired, or revoked \u2014 plus the SHA-256 fingerprint.",
     who: "AUTOMATIC" as const,
   },
-];
-
-const phase2Steps = [
   {
     num: 4,
     icon: <Lock size={20} />,
@@ -63,19 +59,6 @@ const phase2Steps = [
     who: "YOU" as const,
   },
 ];
-
-function StepConnector() {
-  return (
-    <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 translate-x-1/2 md:flex">
-      <div
-        className="flex h-6 w-6 items-center justify-center rounded-full"
-        style={{ background: "var(--background)", border: "1px solid var(--border)" }}
-      >
-        <ChevronRight size={12} style={{ color: "var(--tx3)" }} />
-      </div>
-    </div>
-  );
-}
 
 export function HiwSection() {
   return (
@@ -110,117 +93,42 @@ export function HiwSection() {
           </p>
         </motion.div>
 
-        {/* Phase 1 */}
-        <div className="mb-12">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="mb-8 flex items-center justify-center gap-2.5"
-          >
-            <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.04em]"
-              style={{
-                background: "var(--verified-light)",
-                color: "#166534",
-              }}
-            >
-              <ShieldCheck size={12} />
-              Phase 1
-            </span>
-            <span
-              className="text-[18px] font-bold"
-              style={{ letterSpacing: "-0.02em", color: "var(--foreground)" }}
-            >
-              Verify the signature
-            </span>
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-5">
-            {phase1Steps.map((step, i) => (
-              <div key={step.num} className="relative">
-                <StepCard
-                  {...step}
-                  color="var(--verified)"
-                  colorLight="var(--verified-light)"
-                  index={i}
-                />
-                {i < phase1Steps.length - 1 && <StepConnector />}
-              </div>
-            ))}
-          </div>
+        {/* 2-column grid of all 6 steps */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {allSteps.map((step, i) => (
+            <StepCard
+              key={step.num}
+              {...step}
+              color="var(--am)"
+              colorLight="var(--am-light)"
+              index={i}
+            />
+          ))}
         </div>
 
         {/* Divider */}
         <motion.div
-          initial={{ opacity: 0, scaleX: 0.6 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12 flex items-center gap-4"
+          className="my-10"
         >
           <div
-            className="flex-1 border-t"
-            style={{ borderColor: "var(--border)" }}
-          />
-          <span
-            className="rounded-full border px-4 py-2 text-[11px] font-semibold"
+            className="rounded-[var(--r-md)] px-6 py-3"
             style={{
-              background: "var(--primary-bg)",
-              borderColor: "color-mix(in srgb, var(--primary) 20%, transparent)",
-              color: "var(--primary-dark)",
+              background: "var(--am-bg)",
+              border: "1px solid var(--am-light)",
             }}
           >
-            Document verified \u2014 want to see it?
-          </span>
-          <div
-            className="flex-1 border-t"
-            style={{ borderColor: "var(--border)" }}
-          />
-        </motion.div>
-
-        {/* Phase 2 */}
-        <div className="mb-12">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="mb-8 flex items-center justify-center gap-2.5"
-          >
-            <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.04em]"
-              style={{
-                background: "var(--primary-light)",
-                color: "var(--primary-dark)",
-              }}
+            <p
+              className="text-[14px] font-medium"
+              style={{ color: "var(--am-dark)" }}
             >
-              <Eye size={12} />
-              Phase 2
-            </span>
-            <span
-              className="text-[18px] font-bold"
-              style={{ letterSpacing: "-0.02em", color: "var(--foreground)" }}
-            >
-              Preview the document
-            </span>
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-5">
-            {phase2Steps.map((step, i) => (
-              <div key={step.num} className="relative">
-                <StepCard
-                  {...step}
-                  color="var(--primary)"
-                  colorLight="var(--primary-light)"
-                  index={i}
-                />
-                {i < phase2Steps.length - 1 && <StepConnector />}
-              </div>
-            ))}
+              Document verified — want to see it?
+            </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* CTA */}
         <motion.div
@@ -232,19 +140,16 @@ export function HiwSection() {
         >
           <a
             href="#verify"
-            className="cta-shine inline-flex items-center rounded-[var(--r-md)] px-7 py-3.5 text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[2px]"
+            className="cta-shine inline-flex items-center rounded-[var(--r-md)] px-8 py-4 text-[15px] font-semibold transition-all duration-200 hover:-translate-y-[2px]"
             style={{
-              background: "var(--primary)",
-              color: "var(--primary-cta-fg)",
-              boxShadow: "var(--shadow-sm)",
+              background: "var(--cta)",
+              color: "var(--cta-fg)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--primary-hover)";
-              e.currentTarget.style.boxShadow = "var(--shadow-primary)";
+              e.currentTarget.style.background = "var(--cta-hover)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--primary)";
-              e.currentTarget.style.boxShadow = "var(--shadow-sm)";
+              e.currentTarget.style.background = "var(--cta)";
             }}
           >
             Verify a document

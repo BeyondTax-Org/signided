@@ -22,9 +22,9 @@ export function PreviewViewer() {
       <div
         className="mb-4 flex items-center justify-between rounded-[var(--r-md)] px-4 py-2.5"
         style={{
-          background: isUrgent ? "var(--revoked-light)" : "var(--bg2)",
+          background: isUrgent ? "var(--revoked-light)" : "var(--muted)",
           border: "1px solid",
-          borderColor: isUrgent ? "rgba(239,68,68,0.2)" : "var(--bd)",
+          borderColor: isUrgent ? "rgba(239,68,68,0.2)" : "var(--border)",
         }}
       >
         <div className="flex items-center gap-2">
@@ -36,7 +36,7 @@ export function PreviewViewer() {
             className="text-[12px] font-medium"
             style={{
               fontFamily: "var(--mono)",
-              color: isUrgent ? "var(--revoked)" : "var(--tx2)",
+              color: isUrgent ? "var(--revoked)" : "var(--muted-foreground)",
             }}
           >
             {isExpired
@@ -56,7 +56,7 @@ export function PreviewViewer() {
       <div
         className="relative overflow-hidden rounded-[var(--r-lg)] border bg-white"
         style={{
-          borderColor: "var(--bd)",
+          borderColor: "var(--border)",
           minHeight: 400,
         }}
       >
@@ -115,7 +115,7 @@ export function PreviewViewer() {
         <button
           onClick={() => dispatch({ type: "RESET" })}
           className="inline-flex items-center gap-2 rounded-[var(--r-md)] border px-6 py-3 text-[14px] font-medium transition-all duration-200 hover:-translate-y-px cursor-pointer"
-          style={{ borderColor: "var(--bd)", color: "var(--tx)" }}
+          style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
         >
           <RotateCcw size={14} />
           Done — Verify another

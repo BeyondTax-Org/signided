@@ -178,17 +178,15 @@ export function ResultCard({ result }: { result: QuickResult }) {
                 onClick={() => dispatch({ type: "REQUEST_PREVIEW" })}
                 className="cta-shine mt-1 flex w-full items-center justify-center gap-2 rounded-[var(--r-md)] py-3.5 text-[13px] font-semibold transition-all duration-200 hover:-translate-y-px cursor-pointer"
                 style={{
-                  background: "var(--primary)",
-                  color: "var(--primary-cta-fg)",
+                  background: "var(--cta)",
+                  color: "var(--cta-fg)",
                   boxShadow: "var(--shadow-sm)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "var(--primary-hover)";
-                  e.currentTarget.style.boxShadow = "var(--shadow-primary)";
+                  e.currentTarget.style.background = "var(--cta-hover)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "var(--primary)";
-                  e.currentTarget.style.boxShadow = "var(--shadow-sm)";
+                  e.currentTarget.style.background = "var(--cta)";
                 }}
               >
                 <Eye size={14} />

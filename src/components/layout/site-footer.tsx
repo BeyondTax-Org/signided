@@ -3,8 +3,8 @@ export function SiteFooter() {
     <footer
       className="px-6 py-12"
       style={{
-        background: "var(--muted)",
-        borderTop: "1px solid var(--border)",
+        background: "var(--dark)",
+        borderTop: "1px solid var(--dark-bd)",
       }}
     >
       <div className="mx-auto max-w-[1120px]">
@@ -13,10 +13,10 @@ export function SiteFooter() {
           {/* Left: Logo + tagline */}
           <div className="flex items-center gap-2.5">
             <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
-              <rect width="28" height="28" rx="6" fill="var(--primary-bg)" />
+              <rect width="28" height="28" rx="6" fill="var(--am)" opacity="0.15" />
               <path
                 d="M14 5L7 8.5V13.5C7 18.2 9.9 22.5 14 23.5C18.1 22.5 21 18.2 21 13.5V8.5L14 5Z"
-                fill="var(--primary)"
+                fill="var(--am)"
                 opacity="0.9"
               />
               <path
@@ -27,28 +27,28 @@ export function SiteFooter() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="text-[13px]" style={{ color: "var(--muted-foreground)" }}>
+            <span className="text-[13px]" style={{ color: "var(--dark-tx2)" }}>
               <span
                 className="font-semibold"
-                style={{ color: "var(--foreground)" }}
+                style={{ color: "var(--dark-tx)" }}
               >
                 Sign IDed
               </span>{" "}
-              — Public verification by{" "}
+              by{" "}
               <a
                 href="https://aiyugtech.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold transition-colors"
-                style={{ color: "var(--primary)" }}
+                style={{ color: "var(--am)" }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--primary-hover)")
+                  (e.currentTarget.style.color = "var(--am-hover)")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--primary)")
+                  (e.currentTarget.style.color = "var(--am)")
                 }
               >
-                Aiyug Tech
+                Aiyug
               </a>
             </span>
           </div>
@@ -56,7 +56,7 @@ export function SiteFooter() {
           {/* Right: Nav links */}
           <nav
             className="flex items-center gap-6 text-[13px]"
-            style={{ color: "var(--muted-foreground)" }}
+            style={{ color: "var(--dark-tx2)" }}
           >
             {[
               { label: "Privacy", href: "/privacy" },
@@ -68,10 +68,10 @@ export function SiteFooter() {
                 href={link.href}
                 className="transition-colors"
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--primary)")
+                  (e.currentTarget.style.color = "var(--dark-tx)")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--muted-foreground)")
+                  (e.currentTarget.style.color = "var(--dark-tx2)")
                 }
               >
                 {link.label}
@@ -83,14 +83,14 @@ export function SiteFooter() {
         {/* Bottom divider + copyright */}
         <div
           className="mt-8 pt-6"
-          style={{ borderTop: "1px solid var(--border)" }}
+          style={{ borderTop: "1px solid var(--dark-bd)" }}
         >
           <p
             className="text-center text-[11px]"
-            style={{ color: "var(--tx3)" }}
+            style={{ color: "var(--dark-tx3)" }}
           >
             &copy; {new Date().getFullYear()} Aiyug Technologies Pvt. Ltd. All
-            rights reserved. Verification infrastructure for signed documents.
+            rights reserved.
           </p>
         </div>
       </div>

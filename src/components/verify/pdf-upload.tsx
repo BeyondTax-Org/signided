@@ -56,9 +56,9 @@ export function PdfUpload() {
         }}
         className="flex cursor-pointer flex-col items-center justify-center rounded-[var(--r-md)] border-2 border-dashed p-8 transition-all duration-200"
         style={{
-          borderColor: isDragging ? "var(--primary)" : "var(--bd-strong)",
+          borderColor: isDragging ? "var(--am)" : "var(--bd-strong)",
           background: isDragging
-            ? "var(--primary-bg)"
+            ? "var(--am-bg)"
             : "linear-gradient(180deg, var(--muted) 0%, var(--background) 100%)",
         }}
       >
@@ -66,9 +66,9 @@ export function PdfUpload() {
           <div className="flex items-center gap-2.5">
             <div
               className="flex h-8 w-8 items-center justify-center rounded-lg"
-              style={{ background: "var(--primary-bg)" }}
+              style={{ background: "var(--am-bg)" }}
             >
-              <FileText size={16} style={{ color: "var(--primary)" }} />
+              <FileText size={16} style={{ color: "var(--am)" }} />
             </div>
             <div>
               <span className="text-[13px] font-semibold" style={{ color: "var(--foreground)" }}>
@@ -86,13 +86,13 @@ export function PdfUpload() {
           <>
             <div
               className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl"
-              style={{ background: "var(--primary-bg)" }}
+              style={{ background: "var(--am-bg)" }}
             >
-              <Upload size={20} style={{ color: "var(--primary)" }} />
+              <Upload size={20} style={{ color: "var(--am)" }} />
             </div>
             <p className="text-[13px] font-medium" style={{ color: "var(--foreground)" }}>
               Drop a signed PDF here, or{" "}
-              <span style={{ color: "var(--primary)", textDecoration: "underline" }}>
+              <span style={{ color: "var(--am)", textDecoration: "underline" }}>
                 browse
               </span>
             </p>

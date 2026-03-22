@@ -20,9 +20,9 @@ export function PreviewWaiting() {
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="flex h-14 w-14 items-center justify-center rounded-2xl"
-            style={{ background: "var(--primary-bg)" }}
+            style={{ background: "var(--am-bg)" }}
           >
-            <Smartphone size={28} style={{ color: "var(--primary)" }} />
+            <Smartphone size={28} style={{ color: "var(--am)" }} />
           </motion.div>
         </div>
         <h3
@@ -41,7 +41,7 @@ export function PreviewWaiting() {
             <motion.div
               key={i}
               className="h-2 w-2 rounded-full"
-              style={{ background: "var(--primary)" }}
+              style={{ background: "var(--am)" }}
               animate={{ opacity: [0.3, 1, 0.3] }}
               transition={{
                 duration: 1.2,

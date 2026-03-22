@@ -58,10 +58,10 @@ export function FaqSection() {
                   className="overflow-hidden rounded-[var(--r-md)] border bg-white transition-all duration-200"
                   style={{
                     borderColor: isOpen
-                      ? "color-mix(in srgb, var(--primary) 30%, var(--border))"
+                      ? "var(--bd-strong)"
                       : "var(--border)",
                     boxShadow: isOpen
-                      ? "0 4px 16px rgba(99,102,241,0.06)"
+                      ? "var(--shadow-md)"
                       : "var(--shadow-sm)",
                   }}
                 >
@@ -75,7 +75,7 @@ export function FaqSection() {
                     onMouseEnter={(e) => {
                       if (!isOpen)
                         (e.currentTarget.parentElement as HTMLElement).style.borderColor =
-                          "color-mix(in srgb, var(--primary) 20%, var(--border))";
+                          "var(--bd-strong)";
                     }}
                     onMouseLeave={(e) => {
                       if (!isOpen)
@@ -94,7 +94,7 @@ export function FaqSection() {
                     >
                       <ChevronDown
                         size={16}
-                        style={{ color: isOpen ? "var(--primary)" : "var(--tx3)" }}
+                        style={{ color: isOpen ? "var(--foreground)" : "var(--tx3)" }}
                       />
                     </motion.div>
                   </button>
@@ -118,7 +118,7 @@ export function FaqSection() {
                         <div
                           className="border-t px-5 py-4"
                           style={{
-                            borderColor: "color-mix(in srgb, var(--primary) 12%, transparent)",
+                            borderColor: "var(--border)",
                             background: "var(--muted)",
                           }}
                         >

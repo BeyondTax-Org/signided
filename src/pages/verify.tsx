@@ -50,27 +50,27 @@ function VerifyContent() {
             state.step === "expired" ||
             state.step === "revoked") &&
             state.result && (
-              <div key="result" className="px-6 py-16" style={{ background: "var(--bg2)" }}>
+              <div key="result" className="px-6 py-16" style={{ background: "var(--muted)" }}>
                 <ResultCard result={state.result} />
               </div>
             )}
           {state.step === "preview-request" && (
-            <div key="prev-req" className="px-6 py-16" style={{ background: "var(--bg2)" }}>
+            <div key="prev-req" className="px-6 py-16" style={{ background: "var(--muted)" }}>
               <PreviewRequest />
             </div>
           )}
           {state.step === "preview-waiting" && (
-            <div key="prev-wait" className="px-6 py-16" style={{ background: "var(--bg2)" }}>
+            <div key="prev-wait" className="px-6 py-16" style={{ background: "var(--muted)" }}>
               <PreviewWaiting />
             </div>
           )}
           {state.step === "preview-approved" && (
-            <div key="prev-ok" className="px-6 py-16" style={{ background: "var(--bg2)" }}>
+            <div key="prev-ok" className="px-6 py-16" style={{ background: "var(--muted)" }}>
               <PreviewApproved />
             </div>
           )}
           {state.step === "preview-viewer" && (
-            <div key="prev-view" className="px-6 py-16" style={{ background: "var(--bg2)" }}>
+            <div key="prev-view" className="px-6 py-16" style={{ background: "var(--muted)" }}>
               <PreviewViewer />
             </div>
           )}

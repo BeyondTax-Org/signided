@@ -51,112 +51,124 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
           </p>
         </div>
 
-        {/* Form card */}
-        <div className="mx-auto max-w-[480px]">
-          <div
-            className="group relative rounded-[var(--radius-card)] border bg-white p-6 transition-all duration-300"
-            style={{
-              borderColor: "var(--border)",
-              boxShadow: "var(--shadow-md)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow =
-                "0 4px 16px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.06), 0 0 0 1px color-mix(in srgb, var(--primary) 15%, transparent)";
-              e.currentTarget.style.borderColor = "color-mix(in srgb, var(--primary) 25%, var(--border))";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "var(--shadow-md)";
-              e.currentTarget.style.borderColor = "var(--border)";
-            }}
-          >
-            {/* Tabs */}
+        {/* Two-column: form + info cards */}
+        <div className="mx-auto grid max-w-[880px] grid-cols-1 gap-8 md:grid-cols-[1fr,320px]">
+          {/* Left: Form card */}
+          <div>
             <div
-              className="mb-5 flex border-b"
-              style={{ borderColor: "var(--border)" }}
+              className="rounded-[var(--radius-card)] border bg-white p-6 transition-all duration-300"
+              style={{
+                borderColor: "var(--border)",
+                boxShadow: "var(--shadow-md)",
+              }}
             >
-              {([
-                { key: "uvc" as Tab, icon: Hash, label: "UVC Code" },
-                { key: "pdf" as Tab, icon: FileUp, label: "Upload PDF" },
-              ]).map((t) => (
-                <button
-                  key={t.key}
-                  onClick={() => setTab(t.key)}
-                  className={cn(
-                    "flex items-center gap-1.5 px-4 pb-2.5 text-[13px] font-medium transition-all cursor-pointer",
-                    tab === t.key
-                      ? "border-b-2"
-                      : "opacity-50 hover:opacity-80"
-                  )}
-                  style={{
-                    borderColor:
-                      tab === t.key ? "var(--primary)" : "transparent",
-                    color: tab === t.key ? "var(--foreground)" : "var(--muted-foreground)",
-                  }}
-                >
-                  <t.icon size={14} />
-                  {t.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Content */}
-            {tab === "uvc" ? (
-              <UvcInput onOpenHelp={onOpenHelp} initialCode={initialCode} />
-            ) : (
-              <PdfUpload />
-            )}
-
-            {/* Security note */}
-            <div
-              className="mt-4 flex items-start gap-2 rounded-[var(--r-sm)] p-3"
-              style={{ background: "var(--muted)" }}
-            >
-              <Lock
-                size={12}
-                style={{ color: "var(--tx3)", marginTop: 2, flexShrink: 0 }}
-              />
-              <p
-                className="text-[11px] leading-[1.6]"
-                style={{ color: "var(--tx3)" }}
+              {/* Tabs */}
+              <div
+                className="mb-5 flex border-b"
+                style={{ borderColor: "var(--border)" }}
               >
-                Document preview requires OTP verification from the document
-                owner. We never store uploaded files.
-              </p>
+                {([
+                  { key: "uvc" as Tab, icon: Hash, label: "UVC Code" },
+                  { key: "pdf" as Tab, icon: FileUp, label: "Upload PDF" },
+                ]).map((t) => (
+                  <button
+                    key={t.key}
+                    onClick={() => setTab(t.key)}
+                    className={cn(
+                      "flex items-center gap-1.5 px-4 pb-2.5 text-[13px] font-medium transition-all cursor-pointer",
+                      tab === t.key
+                        ? "border-b-2"
+                        : "opacity-50 hover:opacity-80"
+                    )}
+                    style={{
+                      borderColor:
+                        tab === t.key ? "var(--foreground)" : "transparent",
+                      color: tab === t.key ? "var(--foreground)" : "var(--muted-foreground)",
+                    }}
+                  >
+                    <t.icon size={14} />
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Content */}
+              {tab === "uvc" ? (
+                <UvcInput onOpenHelp={onOpenHelp} initialCode={initialCode} />
+              ) : (
+                <PdfUpload />
+              )}
+
+              {/* Security note */}
+              <div
+                className="mt-4 flex items-start gap-2 rounded-[var(--r-sm)] p-3"
+                style={{ background: "var(--muted)" }}
+              >
+                <Lock
+                  size={12}
+                  style={{ color: "var(--tx3)", marginTop: 2, flexShrink: 0 }}
+                />
+                <p
+                  className="text-[11px] leading-[1.6]"
+                  style={{ color: "var(--tx3)" }}
+                >
+                  Document preview requires OTP verification from the document
+                  owner. We never store uploaded files.
+                </p>
+              </div>
             </div>
+
+            {/* Demo codes */}
+            <DemoCodes />
           </div>
 
-          {/* Demo codes */}
-          <DemoCodes />
-
-          {/* Info row */}
-          <div className="mt-6 grid grid-cols-3 gap-4">
+          {/* Right: Info cards */}
+          <div className="flex flex-col gap-3">
             {[
               {
+                icon: Hash,
                 title: "UVC Code",
                 desc: "Unique verification code printed on every signed document",
               },
               {
+                icon: Lock,
                 title: "Fingerprint",
                 desc: "SHA-256 hash confirms the file hasn\u2019t been tampered with",
               },
               {
+                icon: FileUp,
                 title: "Secure Preview",
                 desc: "View the original document with owner consent via OTP",
               },
             ].map((item) => (
-              <div key={item.title} className="text-center">
-                <p
-                  className="text-[11px] font-semibold"
-                  style={{ color: "var(--foreground)" }}
+              <div
+                key={item.title}
+                className="flex items-start gap-3 rounded-[var(--radius-card)] border p-4"
+                style={{
+                  background: "var(--card)",
+                  borderColor: "var(--border)",
+                }}
+              >
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+                  style={{ background: "var(--am-bg)" }}
                 >
-                  {item.title}
-                </p>
-                <p
-                  className="mt-0.5 text-[10px] leading-[1.5]"
-                  style={{ color: "var(--tx3)" }}
-                >
-                  {item.desc}
-                </p>
+                  <item.icon size={16} style={{ color: "var(--am)" }} />
+                </div>
+                <div>
+                  <p
+                    className="text-[13px] font-semibold"
+                    style={{ color: "var(--foreground)" }}
+                  >
+                    {item.title}
+                  </p>
+                  <p
+                    className="mt-0.5 text-[12px] leading-[1.5]"
+                    style={{ color: "var(--muted-foreground)" }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

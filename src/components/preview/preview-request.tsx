@@ -57,8 +57,8 @@ export function PreviewRequest() {
               <div
                 className="flex h-7 w-7 items-center justify-center rounded-md"
                 style={{
-                  background: "var(--primary-bg)",
-                  color: "var(--primary)",
+                  background: "var(--am-bg)",
+                  color: "var(--am)",
                   flexShrink: 0,
                 }}
               >
@@ -75,17 +75,15 @@ export function PreviewRequest() {
           onClick={handleRequest}
           className="cta-shine w-full rounded-[var(--r-md)] py-3.5 text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[2px] cursor-pointer"
           style={{
-            background: "var(--primary)",
-            color: "var(--primary-cta-fg)",
+            background: "var(--cta)",
+            color: "var(--cta-fg)",
             boxShadow: "var(--shadow-sm)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "var(--primary-hover)";
-            e.currentTarget.style.boxShadow = "var(--shadow-primary)";
+            e.currentTarget.style.background = "var(--cta-hover)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "var(--primary)";
-            e.currentTarget.style.boxShadow = "var(--shadow-sm)";
+            e.currentTarget.style.background = "var(--cta)";
           }}
         >
           Send preview request

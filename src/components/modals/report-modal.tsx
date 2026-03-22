@@ -25,7 +25,7 @@ export function ReportModal({
             </Dialog.Close>
           </div>
 
-          <div className="space-y-4 text-[13px] leading-[1.7]" style={{ color: "var(--tx2)" }}>
+          <div className="space-y-4 text-[13px] leading-[1.7]" style={{ color: "var(--muted-foreground)" }}>
             <p>
               If you believe a document has been tampered with, forged, or if a
               revoked signature is being presented as valid, please report it.
@@ -51,7 +51,7 @@ export function ReportModal({
               <a
                 href="mailto:security@aiyugtech.com"
                 className="font-semibold underline"
-                style={{ color: "var(--am-hover)" }}
+                style={{ color: "var(--am)" }}
               >
                 security@aiyugtech.com
               </a>{" "}
@@ -63,7 +63,7 @@ export function ReportModal({
           <button
             onClick={onClose}
             className="mt-4 w-full rounded-[var(--r-md)] py-2.5 text-[13px] font-semibold transition-all cursor-pointer"
-            style={{ background: "var(--bg2)", color: "var(--tx)" }}
+            style={{ background: "var(--muted)", color: "var(--foreground)" }}
           >
             Close
           </button>

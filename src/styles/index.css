@@ -18,8 +18,8 @@ html {
 
 body {
   font-family: var(--font);
-  color: var(--tx);
-  background: var(--bg);
+  color: var(--foreground);
+  background: var(--background);
   line-height: 1.65;
   font-size: 16px;
 }
@@ -37,16 +37,16 @@ body {
 }
 
 @keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.25); }
-  50% { box-shadow: 0 0 16px 4px rgba(99, 102, 241, 0.18); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(180, 83, 9, 0.25); }
+  50% { box-shadow: 0 0 16px 4px rgba(180, 83, 9, 0.18); }
 }
 
 /* ═══════════════ FOCUS STATES ═══════════════ */
 
-.focus-primary:focus {
+.focus-amber:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12), 0 0 16px rgba(99, 102, 241, 0.06);
+  border-color: var(--am);
+  box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.12), 0 0 16px rgba(180, 83, 9, 0.06);
 }
 
 /* ═══════════════ CTA SHINE EFFECT ═══════════════ */
@@ -63,7 +63,7 @@ body {
   left: 0;
   width: 40%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
   transform: translateX(-100%) skewX(-15deg);
   transition: none;
   pointer-events: none;
@@ -76,7 +76,7 @@ body {
 /* ═══════════════ UTILITY CLASSES ═══════════════ */
 
 .section-gradient {
-  background: linear-gradient(180deg, var(--muted) 0%, var(--bg) 100%);
+  background: linear-gradient(180deg, var(--muted) 0%, var(--background) 100%);
 }
 
 .card-elevated {
@@ -84,13 +84,6 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-md);
-}
-
-.text-primary-gradient {
-  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 /* ═══════════════ SCROLLBAR ═══════════════ */

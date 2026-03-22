@@ -26,14 +26,14 @@ export function CodeHelpModal({
             </Dialog.Close>
           </div>
 
-          <div className="space-y-4 text-[13px] leading-[1.7]" style={{ color: "var(--tx2)" }}>
+          <div className="space-y-4 text-[13px] leading-[1.7]" style={{ color: "var(--muted-foreground)" }}>
             <p>
               The <strong>Unique Verification Code (UVC)</strong> is printed on
               every document signed through Aiyug's signing platform.
             </p>
             <div
               className="rounded-[var(--r-sm)] p-4"
-              style={{ background: "var(--bg2)" }}
+              style={{ background: "var(--muted)" }}
             >
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--tx3)" }}>
                 Where to look:

@@ -32,7 +32,7 @@ export function PreviewApproved() {
         >
           Preview approved!
         </h3>
-        <p className="text-[13px]" style={{ color: "var(--tx2)" }}>
+        <p className="text-[13px]" style={{ color: "var(--muted-foreground)" }}>
           Opening the secure document viewer\u2026
         </p>
       </div>

@@ -20,7 +20,7 @@ export default function NotFound() {
           <a
             href="/"
             className="inline-flex rounded-[var(--r-md)] px-6 py-2.5 text-[14px] font-semibold transition-all hover:-translate-y-px"
-            style={{ background: "var(--am)", color: "var(--am-cta-fg)" }}
+            style={{ background: "var(--cta)", color: "var(--cta-fg)" }}
           >
             Go home
           </a>

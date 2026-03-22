@@ -1,21 +1,22 @@
 :root {
-  /* ═══════════════ PRIMARY (INDIGO) ═══════════════ */
-  --primary: #6366F1;
-  --primary-hover: #4F46E5;
-  --primary-dark: #3730A3;
-  --primary-light: #E0E7FF;
-  --primary-bg: #EEF2FF;
-  --primary-cta-fg: #FFFFFF;
-  --primary-glow: rgba(99, 102, 241, 0.15);
-  --primary-glow-strong: rgba(99, 102, 241, 0.25);
+  /* ═══════════════ CTA (DARK) ═══════════════ */
+  --cta: #1C1917;
+  --cta-hover: #0C0A09;
+  --cta-fg: #FFFFFF;
 
-  /* Amber accent (secondary — Aiyug brand) */
-  --am: #F59E0B;
-  --am-hover: #D97706;
-  --am-dark: #92400E;
+  /* ═══════════════ ACCENT (AMBER) ═══════════════ */
+  --am: #B45309;
+  --am-hover: #92400E;
+  --am-dark: #78350F;
   --am-light: #FEF3C7;
-  --am-bg: #FFFBEB;
-  --am-cta-fg: #1C1917;
+  --am-bg: rgba(180, 83, 9, 0.08);
+  --am-cta-fg: #FFFFFF;
+  --am-glow: rgba(180, 83, 9, 0.15);
+
+  /* Legacy alias — primary maps to CTA for buttons */
+  --primary: var(--cta);
+  --primary-hover: var(--cta-hover);
+  --primary-cta-fg: var(--cta-fg);
 
   /* ═══════════════ STATUS COLORS ═══════════════ */
   --verified: #22C55E;
@@ -36,7 +37,7 @@
   --muted-foreground: #64748B;
   --border: #E2E8F0;
   --input-background: #F8FAFC;
-  --ring: var(--primary);
+  --ring: var(--am);
 
   /* Legacy aliases */
   --bg: var(--background);
@@ -47,6 +48,14 @@
   --tx3: #94A3B8;
   --bd: var(--border);
   --bd-strong: #CBD5E1;
+
+  /* ═══════════════ DARK SURFACE (footer) ═══════════════ */
+  --dark: #1C1917;
+  --dark2: #292524;
+  --dark-tx: rgba(255, 255, 255, 0.92);
+  --dark-tx2: rgba(255, 255, 255, 0.6);
+  --dark-tx3: rgba(255, 255, 255, 0.35);
+  --dark-bd: rgba(255, 255, 255, 0.08);
 
   /* ═══════════════ RADIUS ═══════════════ */
   --radius: 12px;
@@ -85,13 +94,5 @@
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
   --shadow-md: 0 2px 4px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.05);
   --shadow-lg: 0 4px 8px rgba(0,0,0,0.03), 0 16px 48px rgba(0,0,0,0.06);
-  --shadow-primary: 0 8px 24px rgba(99,102,241,0.2);
-  --shadow-am: 0 8px 24px rgba(245,158,11,0.2);
-
-  /* Chart colors */
-  --chart-1: #6366F1;
-  --chart-2: #8B5CF6;
-  --chart-3: #A78BFA;
-  --chart-4: #C4B5FD;
-  --chart-5: #DDD6FE;
+  --shadow-am: 0 8px 24px rgba(180,83,9,0.2);
 }
