@@ -77,16 +77,17 @@ export function SiteHeader() {
           </a>
           <a
             href="#verify"
-            className="cta-shine rounded-[var(--r-sm)] px-[18px] py-[7px] text-[12px] font-semibold transition-all duration-200 hover:-translate-y-px"
+            className="cta-shine rounded-lg px-5 py-2 text-[13px] font-semibold transition-all duration-200 hover:-translate-y-px no-underline"
             style={{
-              background: "var(--cta)",
-              color: "var(--cta-fg)",
+              background: "#1C1917",
+              color: "#FFFFFF",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--cta-hover)";
+              e.currentTarget.style.background = "#0C0A09";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--cta)";
+              e.currentTarget.style.background = "#1C1917";
             }}
           >
             Verify now
@@ -97,10 +98,10 @@ export function SiteHeader() {
         <div className="flex items-center gap-3 sm:hidden">
           <a
             href="#verify"
-            className="cta-shine rounded-[var(--r-sm)] px-[14px] py-[6px] text-[12px] font-semibold"
+            className="cta-shine rounded-lg px-4 py-1.5 text-[12px] font-semibold no-underline"
             style={{
-              background: "var(--cta)",
-              color: "var(--cta-fg)",
+              background: "#1C1917",
+              color: "#FFFFFF",
             }}
           >
             Verify

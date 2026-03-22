@@ -4,7 +4,7 @@ import { DocumentMockup } from "./document-mockup";
 export function HeroSection() {
   return (
     <section
-      className="relative overflow-hidden px-6 pt-24 pb-20"
+      className="relative overflow-hidden px-6 pt-20 pb-12"
       style={{ background: "var(--background)" }}
     >
       <div className="relative mx-auto max-w-[680px] text-center">
@@ -32,10 +32,10 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-6 flex justify-center"
+          className="mb-5 flex justify-center"
         >
           <div
-            className="flex h-16 w-16 items-center justify-center rounded-2xl"
+            className="flex h-14 w-14 items-center justify-center rounded-2xl"
             style={{ background: "var(--am-bg)" }}
           >
             <svg width="36" height="36" viewBox="0 0 28 28" fill="none">
@@ -94,7 +94,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="mx-auto mb-8 max-w-[480px] leading-[1.7]"
+          className="mx-auto mb-6 max-w-[480px] leading-[1.7]"
           style={{ fontSize: "15px", color: "var(--muted-foreground)" }}
         >
           Enter the unique verification code printed on any Aiyug-signed PDF
@@ -127,7 +127,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.65 }}
-        className="mx-auto mt-12 hidden max-w-[360px] sm:block"
+        className="mx-auto mt-10 max-w-[320px] sm:max-w-[360px]"
       >
         <DocumentMockup />
       </motion.div>
