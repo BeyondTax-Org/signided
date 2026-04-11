@@ -30,10 +30,11 @@ const features = [
 
 export function FeaturesGrid() {
   return (
-    <section className="px-6 py-16" style={{ background: "var(--background)" }}>
+    <section aria-labelledby="features-heading" className="px-6 py-16" style={{ background: "var(--background)" }}>
       {/* Section header */}
       <div className="mx-auto mb-10 max-w-[1120px]">
         <h2
+          id="features-heading"
           className="mb-2"
           style={{
             fontSize: "26px",
@@ -45,11 +46,8 @@ export function FeaturesGrid() {
           Why Sign IDed?
         </h2>
         <p
-          style={{
-            fontSize: "15px",
-            color: "var(--muted-foreground)",
-            lineHeight: 1.6,
-          }}
+          className="text-[15px] leading-[1.6]"
+          style={{ color: "var(--muted-foreground)" }}
         >
           Designed for India&apos;s digital signing compliance requirements.
         </p>
@@ -87,9 +85,9 @@ export function FeaturesGrid() {
             <div className="flex items-start gap-4">
               <div
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-                style={{ background: "rgba(180, 83, 9, 0.12)" }}
+                style={{ background: "var(--am-bg)" }}
               >
-                <feature.icon size={22} strokeWidth={2} style={{ color: "#B45309" }} />
+                <feature.icon size={22} strokeWidth={2} aria-hidden="true" style={{ color: "var(--am)" }} />
               </div>
               <div>
                 <h3
