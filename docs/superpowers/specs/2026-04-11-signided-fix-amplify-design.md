@@ -102,6 +102,8 @@ A slim horizontal strip between Hero and Features Grid.
 - Icon: 13px, color `var(--am)` (`#B45309`)
 - Text: `text-[11px] font-semibold tracking-wide uppercase`, color `var(--am)`
 
+> Note: The strip background uses `var(--am-bg)` which is confirmed present in `theme.css` as `rgba(180, 83, 9, 0.08)`. No new token needed.
+
 ### 4.3 Features Grid — Add Section Header (`src/components/trust-bar.tsx`)
 
 Rename file to `src/components/features-grid.tsx`. Add section header above the 4 cards:
@@ -132,12 +134,15 @@ Update section order:
 
 ### 5.1 `amplify.yml` (project root)
 
+Includes Node 18 pin and SPA redirect rule inline — canonical single source of truth:
+
 ```yaml
 version: 1
 frontend:
   phases:
     preBuild:
       commands:
+        - nvm use 18
         - npm ci
     build:
       commands:
@@ -149,30 +154,26 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+  redirects:
+    - source: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>'
+      target: /index.html
+      status: '200'
 ```
 
 ### 5.2 SPA Redirect Rule
 
-Required so React Router routes (e.g. `/verify`, `/privacy`) return `index.html` instead of 404.
-
-In Amplify Console → App → Rewrites and Redirects, add:
-
-| Source | Target | Type |
-|---|---|---|
-| `</^[^.]+$\|\.(?!(css\|gif\|ico\|jpg\|js\|png\|txt\|svg\|woff\|woff2\|ttf\|map\|json)$)([^.]+$)/>` | `/index.html` | 200 (Rewrite) |
-
-This can also be set in `amplify.yml` under `customHeaders` or via the Amplify Console UI.
+The redirect rule is defined directly in `amplify.yml` under `redirects` (see §5.1 — **not** `customHeaders`). This ensures React Router routes like `/verify` and `/privacy` return `index.html` with a 200 rewrite instead of a 404. No separate console configuration is needed.
 
 ### 5.3 Amplify Console Setup Checklist
 
 - [ ] Connect GitHub repo (or push to CodeCommit)
 - [ ] Select branch: `main`
-- [ ] Framework: detect as Vite automatically (or set manually)
-- [ ] Build command: `npm run build`
-- [ ] Output directory: `dist`
-- [ ] Node.js version: 18 (set env var `_LIVE_UPDATES` if needed)
+- [ ] Framework: detected as Vite automatically (or set manually)
+- [ ] Build command: `npm run build` (driven by `amplify.yml`)
+- [ ] Output directory: `dist` (driven by `amplify.yml`)
+- [ ] Node.js version: 18 — pinned via `nvm use 18` in `amplify.yml` preBuild
 - [ ] Domain: `signided.aiyugtech.com` → connect custom domain in Amplify Console
-- [ ] Add SPA redirect rule (see §5.2)
+- [ ] SPA redirect: included in `amplify.yml` — no console redirect rule needed
 
 ---
 
@@ -183,7 +184,7 @@ This can also be set in `amplify.yml` under `customHeaders` or via the Amplify C
 | `src/components/hero/hero-section.tsx` | Update | Split layout, left/right columns |
 | `src/components/compliance-badges.tsx` | Create | NEW — 4 compliance badge pills |
 | `src/components/features-grid.tsx` | Create (rename) | Was `trust-bar.tsx` + section header |
-| `src/components/trust-bar.tsx` | Delete | Replaced by `features-grid.tsx` |
+| `src/components/trust-bar.tsx` | Git rename → `features-grid.tsx` | Use `git mv` to preserve history |
 | `src/pages/home.tsx` | Update | Insert ComplianceBadges, update imports |
 | `amplify.yml` | Create | AWS Amplify CI/CD config |
 
@@ -201,7 +202,7 @@ This can also be set in `amplify.yml` under `customHeaders` or via the Amplify C
 ## 8. Success Criteria
 
 - [ ] `npm run build` passes with zero errors
-- [ ] Hero renders as two-column split on desktop, stacked on mobile
+- [ ] Hero renders as two-column split at `lg` breakpoint (1024px+), stacked at `< 1024px` (mobile: 375px, tablet: 768px)
 - [ ] Compliance Badges strip visible between Hero and Features Grid
 - [ ] Features Grid has "Why Sign IDed?" section header
 - [ ] All 8 sections present and in correct order
