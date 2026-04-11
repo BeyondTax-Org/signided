@@ -35,7 +35,6 @@ export function HeroSection() {
             <img
               src="/brand/signided-mark-color-light.svg"
               alt=""
-              role="presentation"
               className="h-14 w-14"
             />
           </div>
