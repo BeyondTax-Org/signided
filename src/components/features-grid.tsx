@@ -28,9 +28,34 @@ const features = [
   },
 ];
 
-export function TrustBar() {
+export function FeaturesGrid() {
   return (
     <section className="px-6 py-16" style={{ background: "var(--background)" }}>
+      {/* Section header */}
+      <div className="mx-auto mb-10 max-w-[1120px]">
+        <h2
+          className="mb-2"
+          style={{
+            fontSize: "26px",
+            fontWeight: 700,
+            letterSpacing: "-0.03em",
+            color: "var(--foreground)",
+          }}
+        >
+          Why Sign IDed?
+        </h2>
+        <p
+          style={{
+            fontSize: "15px",
+            color: "var(--muted-foreground)",
+            lineHeight: 1.6,
+          }}
+        >
+          Designed for India&apos;s digital signing compliance requirements.
+        </p>
+      </div>
+
+      {/* 4 cards grid */}
       <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-5 sm:grid-cols-2">
         {features.map((feature, i) => (
           <motion.div
@@ -60,15 +85,12 @@ export function TrustBar() {
             }}
           >
             <div className="flex items-start gap-4">
-              {/* Icon */}
               <div
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
                 style={{ background: "rgba(180, 83, 9, 0.12)" }}
               >
                 <feature.icon size={22} strokeWidth={2} style={{ color: "#B45309" }} />
               </div>
-
-              {/* Text */}
               <div>
                 <h3
                   className="mb-1 text-[15px] font-semibold"
