@@ -9,7 +9,8 @@ const badges = [
 
 export function ComplianceBadges() {
   return (
-    <div
+    <section
+      aria-label="Compliance certifications"
       className="w-full px-6 py-3.5"
       style={{
         background: "var(--am-bg)",          /* rgba(180,83,9,0.08) */
@@ -17,9 +18,12 @@ export function ComplianceBadges() {
         borderBottom: "0.5px solid rgba(180,83,9,0.15)",
       }}
     >
-      <div className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-center gap-3">
+      <ul
+        role="list"
+        className="mx-auto flex max-w-[1120px] list-none flex-wrap items-center justify-center gap-3 p-0 m-0"
+      >
         {badges.map(({ icon: Icon, label }) => (
-          <span
+          <li
             key={label}
             className="inline-flex items-center gap-1.5 rounded-full px-3 py-1"
             style={{
@@ -29,6 +33,7 @@ export function ComplianceBadges() {
             <Icon
               size={13}
               strokeWidth={2.5}
+              aria-hidden="true"
               style={{ color: "var(--am)" }}   /* #B45309 */
             />
             <span
@@ -37,9 +42,9 @@ export function ComplianceBadges() {
             >
               {label}
             </span>
-          </span>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 }
