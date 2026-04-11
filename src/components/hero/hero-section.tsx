@@ -34,7 +34,8 @@ export function HeroSection() {
           >
             <img
               src="/brand/signided-mark-color-light.svg"
-              alt="Sign IDed"
+              alt=""
+              role="presentation"
               className="h-14 w-14"
             />
           </div>
@@ -86,10 +87,10 @@ export function HeroSection() {
           <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
             <a
               href="#verify"
-              className="cta-shine inline-flex items-center rounded-xl px-8 py-3.5 text-[15px] font-semibold no-underline hover:scale-[1.03] active:scale-[0.97] transition-transform"
+              className="cta-shine focus-amber inline-flex items-center rounded-xl px-8 py-3.5 text-[15px] font-semibold no-underline hover:scale-[1.03] active:scale-[0.97] transition-transform"
               style={{
-                background: "#1C1917",
-                color: "#FFFFFF",
+                background: "var(--cta)",
+                color: "var(--cta-fg)",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
               }}
             >
