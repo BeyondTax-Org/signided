@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router";
 import { cn } from "@/lib/utils";
 import { UvcInput } from "./uvc-input";
 import { PdfUpload } from "./pdf-upload";
 import { DemoCodes } from "./demo-codes";
 import { Eye, Fingerprint, FileUp, Hash, Lock } from "lucide-react";
+import usePostUploadSignedDoc from "./data/usePostUploadSignedDoc";
 
 interface VerifyFormProps {
   onOpenHelp: () => void;
@@ -12,6 +14,32 @@ interface VerifyFormProps {
 }
 
 type Tab = "uvc" | "pdf";
+
+export interface VerifyApiResult {
+  status: "verified" | "expired" | "revoked" | "not-found";
+  uvc_code?: string;
+  fingerprint_sha256?: string;
+  document_title?: string;
+  purpose?: string;
+  owner_initials?: string;
+  owner_email?: string;
+  requester_email?: string;
+  signer_count?: number;
+  signers?: {
+    signer_email?: string;
+    signer_name?: string;
+    signer_role?: string;
+    is_guest?: boolean;
+    status?: string;
+    signed_at?: string | null;
+    declined_at?: string | null;
+    order?: number;
+  }[];
+  signed_at?: string;
+  completed_at?: string;
+  verification_expires_at?: string | null;
+  preview_available?: boolean;
+}
 
 const supportCards = [
   {
@@ -39,6 +67,40 @@ const supportCards = [
 
 export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
   const [tab, setTab] = useState<Tab>("uvc");
+  const navigate = useNavigate();
+  const [uploadSignedData, uploadSignedError, uploadSignedDocLoading, postUploadSignedDoc] =
+    usePostUploadSignedDoc();
+  const submitError = uploadSignedError ? "Error in verifying" : "";
+
+  useEffect(() => {
+    const response =
+      uploadSignedData &&
+      typeof uploadSignedData === "object" &&
+      "data" in uploadSignedData
+        ? (uploadSignedData as { data?: unknown }).data
+        : uploadSignedData;
+
+    if (!response || typeof response !== "object" || !("status" in response)) {
+      return;
+    }
+
+    navigate("/verify", {
+      state: {
+        result: response as VerifyApiResult,
+        showLoading: true,
+      },
+    });
+  }, [navigate, uploadSignedData]);
+
+  function handleVerifyUvc(uvcCode: string) {
+    postUploadSignedDoc({ uvc_code: uvcCode });
+  }
+
+  function handleVerifyPdf(file: File) {
+    const formData = new FormData();
+    formData.append("pdf", file);
+    postUploadSignedDoc(formData);
+  }
 
   return (
     <motion.section
@@ -70,7 +132,7 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
           </h2>
           <p
             className="text-[0.9rem] font-[500] leading-[1.45] sm:text-[1rem]"
-            style={{ color: "#6F7686", marginTop: "0.7rem"}}
+            style={{ color: "#6F7686", marginTop: "0.7rem" }}
           >
             Enter the verification code (UVC) or upload the signed PDF to check
             its authenticity.
@@ -79,22 +141,34 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
 
         <div
           className="overflow-hidden rounded-lg border bg-white"
-          style={{ borderColor: "#DCE1EA", marginTop: "2.3rem", paddingTop: "1rem"}}
+          style={{
+            borderColor: "#DCE1EA",
+            marginTop: "2.3rem",
+            paddingTop: "1rem",
+          }}
         >
-          <div className="grid  grid-cols-2 border-b" style={{ borderColor: "#DCE1EA",  }}>
-            {([
-              { key: "uvc" as Tab, icon: Hash, label: "Verification Code (UVC)" },
+          <div
+            className="grid  grid-cols-2 border-b"
+            style={{ borderColor: "#DCE1EA" }}
+          >
+            {[
+              {
+                key: "uvc" as Tab,
+                icon: Hash,
+                label: "Verification Code (UVC)",
+              },
               { key: "pdf" as Tab, icon: FileUp, label: "Upload Signed PDF" },
-            ]).map((t) => (
+            ].map((t) => (
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
                 className={cn(
                   "relative flex min-h-[48px] items-center justify-center gap-1.5 px-2 text-center text-[0.72rem] font-[600] leading-[1.2] transition-colors cursor-pointer sm:gap-2 sm:text-[0.8rem]",
-                  tab === t.key ? "" : "hover:bg-[#FAFBFD]"
+                  tab === t.key ? "" : "hover:bg-[#FAFBFD]",
                 )}
                 style={{
-                  color: tab === t.key ? "#191B2A" : "#6F7686", paddingBottom: "0.9rem"
+                  color: tab === t.key ? "#191B2A" : "#6F7686",
+                  paddingBottom: "0.9rem",
                 }}
               >
                 <t.icon size={14} strokeWidth={2} />
@@ -109,18 +183,35 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
             ))}
           </div>
 
-          <div className="" style={{
-            padding: "clamp(1rem, 5vw, 2rem)"
-          }}>
+          <div
+            className=""
+            style={{
+              padding: "clamp(1rem, 5vw, 2rem)",
+            }}
+          >
             {tab === "uvc" ? (
-              <UvcInput onOpenHelp={onOpenHelp} initialCode={initialCode} />
+              <UvcInput
+                onOpenHelp={onOpenHelp}
+                initialCode={initialCode}
+                isSubmitting={uploadSignedDocLoading}
+                submitError={submitError}
+                onVerify={handleVerifyUvc}
+              />
             ) : (
-              <PdfUpload />
+              <PdfUpload
+                isSubmitting={uploadSignedDocLoading}
+                submitError={submitError}
+                onVerify={handleVerifyPdf}
+              />
             )}
 
             <div
               className="flex items-center gap-3 rounded-md"
-              style={{ background: "#F6F7F9", marginTop: "2rem", padding: "1rem" }}
+              style={{
+                background: "#F6F7F9",
+                marginTop: "2rem",
+                padding: "1rem",
+              }}
             >
               <Lock size={18} style={{ color: "#6F7686", flexShrink: 0 }} />
               <p
@@ -134,7 +225,10 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
           </div>
         </div>
 
-        <div className=" grid grid-cols-1 gap-4 md:grid-cols-3" style={{marginTop: "2rem"}}>
+        <div
+          className=" grid grid-cols-1 gap-4 md:grid-cols-3"
+          style={{ marginTop: "2rem" }}
+        >
           {supportCards.map((item) => (
             <div
               key={item.title}
@@ -145,7 +239,11 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md md:h-[50%] md:w-[20%]"
                 style={{ background: item.bg }}
               >
-                <item.icon size={18} strokeWidth={2} style={{ color: item.color }} />
+                <item.icon
+                  size={18}
+                  strokeWidth={2}
+                  style={{ color: item.color }}
+                />
               </div>
               <div>
                 <p

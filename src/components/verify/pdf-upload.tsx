@@ -1,13 +1,20 @@
 import { useState, useCallback, type DragEvent } from "react";
 import { FileCheck, FileText, Upload } from "lucide-react";
-import { verifyPDF } from "@/api/verify";
-import { useVerify } from "./verify-context";
 
-export function PdfUpload() {
+interface PdfUploadProps {
+  onVerify: (file: File) => void;
+  isSubmitting?: boolean;
+  submitError?: string;
+}
+
+export function PdfUpload({
+  onVerify,
+  isSubmitting = false,
+  submitError = "",
+}: PdfUploadProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState("");
-  const { dispatch } = useVerify();
 
   const handleFile = useCallback((f: File) => {
     if (f.type !== "application/pdf") {
@@ -22,15 +29,13 @@ export function PdfUpload() {
     setError("");
   }, []);
 
-  async function handleVerify() {
+  function handleVerify() {
     if (!file) {
       setError("Please choose a signed PDF first.");
       return;
     }
 
-    dispatch({ type: "VERIFY_START" });
-    const result = await verifyPDF(file);
-    dispatch({ type: "VERIFY_RESULT", status: result.status, result });
+    onVerify(file);
   }
 
   function formatFileSize(bytes: number) {
@@ -145,11 +150,13 @@ export function PdfUpload() {
       <button
         type="button"
         onClick={handleVerify}
+        disabled={isSubmitting}
         className="cta-shine flex w-full items-center justify-center gap-2 rounded-md text-[1rem] font-[600] transition-all duration-200 hover:-translate-y-[1px] cursor-pointer"
         style={{
           background: "#6568F6",
           color: "#FFFFFF",
           boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+          opacity: isSubmitting ? 0.72 : 1,
           padding: "0.7rem",
         }}
         onMouseEnter={(e) => {
@@ -160,8 +167,16 @@ export function PdfUpload() {
         }}
       >
         <FileText size={18} strokeWidth={2} />
-        Verify PDF
+        {isSubmitting ? "Verifying..." : "Verify PDF"}
       </button>
+      {submitError && (
+        <p
+          className="mt-2 text-center text-[12px] font-semibold"
+          style={{ color: "var(--revoked)" }}
+        >
+          {submitError}
+        </p>
+      )}
     </div>
   );
 }

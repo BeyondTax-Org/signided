@@ -2,11 +2,17 @@ export type VerifyStatus = "verified" | "expired" | "revoked" | "not-found";
 
 export interface QuickResult {
   status: VerifyStatus;
+  uvcCode?: string;
   fingerprint?: string;
   signedOn?: string;
+  completedAt?: string;
+  expiresAt?: string | null;
   method?: string;
+  purpose?: string;
   docTitle?: string;
   signerInitials?: string;
+  requesterEmail?: string;
+  previewAvailable?: boolean;
   pages?: number;
 }
 

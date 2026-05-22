@@ -1,35 +1,41 @@
 import { useState, type FormEvent } from "react";
 import { isValidFormat } from "@/lib/uvc";
-import { verifyUVC } from "@/api/verify";
-import { useVerify } from "./verify-context";
 import { CircleHelp, Search } from "lucide-react";
 
 interface UvcInputProps {
   onOpenHelp: () => void;
+  onVerify: (uvcCode: string) => void;
   initialCode?: string;
+  isSubmitting?: boolean;
+  submitError?: string;
 }
 
-export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
+export function UvcInput({
+  onOpenHelp,
+  onVerify,
+  initialCode = "",
+  isSubmitting = false,
+  submitError = "",
+}: UvcInputProps) {
   const [code, setCode] = useState(initialCode);
   const [error, setError] = useState("");
-  const { dispatch } = useVerify();
 
-  async function handleSubmit(e: FormEvent) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError("");
 
-    if (!code.trim()) {
+    const trimmedCode = code.trim();
+
+    if (!trimmedCode) {
       setError("Please enter a verification code.");
       return;
     }
-    if (!isValidFormat(code)) {
+    if (!isValidFormat(trimmedCode)) {
       setError("Invalid format. UVC codes are 4-10 alphanumeric characters.");
       return;
     }
 
-    dispatch({ type: "VERIFY_START" });
-    const result = await verifyUVC(code);
-    dispatch({ type: "VERIFY_RESULT", status: result.status, result });
+    onVerify(trimmedCode);
   }
 
   return (
@@ -103,11 +109,13 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
 
       <button
         type="submit"
+        disabled={isSubmitting}
         className="cta-shine flex w-full items-center justify-center gap-2 rounded-md text-[1rem] font-[600] transition-all duration-200 hover:-translate-y-[1px] cursor-pointer"
         style={{
           background: "#6568F6",
           color: "#FFFFFF",
           boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+          opacity: isSubmitting ? 0.72 : 1,
           padding: "0.7rem"
         }}
         onMouseEnter={(e) => {
@@ -118,8 +126,16 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
         }}
       >
         <Search size={18} strokeWidth={2} />
-        Verify Document
+        {isSubmitting ? "Verifying..." : "Verify Document"}
       </button>
+      {submitError && (
+        <p
+          className="mt-2 text-center text-[12px] font-semibold"
+          style={{ color: "var(--revoked)" }}
+        >
+          {submitError}
+        </p>
+      )}
     </form>
   );
 }
