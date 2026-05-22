@@ -291,7 +291,6 @@ function PreviewApproveSuccess({
   approval?: PreviewApproveResponse;
 }) {
   const previewUrl = approval?.data?.preview_url;
-  console.log("previewUrl", approval);
 
   return (
     <motion.div
@@ -350,7 +349,7 @@ function PreviewApproveSuccess({
                 Document preview
               </p>
               <p className="mt-1 text-[13px] font-bold" style={{ color: "#6F7686" }}>
-                Preview expires in {formatExpiryMinutes(approval?.expires_at)}
+                Preview expires in {formatExpiryMinutes(approval?.data?.expires_at)}
               </p>
             </div>
             {previewUrl && (
@@ -388,6 +387,8 @@ function PreviewApproveSuccess({
 }
 
 function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
+  const payload = request?.data;
+
   return (
     <motion.div
       key="owner-waiting"
@@ -453,7 +454,7 @@ function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
           className="mt-[55px] text-[18px] font-bold"
           style={{ color: "#6F7686" }}
         >
-          This request expires in {formatExpiryMinutes(request?.expires_at)}.
+          This request expires in {formatExpiryMinutes(payload?.expires_at)}.
           Don't close this page.
         </p>
       </div>
@@ -480,6 +481,8 @@ function OwnerOtpEntry({
   onBack: () => void;
   inputRef: RefObject<HTMLInputElement | null>;
 }) {
+  const payload = request?.data;
+
   return (
     <motion.div
       key="owner-otp"
@@ -511,7 +514,7 @@ function OwnerOtpEntry({
           style={{ color: "#6F7686" }}
         >
           Enter the 6 digit code sent to the owner
-          {request?.owner_mobile_hint ? ` at ${request.owner_mobile_hint}` : ""}.
+          {payload?.owner_mobile_hint ? ` at ${payload.owner_mobile_hint}` : ""}.
         </p>
 
         <div className="mx-auto mt-[36px] max-w-[430px]">
@@ -538,7 +541,7 @@ function OwnerOtpEntry({
             style={{ color: "#6F7686" }}
           >
             <Clock size={17} />
-            Expires in {formatExpiryMinutes(request?.expires_at)}
+            Expires in {formatExpiryMinutes(payload?.expires_at)}
           </div>
         </div>
 

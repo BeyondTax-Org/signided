@@ -17,7 +17,7 @@ const usePostPreviewReqApprove = () => {
       status_code: 200,
       status_text: "OK",
       callBack: (res) => {
-        const data = res?.data || res;
+        const data = res;
         if (data && typeof data === "object") {
           setSuccessData(data);
           setError(undefined);
@@ -30,7 +30,7 @@ const usePostPreviewReqApprove = () => {
       status_code: 201,
       status_text: "Created",
       callBack: (res) => {
-        const data = res?.data || res;
+        const data = res;
         if (data && typeof data === "object") {
           setSuccessData(data);
           setError(undefined);

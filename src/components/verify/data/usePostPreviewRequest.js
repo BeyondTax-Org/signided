@@ -17,7 +17,7 @@ const usePostPreviewRequest = () => {
       status_code: 201,
       status_text: "Created",
       callBack: (res) => {
-        const data = res?.data || res;
+        const data = res;
         if (data && typeof data === "object") {
           setSuccessData(data);
           setError(undefined);

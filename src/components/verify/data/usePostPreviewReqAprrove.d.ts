@@ -3,10 +3,16 @@ interface PreviewApproveBody {
   otp_session_id?: string;
 }
 
-export interface PreviewApproveResponse {
+export interface PreviewApprovePayload {
   grant_id: string;
   preview_url: string;
   expires_at: string;
+}
+
+export interface PreviewApproveResponse {
+  status_code: number;
+  status_text: string;
+  data: PreviewApprovePayload;
 }
 
 declare const usePostPreviewReqApprove: () => [
