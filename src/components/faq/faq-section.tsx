@@ -4,41 +4,41 @@ import { ChevronDown } from "lucide-react";
 import { FAQ_ITEMS } from "@/lib/constants";
 
 export function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section
       id="faq"
-      className="border-y px-6 py-20"
+      className="scroll-mt-20 border-y "
       style={{
-        background: "linear-gradient(180deg, var(--muted) 0%, var(--background) 100%)",
-        borderColor: "var(--border)",
+        background: "#FAFBFD",
+        borderColor: "#E5E9F1",
+        padding: "4rem 1rem",
       }}
     >
-      <div className="mx-auto max-w-[560px]">
+      <div className="mx-auto max-w-full md:max-w-[55%]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-10 text-center"
+          className=" text-center"
+          style={{ marginBottom: "2rem" }}
         >
           <h2
             style={{
-              fontSize: "clamp(22px, 3vw, 28px)",
+              fontSize: "clamp(25px, 2.9vw, 28px)",
               fontWeight: 700,
-              letterSpacing: "-0.03em",
-              color: "var(--foreground)",
+              letterSpacing: "-0.035em",
+              lineHeight: 1.08,
+              color: "#191B2A",
             }}
           >
-            Common questions
+            Frequently Asked Questions
           </h2>
-          <p className="mt-2 text-[15px]" style={{ color: "var(--muted-foreground)" }}>
-            Everything you need to know about verifying documents.
-          </p>
         </motion.div>
 
-        <div className="space-y-3">
+        <div className="">
           {FAQ_ITEMS.map((item, i) => {
             const isOpen = openIndex === i;
             return (
@@ -53,37 +53,37 @@ export function FaqSection() {
                   damping: 30,
                   delay: i * 0.06,
                 }}
+                style={{ marginBottom: "0.8rem" }}
               >
                 <div
-                  className="overflow-hidden rounded-[var(--r-md)] border bg-white transition-all duration-200"
+                  className="overflow-hidden rounded-md border bg-white transition-all duration-200"
                   style={{
-                    borderColor: isOpen
-                      ? "var(--bd-strong)"
-                      : "var(--border)",
-                    boxShadow: isOpen
-                      ? "var(--shadow-md)"
-                      : "var(--shadow-sm)",
+                    borderColor: "#DCE1EA",
+                    boxShadow: "0 1px 2px rgba(15, 23, 42, 0.02)",
+                    padding: "1rem",
                   }}
                 >
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between px-5 py-4 text-left text-[13px] font-semibold transition-colors duration-200 cursor-pointer"
+                    className="flex w-full items-center justify-between gap-4 text-left text-[0.85rem] font-[600] transition-colors duration-200 cursor-pointer sm:gap-6 sm:text-[0.9rem]"
                     style={{
-                      color: "var(--foreground)",
-                      letterSpacing: "-0.01em",
+                      color: "#191B2A",
+                      letterSpacing: "-0.015em",
                     }}
                     onMouseEnter={(e) => {
                       if (!isOpen)
-                        (e.currentTarget.parentElement as HTMLElement).style.borderColor =
-                          "var(--bd-strong)";
+                        (
+                          e.currentTarget.parentElement as HTMLElement
+                        ).style.borderColor = "#C9CEDA";
                     }}
                     onMouseLeave={(e) => {
                       if (!isOpen)
-                        (e.currentTarget.parentElement as HTMLElement).style.borderColor =
-                          "var(--border)";
+                        (
+                          e.currentTarget.parentElement as HTMLElement
+                        ).style.borderColor = "#DCE1EA";
                     }}
                   >
-                    {item.question}
+                    <span>{item.question}</span>
                     <motion.div
                       animate={{ rotate: isOpen ? 180 : 0 }}
                       transition={{
@@ -91,10 +91,12 @@ export function FaqSection() {
                         stiffness: 500,
                         damping: 25,
                       }}
+                      className="shrink-0"
                     >
                       <ChevronDown
-                        size={16}
-                        style={{ color: isOpen ? "var(--foreground)" : "var(--tx3)" }}
+                        size={18}
+                        strokeWidth={2}
+                        style={{ color: "#6F7686" }}
                       />
                     </motion.div>
                   </button>
@@ -115,16 +117,10 @@ export function FaqSection() {
                         }}
                         className="overflow-hidden"
                       >
-                        <div
-                          className="border-t px-5 py-4"
-                          style={{
-                            borderColor: "var(--border)",
-                            background: "var(--muted)",
-                          }}
-                        >
+                        <div className="pt-0">
                           <p
-                            className="text-[13px] leading-[1.7]"
-                            style={{ color: "var(--muted-foreground)" }}
+                            className="max-w-[910px] text-[0.85rem] font-[500] leading-[1.65]"
+                            style={{ color: "#6F7686", marginTop: "0.8rem" }}
                           >
                             {item.answer}
                           </p>

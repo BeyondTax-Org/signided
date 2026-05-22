@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { UvcInput } from "./uvc-input";
 import { PdfUpload } from "./pdf-upload";
 import { DemoCodes } from "./demo-codes";
-import { Hash, FileUp, Lock } from "lucide-react";
+import { Eye, Fingerprint, FileUp, Hash, Lock } from "lucide-react";
 
 interface VerifyFormProps {
   onOpenHelp: () => void;
@@ -12,6 +12,30 @@ interface VerifyFormProps {
 }
 
 type Tab = "uvc" | "pdf";
+
+const supportCards = [
+  {
+    icon: Hash,
+    title: "UVC Code",
+    desc: "Found near the signature stamp or QR on the signed document.",
+    bg: "#E9FBF2",
+    color: "#10B981",
+  },
+  {
+    icon: Fingerprint,
+    title: "Fingerprint",
+    desc: "SHA-256 hash that proves the document hasn't been modified.",
+    bg: "#ECECFF",
+    color: "#6568F6",
+  },
+  {
+    icon: Eye,
+    title: "Secure Preview",
+    desc: "View the signed doc with owner's approval via OTP.",
+    bg: "#FFE6F2",
+    color: "#FF3C9A",
+  },
+];
 
 export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
   const [tab, setTab] = useState<Tab>("uvc");
@@ -24,155 +48,124 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
       id="verify"
-      className="border-y px-6 py-16"
+      className="scroll-mt-20 border-y px-4 py-12 sm:px-5 sm:py-[72px]"
       style={{
-        background: "linear-gradient(180deg, var(--muted) 0%, var(--background) 100%)",
-        borderColor: "var(--border)",
+        // background: "#FAFBFD",
+        borderColor: "#E5E9F1",
       }}
     >
-      <div className="mx-auto max-w-[1120px]">
-        {/* Heading */}
-        <div className="mb-10 text-center">
+      <div className="mx-auto max-w-[90%] md:max-w-[52%]">
+        <div className="text-center">
           <h2
             style={{
-              fontSize: "clamp(22px, 3vw, 28px)",
+              fontSize: "clamp(1.75rem, 8vw, 32px)",
               fontWeight: 700,
-              letterSpacing: "-0.03em",
-              color: "var(--foreground)",
+              letterSpacing: "-0.035em",
+              lineHeight: 1.08,
+              color: "#181B2A",
+              marginTop: "clamp(2rem, 10vw, 5rem)",
             }}
           >
             Verify a signed document
           </h2>
           <p
-            className="mt-2"
-            style={{ fontSize: "15px", color: "var(--muted-foreground)" }}
+            className="text-[0.9rem] font-[500] leading-[1.45] sm:text-[1rem]"
+            style={{ color: "#6F7686", marginTop: "0.7rem"}}
           >
-            Enter the unique verification code or upload the signed PDF.
+            Enter the verification code (UVC) or upload the signed PDF to check
+            its authenticity.
           </p>
         </div>
 
-        {/* Two-column: form + info cards */}
-        <div className="mx-auto grid max-w-[880px] grid-cols-1 gap-8 md:grid-cols-[1fr,320px]">
-          {/* Left: Form card */}
-          <div>
+        <div
+          className="overflow-hidden rounded-lg border bg-white"
+          style={{ borderColor: "#DCE1EA", marginTop: "2.3rem", paddingTop: "1rem"}}
+        >
+          <div className="grid  grid-cols-2 border-b" style={{ borderColor: "#DCE1EA",  }}>
+            {([
+              { key: "uvc" as Tab, icon: Hash, label: "Verification Code (UVC)" },
+              { key: "pdf" as Tab, icon: FileUp, label: "Upload Signed PDF" },
+            ]).map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setTab(t.key)}
+                className={cn(
+                  "relative flex min-h-[48px] items-center justify-center gap-1.5 px-2 text-center text-[0.72rem] font-[600] leading-[1.2] transition-colors cursor-pointer sm:gap-2 sm:text-[0.8rem]",
+                  tab === t.key ? "" : "hover:bg-[#FAFBFD]"
+                )}
+                style={{
+                  color: tab === t.key ? "#191B2A" : "#6F7686", paddingBottom: "0.9rem"
+                }}
+              >
+                <t.icon size={14} strokeWidth={2} />
+                {t.label}
+                {tab === t.key && (
+                  <span
+                    className="absolute bottom-0 left-0 h-[3px] w-full"
+                    style={{ background: "#6568F6" }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+
+          <div className="" style={{
+            padding: "clamp(1rem, 5vw, 2rem)"
+          }}>
+            {tab === "uvc" ? (
+              <UvcInput onOpenHelp={onOpenHelp} initialCode={initialCode} />
+            ) : (
+              <PdfUpload />
+            )}
+
             <div
-              className="rounded-[var(--radius-card)] border bg-white p-6 transition-all duration-300"
-              style={{
-                borderColor: "var(--border)",
-                boxShadow: "var(--shadow-md)",
-              }}
+              className="flex items-center gap-3 rounded-md"
+              style={{ background: "#F6F7F9", marginTop: "2rem", padding: "1rem" }}
             >
-              {/* Tabs */}
-              <div
-                className="mb-5 flex border-b"
-                style={{ borderColor: "var(--border)" }}
+              <Lock size={18} style={{ color: "#6F7686", flexShrink: 0 }} />
+              <p
+                className="text-[0.8rem] font-[500] leading-[1.45]"
+                style={{ color: "#6F7686" }}
               >
-                {([
-                  { key: "uvc" as Tab, icon: Hash, label: "UVC Code" },
-                  { key: "pdf" as Tab, icon: FileUp, label: "Upload PDF" },
-                ]).map((t) => (
-                  <button
-                    key={t.key}
-                    onClick={() => setTab(t.key)}
-                    className={cn(
-                      "flex items-center gap-1.5 px-4 pb-2.5 text-[13px] font-medium transition-all cursor-pointer",
-                      tab === t.key
-                        ? "border-b-2"
-                        : "opacity-50 hover:opacity-80"
-                    )}
-                    style={{
-                      borderColor:
-                        tab === t.key ? "var(--foreground)" : "transparent",
-                      color: tab === t.key ? "var(--foreground)" : "var(--muted-foreground)",
-                    }}
-                  >
-                    <t.icon size={14} />
-                    {t.label}
-                  </button>
-                ))}
+                We'll show the verification status instantly. To preview the
+                actual document, the owner/signer must approve via OTP.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className=" grid grid-cols-1 gap-4 md:grid-cols-3" style={{marginTop: "2rem"}}>
+          {supportCards.map((item) => (
+            <div
+              key={item.title}
+              className="flex items-start gap-3 rounded-md border bg-white"
+              style={{ borderColor: "#DCE1EA", padding: "1rem" }}
+            >
+              <div
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md md:h-[50%] md:w-[20%]"
+                style={{ background: item.bg }}
+              >
+                <item.icon size={18} strokeWidth={2} style={{ color: item.color }} />
               </div>
-
-              {/* Content */}
-              {tab === "uvc" ? (
-                <UvcInput onOpenHelp={onOpenHelp} initialCode={initialCode} />
-              ) : (
-                <PdfUpload />
-              )}
-
-              {/* Security note */}
-              <div
-                className="mt-4 flex items-start gap-2 rounded-[var(--r-sm)] p-3"
-                style={{ background: "var(--muted)" }}
-              >
-                <Lock
-                  size={12}
-                  style={{ color: "var(--tx3)", marginTop: 2, flexShrink: 0 }}
-                />
+              <div>
                 <p
-                  className="text-[11px] leading-[1.6]"
-                  style={{ color: "var(--tx3)" }}
+                  className="text-[0.9rem] font-[600] leading-[1.2]"
+                  style={{ color: "#191B2A", marginBottom: "0.4rem" }}
                 >
-                  Document preview requires OTP verification from the document
-                  owner. We never store uploaded files.
+                  {item.title}
+                </p>
+                <p
+                  className="text-[0.75rem] font-[500] leading-[1.55]"
+                  style={{ color: "#6F7686" }}
+                >
+                  {item.desc}
                 </p>
               </div>
             </div>
-
-            {/* Demo codes */}
-            <DemoCodes />
-          </div>
-
-          {/* Right: Info cards */}
-          <div className="flex flex-col gap-3">
-            {[
-              {
-                icon: Hash,
-                title: "UVC Code",
-                desc: "Unique verification code printed on every signed document",
-              },
-              {
-                icon: Lock,
-                title: "Fingerprint",
-                desc: "SHA-256 hash confirms the file hasn\u2019t been tampered with",
-              },
-              {
-                icon: FileUp,
-                title: "Secure Preview",
-                desc: "View the original document with owner consent via OTP",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="flex items-start gap-3 rounded-[var(--radius-card)] border p-4"
-                style={{
-                  background: "var(--card)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                <div
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                  style={{ background: "var(--am-bg)" }}
-                >
-                  <item.icon size={16} style={{ color: "var(--am)" }} />
-                </div>
-                <div>
-                  <p
-                    className="text-[13px] font-semibold"
-                    style={{ color: "var(--foreground)" }}
-                  >
-                    {item.title}
-                  </p>
-                  <p
-                    className="mt-0.5 text-[12px] leading-[1.5]"
-                    style={{ color: "var(--muted-foreground)" }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
+
+        <DemoCodes />
       </div>
     </motion.section>
   );

@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { isValidFormat } from "@/lib/uvc";
 import { verifyUVC } from "@/api/verify";
 import { useVerify } from "./verify-context";
-import { Info, ArrowRight } from "lucide-react";
+import { CircleHelp, Search } from "lucide-react";
 
 interface UvcInputProps {
   onOpenHelp: () => void;
@@ -33,29 +33,47 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit}>
       <div>
+        <label
+          htmlFor="uvc-code"
+          className="block text-[0.9rem] font-[600] leading-none"
+          style={{ color: "#191B2A", marginBottom: "0.5rem" }}
+        >
+          Verification Code (UVC)
+        </label>
+        <p
+          className="text-[0.8rem] font-[600] leading-[1.45]"
+          style={{ color: "#6F7686", marginBottom: "0.7rem" }}
+        >
+          This is the short code printed near the signature stamp or QR on the
+          signed document.
+        </p>
         <div
-          className="flex items-center overflow-hidden rounded-[var(--r-md)] border transition-all duration-200 focus-within:border-[var(--am)] focus-within:shadow-[0_0_0_3px_rgba(180,83,9,0.1)]"
+          className="flex h-[54px] items-center overflow-hidden rounded-md border bg-white transition-all duration-200 focus-within:border-[#6568F6] focus-within:shadow-[0_0_0_4px_rgba(101,104,246,0.12)] sm:h-[60px]"
           style={{
-            borderColor: error ? "var(--revoked)" : "var(--bd-strong)",
+            borderColor: error ? "var(--revoked)" : "#DCE1EA",
             borderWidth: "1.5px",
+            marginBottom: "0.4rem"
           }}
         >
           <input
+            id="uvc-code"
             type="text"
             value={code}
             onChange={(e) => {
               setCode(e.target.value.toUpperCase());
               setError("");
             }}
-            placeholder="Enter UVC (e.g. X1Z5-AB3)"
-            className="w-full bg-transparent px-4 py-3.5 outline-none"
+            placeholder="e.g., X1Z5-AB3"
+            className="w-full bg-transparent outline-none"
             style={{
               fontFamily: "var(--mono)",
-              fontSize: "15px",
-              letterSpacing: "0.04em",
+              fontSize: "clamp(13px, 4vw, 15px)",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
               color: "var(--foreground)",
+              padding: "1rem"
             }}
             autoComplete="off"
             spellCheck={false}
@@ -71,35 +89,36 @@ export function UvcInput({ onOpenHelp, initialCode = "" }: UvcInputProps) {
         )}
       </div>
 
-      <button
-        type="submit"
-        className="cta-shine flex w-full items-center justify-center gap-2 rounded-[var(--r-md)] py-3.5 text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[2px] cursor-pointer"
-        style={{
-          background: "var(--cta)",
-          color: "var(--cta-fg)",
-          boxShadow: "var(--shadow-sm)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = "var(--cta-hover)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = "var(--cta)";
-        }}
-      >
-        Verify signature
-        <ArrowRight size={15} />
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={onOpenHelp}
+          className="flex items-center gap-1.5 text-[0.7rem] font-[500] transition-colors cursor-pointer"
+          style={{ color: "#6568F6", marginBottom: "0.9rem" }}
+        >
+          <CircleHelp size={14} strokeWidth={2.2} />
+          Where is this?
+        </button>
+      </div>
 
       <button
-        type="button"
-        onClick={onOpenHelp}
-        className="flex items-center gap-1.5 text-[12px] font-medium transition-colors cursor-pointer"
-        style={{ color: "var(--tx3)" }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--am)")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--tx3)")}
+        type="submit"
+        className="cta-shine flex w-full items-center justify-center gap-2 rounded-md text-[1rem] font-[600] transition-all duration-200 hover:-translate-y-[1px] cursor-pointer"
+        style={{
+          background: "#6568F6",
+          color: "#FFFFFF",
+          boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+          padding: "0.7rem"
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = "#575AEF";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = "#6568F6";
+        }}
       >
-        <Info size={12} />
-        Where do I find this code?
+        <Search size={18} strokeWidth={2} />
+        Verify Document
       </button>
     </form>
   );

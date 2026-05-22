@@ -1,36 +1,34 @@
 export function SiteFooter() {
   return (
     <footer
-      className="px-6 py-12"
+      className=""
       style={{
-        background: "var(--dark)",
+        background: "#FAFBFD",
         borderTop: "1px solid var(--dark-bd)",
+        padding: "1.1rem 0.2rem"
       }}
     >
-      <div className="mx-auto max-w-[1120px]">
+      <div className="mx-auto max-w-[1120px] px-3 sm:px-0">
         {/* Main footer row */}
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           {/* Left: Logo + tagline */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex max-w-full flex-wrap items-center justify-center gap-1.5 text-center sm:justify-start sm:text-left">
             <img
               src="/brand/signided-mark-color-dark.svg"
               alt=""
               className="h-6 w-6"
             />
-            <span className="text-[13px]" style={{ color: "var(--dark-tx2)" }}>
-              <span
-                className="font-semibold"
-                style={{ color: "var(--dark-tx)" }}
-              >
+            <span className="text-[12px] sm:text-[13px]" style={{ color: "black" }}>
+              <span className="font-[600]" style={{ color: "black" }}>
                 Sign IDed
               </span>{" "}
-              by{" "}
+              <span className="font-[500]">by</span>
               <a
                 href="https://aiyugtech.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold transition-colors"
-                style={{ color: "var(--am)" }}
+                className="font-[500] transition-colors text-[11px] text-gray-700"
+                style={{ color: "gray" }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.color = "var(--am-hover)")
                 }
@@ -38,36 +36,38 @@ export function SiteFooter() {
                   (e.currentTarget.style.color = "var(--am)")
                 }
               >
-                Aiyug
+                — A public verification portal by{" "}
+                <span className="text-black font-[600]">Aiyug Workspace </span>(Aiyug Tech)
               </a>
             </span>
           </div>
 
           {/* Right: Links */}
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-6">
             <a
               href="#verify"
-              className="rounded-lg px-5 py-2 text-[13px] font-semibold no-underline transition-colors"
+              className="rounded-lg text-[12px] font-[500] no-underline transition-colors"
               style={{
-                background: "rgba(180, 83, 9, 0.15)",
-                color: "#F59E0B",
-                border: "1px solid rgba(180, 83, 9, 0.25)",
+                background: "rgba(238, 241, 250, 0.85)",
+                color: "#6568F6",
+                border: "1px solid #6568F6",
+                padding: "0.1rem 0.5rem"
               }}
             >
               Verify a document
             </a>
             <nav
-              className="flex items-center gap-5 text-[13px]"
-              style={{ color: "var(--dark-tx2)" }}
+              className="flex flex-wrap items-center justify-center gap-4 text-[13px] sm:gap-5"
+              style={{ color: "black" }}
             >
               <a
                 href="https://doclate.aiyugtech.com"
                 className="transition-colors"
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--dark-tx)")
+                  (e.currentTarget.style.color = "gray")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--dark-tx2)")
+                  (e.currentTarget.style.color = "black")
                 }
               >
                 Doclate
@@ -81,10 +81,10 @@ export function SiteFooter() {
                   href={link.href}
                   className="transition-colors"
                   onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "var(--dark-tx)")
+                    (e.currentTarget.style.color = "gray")
                   }
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "var(--dark-tx2)")
+                    (e.currentTarget.style.color = "black")
                   }
                 >
                   {link.label}
@@ -96,12 +96,12 @@ export function SiteFooter() {
 
         {/* Bottom divider + copyright */}
         <div
-          className="mt-8 pt-6"
-          style={{ borderTop: "1px solid var(--dark-bd)" }}
+          className="pt-6"
+          style={{ borderTop: "1px solid white", marginTop: '1rem' }}
         >
           <p
             className="text-center text-[11px]"
-            style={{ color: "var(--dark-tx2)" }}
+            style={{ color: "black" }}
           >
             &copy; {new Date().getFullYear()} Aiyug Technologies Pvt. Ltd. All
             rights reserved.

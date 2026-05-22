@@ -1,5 +1,6 @@
 import { useVerify } from "./verify-context";
 import { verifyUVC } from "@/api/verify";
+import { Sparkles } from "lucide-react";
 
 const demos = [
   { code: "X1Z5-AB3", color: "var(--verified)", bg: "var(--verified-light)", label: "Verified" },
@@ -17,37 +18,52 @@ export function DemoCodes() {
   }
 
   return (
-    <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-      <span className="text-[11px] font-medium" style={{ color: "var(--tx3)" }}>
-        Try demo:
+    <div
+      className="mx-auto flex w-full flex-wrap items-center justify-center gap-1.5 rounded-md sm:w-fit"
+      style={{ background: "#F4F5F8", marginTop: "1.5rem", marginBottom: "5rem", padding: "0.3rem 0.8rem"}}
+    >
+      <Sparkles size={19} strokeWidth={2.15} style={{ color: "#6568F6" }} />
+      <span
+        className="ml-1 text-[0.85rem] font-[500]"
+        style={{ color: "#6F7686" }}
+      >
+        Try demo codes:
       </span>
-      {demos.map((d) => (
+      {demos.map((d, index) => (
         <button
           key={d.code}
           onClick={() => handleDemo(d.code)}
-          className="group flex items-center gap-1.5 rounded-full border px-3 py-1 transition-all duration-200 hover:-translate-y-px cursor-pointer"
+          className="group flex items-center gap-1 transition-colors cursor-pointer"
           style={{
-            borderColor: d.bg,
-            background: "var(--background)",
+            background: "transparent",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = d.color;
-            e.currentTarget.style.background = d.bg;
+            e.currentTarget.style.opacity = "0.8";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = d.bg;
-            e.currentTarget.style.background = "var(--background)";
+            e.currentTarget.style.opacity = "1";
           }}
         >
           <code
-            className="text-[11px] font-bold"
+            className="text-[0.85rem] font-[600]"
             style={{ fontFamily: "var(--mono)", color: d.color }}
           >
             {d.code}
           </code>
-          <span className="text-[9px] font-medium" style={{ color: "var(--tx3)" }}>
-            {d.label}
+          <span
+            className="text-[0.85rem] font-[500]"
+            style={{ color: "#6F7686" }}
+          >
+            ({d.label.toLowerCase()})
           </span>
+          {index < demos.length - 1 && (
+            <span
+              className="pl-0.5 text-[13px] font-bold"
+              style={{ color: "#6F7686" }}
+            >
+              ·
+            </span>
+          )}
         </button>
       ))}
     </div>

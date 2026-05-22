@@ -4,7 +4,6 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { HeroSection } from "@/components/hero/hero-section";
 import { FeaturesGrid } from "@/components/features-grid";
-import { ComplianceBadges } from "@/components/compliance-badges";
 import { VerifyForm } from "@/components/verify/verify-form";
 import { LoadingState } from "@/components/verify/loading-state";
 import { ResultCard } from "@/components/verify/result-card";
@@ -40,7 +39,7 @@ function HomeContent() {
       <SiteHeader />
       <main>
         <HeroSection />
-        <ComplianceBadges />
+        {/* <ComplianceBadges /> */}
         <FeaturesGrid />
 
         <AnimatePresence mode="wait">

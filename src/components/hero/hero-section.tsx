@@ -1,111 +1,99 @@
-import { DocumentMockup } from "./document-mockup";
+import { BookOpen, Search, Shield } from "lucide-react";
 
 export function HeroSection() {
   return (
     <section
-      className="relative overflow-hidden px-6 pt-20 pb-12"
-      style={{ background: "var(--background)" }}
+      className="relative overflow-hidden px-5"
+      style={{
+        background:
+          "linear-gradient(180deg, #F8F9FF 0%, #FFFFFF 47%, #F8F9FF 100%)",
+        borderColor: "#E6E9F4",
+      }}
     >
-      <div className="relative mx-auto flex max-w-[1120px] flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-16">
-
-        {/* ── LEFT: Copy ── */}
-        <div className="flex w-full flex-col items-center text-center lg:max-w-[520px] lg:items-start lg:text-left">
-
-          {/* Badge */}
-          <div
-            className="mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 animate-fade-in"
-            style={{
-              background: "var(--muted)",
-              borderColor: "var(--border)",
-            }}
-          >
-            <span
-              className="text-[11px] font-semibold tracking-wide"
-              style={{ color: "var(--muted-foreground)" }}
-            >
-              Public verification portal
-            </span>
-          </div>
-
-          {/* Shield mark */}
-          <div
-            className="mb-5 flex animate-fade-in"
-            style={{ animationDelay: "0.1s" }}
-          >
-            <img
-              src="/brand/signided-mark-color-light.svg"
-              alt=""
-              className="h-14 w-14"
-            />
-          </div>
-
-          {/* H1 */}
-          <h1
-            className="mb-4 animate-fade-in"
-            style={{
-              fontSize: "clamp(32px, 5vw, 48px)",
-              fontWeight: 800,
-              letterSpacing: "-0.04em",
-              lineHeight: 1.08,
-              color: "var(--foreground)",
-              animationDelay: "0.15s",
-            }}
-          >
-            Is that signed document real?
-          </h1>
-
-          {/* Sub */}
-          <p
-            className="mb-5 animate-fade-in"
-            style={{
-              fontSize: "clamp(20px, 3vw, 26px)",
-              fontWeight: 500,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.25,
-              color: "var(--am)",
-              animationDelay: "0.25s",
-            }}
-          >
-            Verify it in seconds.
-          </p>
-
-          {/* Description */}
-          <p
-            className="mb-6 max-w-[480px] leading-[1.7] animate-fade-in lg:max-w-none"
-            style={{
-              fontSize: "15px",
-              color: "var(--muted-foreground)",
-              animationDelay: "0.35s",
-            }}
-          >
-            Enter the unique verification code printed on any Aiyug-signed PDF
-            — or upload the file directly. Instant results. No account needed.
-          </p>
-
-          {/* CTA */}
-          <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
-            <a
-              href="#verify"
-              className="cta-shine focus-amber inline-flex items-center rounded-xl px-8 py-3.5 text-[15px] font-semibold no-underline hover:scale-[1.03] active:scale-[0.97] transition-transform"
-              style={{
-                background: "var(--cta)",
-                color: "var(--cta-fg)",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-              }}
-            >
-              Verify a document
-            </a>
-          </div>
-        </div>
-
-        {/* ── RIGHT: Document Mockup ── */}
+      <div className="relative mx-auto flex md:min-h-[460px] md:max-w-[1120px] max-w-[90%] flex-col items-center justify-center py-[56px] text-center min-h-[500px] py-[86px]">
         <div
-          className="w-full max-w-[320px] animate-fade-in sm:max-w-[360px] lg:max-w-none lg:flex-1"
-          style={{ animationDelay: "0.5s" }}
+          className="inline-flex animate-fade-in items-center gap-2 rounded-full border"
+          style={{
+            background: "#E7E9FF",
+            borderColor: "#C9CEFF",
+            color: "#5961F2",
+            padding: "0.35rem 0.65rem",
+            marginBottom: "1.5rem",
+          }}
         >
-          <DocumentMockup />
+          <Shield size={12} strokeWidth={2} />
+          <span className="text-[10px] font-bold leading-none">
+            Public Verification Portal
+          </span>
         </div>
 
+        <h1
+          className="animate-fade-in"
+          style={{
+            maxWidth: "840px",
+            color: "#181B2A",
+            fontSize: "clamp(2rem, 10vw, 52px)",
+            fontWeight: 700,
+            letterSpacing: "-0.035em",
+            lineHeight: 1.12,
+            animationDelay: "0.08s",
+          }}
+        >
+          Is that signed document
+          <br />
+          <span style={{ color: "#6568F6" }}>real</span>?
+          <br />
+          <span style={{ fontSize: "clamp(2rem, 10vw, 52px)" }}>
+            Verify it in seconds.
+          </span>
+        </h1>
+
+        <p
+          className="max-w-[900px] animate-fade-in md:text-[0.9rem] font-medium leading-[1.55] "
+          style={{
+            color: "#6E7484",
+            animationDelay: "0.16s",
+            marginTop: "1rem",
+            marginBottom: "1rem",
+          }}
+        >
+          Check if any Doclate-signed document is genuine, untampered, and still
+          valid. Optionally preview it
+          <br className="hidden sm:block" /> with the owner's consent. No
+          account needed.
+        </p>
+
+        <div
+          className="mt-[32px] flex w-full animate-fade-in flex-col items-center justify-center gap-3 sm:mt-[43px] sm:w-auto sm:flex-row sm:gap-[15px]"
+          style={{ animationDelay: "0.24s" }}
+        >
+          <a
+            href="#verify"
+            className="cta-shine inline-flex w-full max-w-[260px] items-center justify-center gap-2.5 rounded-md text-[0.8rem] font-[500] leading-none no-underline transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
+            style={{
+              background: "#6568F6",
+              color: "#FFFFFF",
+              boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+              padding: "0.55rem 0.7rem",
+            }}
+          >
+            <Search size={16} strokeWidth={2.35} />
+            Verify a Document
+          </a>
+          <a
+            href="#how-it-works"
+            className="inline-flex w-full max-w-[260px] items-center justify-center gap-2.5 rounded-md border bg-white text-[0.8rem] font-[500] leading-none no-underline transition-colors hover:bg-[#F7F8FF] sm:w-auto"
+            style={{
+              borderColor: "#E0E3EC",
+              color: "#181B2A",
+              boxShadow: "0 1px 2px rgba(15, 23, 42, 0.02)",
+              padding: "0.55rem 0.7rem",
+            }}
+          >
+            <BookOpen size={16} strokeWidth={2.05} />
+            How It Works
+          </a>
+        </div>
       </div>
     </section>
   );
