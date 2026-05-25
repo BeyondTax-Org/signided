@@ -10,9 +10,12 @@ import {
   FileKey2,
   FileText,
   KeyRound,
+  RotateCcw,
   Send,
 } from "lucide-react";
+import { useNavigate } from "react-router";
 import type { QuickResult } from "@/api/types";
+import { useVerify } from "@/components/verify/verify-context";
 import usePostPreviewRequest, {
   type PreviewRequestResponse,
 } from "@/components/verify/data/usePostPreviewRequest";
@@ -38,6 +41,9 @@ function maskEmail(email?: string) {
 }
 
 export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
+  const { dispatch } = useVerify();
+  const navigate = useNavigate();
+  // const [step, setStep] = useState<PreviewStep>("approved");
   const [step, setStep] = useState<PreviewStep>("request");
   const [otp, setOtp] = useState("");
   const otpInputRef = useRef<HTMLInputElement>(null);
@@ -86,6 +92,11 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
     });
   }
 
+  function handleVerifyAnother() {
+    dispatch({ type: "RESET" });
+    navigate("/");
+  }
+
   const requestDisabled =
     isRequesting || !result?.uvcCode || !result?.requesterEmail;
 
@@ -98,7 +109,13 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
       <OwnerOtpEntry
         request={requestData}
         otp={otp}
-        error={Boolean(approveError)}
+        errorMessage={
+          !approveError
+            ? ""
+            : typeof approveError === "string"
+            ? approveError
+            : "Error in verifying OTP"
+        }
         isSubmitting={isApproving}
         onOtpChange={handleOtpChange}
         onSubmit={handleApprove}
@@ -109,7 +126,12 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
   }
 
   if (step === "approved") {
-    return <PreviewApproveSuccess approval={approveData} />;
+    return (
+      <PreviewApproveSuccess
+        approval={approveData}
+        onVerifyAnother={handleVerifyAnother}
+      />
+    );
   }
 
   return (
@@ -119,28 +141,36 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35 }}
-      className="mx-auto max-w-[1360px] px-4 py-[84px]"
+      className="mx-auto max-w-[90%] md:max-w-[50%]"
+      style={{ padding: "4rem 0" }}
     >
       <div
-        className="overflow-hidden rounded-[24px] border bg-white"
+        className="overflow-hidden rounded-md border bg-white"
         style={{ borderColor: "#DCE1EA" }}
       >
-        <div className="flex items-center gap-[24px] px-[64px] py-[42px]">
+        <div
+          className="flex items-center gap-[1rem] "
+          style={{ padding: "1rem 2rem" }}
+        >
           <div
-            className="flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-[20px]"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md"
             style={{ background: "#ECECFF" }}
           >
-            <Eye size={38} strokeWidth={2.4} style={{ color: "#6568F6" }} />
+            <Eye size={20} strokeWidth={2} style={{ color: "#6568F6" }} />
           </div>
           <div>
             <h1
-              className="text-[31px] font-extrabold leading-[1.1]"
-              style={{ color: "#191B2A", letterSpacing: "-0.03em" }}
+              className="text-[1.1rem] font-[600] leading-[1.1]"
+              style={{
+                color: "#191B2A",
+                letterSpacing: "-0.03em",
+                marginBottom: "0.3rem",
+              }}
             >
               Request Document Preview
             </h1>
             <p
-              className="mt-[11px] text-[20px] font-semibold"
+              className="text-[0.75rem] font-[500] leading-[1.45]"
               style={{ color: "#6F7686" }}
             >
               The document owner must approve before you can view
@@ -148,11 +178,11 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
           </div>
         </div>
 
-        <div className="border-t px-[64px] py-[48px]" style={{ borderColor: "#DCE1EA" }}>
-          <h2
-            className="text-[22px] font-extrabold"
-            style={{ color: "#191B2A" }}
-          >
+        <div
+          className="border-t "
+          style={{ borderColor: "#DCE1EA", padding: "1.2rem 2rem" }}
+        >
+          <h2 className="text-[0.9rem] font-[600]" style={{ color: "#191B2A" }}>
             Here's what will happen:
           </h2>
 
@@ -171,16 +201,24 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
                 text: "Once approved, a read-only preview opens in Doclate (valid for 15 minutes).",
               },
             ].map((step, index) => (
-              <div key={step.text} className="flex items-center gap-[22px]">
+              <div
+                key={step.text}
+                className="flex items-center gap-3"
+                style={{ marginBottom: "0.6rem" }}
+              >
                 <span
-                  className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full text-[16px] font-extrabold"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[0.7rem] font-[600]"
                   style={{ background: "#ECECFF", color: "#6568F6" }}
                 >
                   {index + 1}
                 </span>
-                <step.icon size={30} strokeWidth={2.1} style={{ color: "#6F7686" }} />
+                <step.icon
+                  size={18}
+                  strokeWidth={2.1}
+                  style={{ color: "#6F7686" }}
+                />
                 <p
-                  className="text-[22px] font-semibold leading-[1.35]"
+                  className="text-[0.8rem] font-semibold leading-[1.35]"
                   style={{ color: "#6F7686" }}
                 >
                   {step.text}
@@ -190,20 +228,28 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
           </div>
 
           <div
-            className="mt-[40px] flex items-center justify-between gap-5 rounded-[16px] px-[34px] py-[29px]"
-            style={{ background: "#F6F7F9" }}
+            className="flex items-center justify-between gap-5 rounded-md "
+            style={{
+              background: "#F6F7F9",
+              margin: "1rem 0",
+              padding: "0.8rem ",
+            }}
           >
-            <div className="flex items-center gap-[24px]">
-              <FileText size={42} strokeWidth={2.1} style={{ color: "#6F7686" }} />
+            <div className="flex items-center gap-3">
+              <FileText
+                size={20}
+                strokeWidth={2.1}
+                style={{ color: "#6F7686" }}
+              />
               <div>
                 <h3
-                  className="text-[23px] font-extrabold leading-[1.25]"
+                  className="text-[0.9rem] font-[600] leading-[1.25]"
                   style={{ color: "#191B2A" }}
                 >
                   {result?.docTitle || "Verified document"}
                 </h3>
                 <p
-                  className="mt-[7px] text-[19px] font-semibold"
+                  className="mt-[7px] text-[0.8rem] font-[500]"
                   style={{ color: "#6F7686" }}
                 >
                   Signed on {result?.signedOn || "Unavailable"}
@@ -212,28 +258,37 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
               </div>
             </div>
             <span
-              className="rounded-full px-[24px] py-[10px] text-[17px] font-extrabold leading-none"
-              style={{ background: "#DDF7EC", color: "#10B981" }}
+              className="rounded-full text-[0.7rem] font-[500] leading-none"
+              style={{
+                background: "#DDF7EC",
+                color: "#10B981",
+                padding: "0.3rem 0.8rem",
+              }}
             >
               VERIFIED
             </span>
           </div>
 
           <div
-            className="mt-[40px] rounded-[16px] border px-[33px] py-[30px]"
-            style={{ background: "#FFF8F4", borderColor: "#FFD6BD" }}
+            className="rounded-md border "
+            style={{
+              background: "#FFF8F4",
+              borderColor: "#FFD6BD",
+              padding: "0.8rem ",
+              marginBottom: "1rem",
+            }}
           >
-            <div className="flex items-start gap-[18px]">
-              <Bell size={29} strokeWidth={2.1} style={{ color: "#F97316" }} />
+            <div className="flex items-start gap-3">
+              <Bell size={20} strokeWidth={2} style={{ color: "#F97316" }} />
               <div>
                 <h3
-                  className="text-[22px] font-extrabold"
+                  className="text-[0.9rem] font-[600] leading-[1.25]"
                   style={{ color: "#191B2A" }}
                 >
                   Owner notification
                 </h3>
                 <p
-                  className="mt-[20px] text-[19px] font-semibold leading-[1.55]"
+                  className="mt-[7px] text-[0.8rem] font-[500]"
                   style={{ color: "#6F7686" }}
                 >
                   An OTP will be sent to the document signer's registered
@@ -256,26 +311,31 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
             </p>
           )}
 
-          <div className="mt-[40px] flex gap-[24px]">
+          <div className="flex gap-3">
             <button
               onClick={handleRequest}
               disabled={requestDisabled}
-              className="cta-shine flex flex-1 items-center justify-center gap-4 rounded-[14px] py-[18px] text-[23px] font-extrabold"
+              className="cta-shine flex flex-1 items-center justify-center gap-2 rounded-md text-[0.8rem] font-[600]"
               style={{
                 background: "#6568F6",
                 color: "#FFFFFF",
                 opacity: requestDisabled ? 0.72 : 1,
+                padding: "0.3rem 0rem",
               }}
             >
-              <Send size={31} strokeWidth={2.2} />
+              <Send size={18} strokeWidth={2.2} />
               {isRequesting ? "Sending..." : "Send Preview Request"}
             </button>
             <button
               onClick={onBack}
-              className="flex items-center justify-center gap-4 rounded-[14px] border px-[30px] text-[23px] font-extrabold"
-              style={{ borderColor: "#DCE1EA", color: "#6F7686" }}
+              className="flex items-center justify-center gap-2 rounded-md border  text-[0.8rem] font-[600]"
+              style={{
+                borderColor: "#DCE1EA",
+                color: "#6F7686",
+                padding: "0.3rem 0.6rem",
+              }}
             >
-              <ArrowLeft size={30} />
+              <ArrowLeft size={18} />
               Back
             </button>
           </div>
@@ -287,8 +347,10 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
 
 function PreviewApproveSuccess({
   approval,
+  onVerifyAnother,
 }: {
   approval?: PreviewApproveResponse;
+  onVerifyAnother: () => void;
 }) {
   const previewUrl = approval?.data?.preview_url;
 
@@ -299,57 +361,76 @@ function PreviewApproveSuccess({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35 }}
-      className="mx-auto max-w-[1120px] px-4 py-[84px]"
+      className="mx-auto max-w-[90%] md:max-w-[55%] "
+      style={{ padding: "4rem 0" }}
     >
       <div
-        className="rounded-[24px] border bg-white px-[24px] py-[44px] text-center sm:px-[48px]"
-        style={{ borderColor: "#DCE1EA" }}
+        className="rounded-md border bg-white  text-center"
+        style={{ borderColor: "#DCE1EA", padding: "2rem" }}
       >
         <motion.div
           initial={{ scale: 0.82 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 360, damping: 16 }}
-          className="mx-auto flex h-[96px] w-[96px] items-center justify-center rounded-[24px]"
-          style={{ background: "#DDF7EC" }}
+          className="mx-auto flex h-13 w-13 items-center justify-center rounded-md"
+          style={{ background: "#DDF7EC", marginBottom: "1rem" }}
         >
-          <CheckCircle2 size={54} strokeWidth={2.4} style={{ color: "#10B981" }} />
+          <CheckCircle2
+            size={24}
+            strokeWidth={2}
+            style={{ color: "#10B981" }}
+          />
         </motion.div>
 
         <h1
-          className="mt-[32px] text-[36px] font-extrabold leading-[1.12]"
+          className="text-[1.8rem] font-[600] leading-[1.12]"
           style={{ color: "#191B2A", letterSpacing: "-0.03em" }}
         >
           Successfully approved
         </h1>
         <p
-          className="mx-auto mt-[15px] max-w-[620px] text-[20px] font-semibold leading-[1.5]"
-          style={{ color: "#6F7686" }}
+          className="mx-auto max-w-[520px] text-[1rem] font-[500] leading-[1.5]"
+          style={{ color: "#6F7686", marginBottom: "0.8rem" }}
         >
-          The OTP has been verified and the document preview request is approved.
+          The OTP has been verified and the document preview request is
+          approved.
         </p>
 
         <div
-          className="mx-auto mt-[36px] flex max-w-[500px] items-center justify-center gap-3 rounded-[16px] border px-5 py-4 text-[17px] font-bold"
-          style={{ background: "#F6FDF9", borderColor: "#BFEBD9", color: "#10B981" }}
+          className="mx-auto flex max-w-[220px] items-center justify-center gap-3 rounded-md border text-[0.8rem] font-[500]"
+          style={{
+            background: "#F6FDF9",
+            borderColor: "#BFEBD9",
+            color: "#10B981",
+            padding: "0.3rem 0.3rem",
+            marginBottom: "0.8rem",
+          }}
         >
-          <CheckCircle2 size={23} />
+          <CheckCircle2 size={20} />
           Owner approval completed
         </div>
 
         <div
-          className="mt-[36px] overflow-hidden rounded-[18px] border bg-white text-left"
+          className="overflow-hidden rounded-md border bg-white text-left"
           style={{ borderColor: "#DCE1EA" }}
         >
           <div
-            className="flex flex-wrap items-center justify-between gap-3 border-b px-5 py-4"
-            style={{ borderColor: "#DCE1EA", background: "#FAFBFD" }}
+            className="flex flex-wrap items-center justify-between gap-3 border-b "
+            style={{ borderColor: "#DCE1EA", background: "#FAFBFD", padding: "0.8rem" }}
           >
             <div>
-              <p className="text-[16px] font-extrabold" style={{ color: "#191B2A" }}>
+              <p
+                className="text-[1rem] font-[500]"
+                style={{ color: "#191B2A" }}
+              >
                 Document preview
               </p>
-              <p className="mt-1 text-[13px] font-bold" style={{ color: "#6F7686" }}>
-                Preview expires in {formatExpiryMinutes(approval?.data?.expires_at)}
+              <p
+                className="mt-1 text-[12px] font-[500]"
+                style={{ color: "#6F7686" }}
+              >
+                Preview expires in{" "}
+                {formatExpiryMinutes(approval?.data?.expires_at)}
               </p>
             </div>
             {previewUrl && (
@@ -357,12 +438,14 @@ function PreviewApproveSuccess({
                 href={previewUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[14px] font-extrabold"
+                className="text-[14px] font-[500]"
                 style={{ color: "#6568F6" }}
               >
                 Open in new tab
               </a>
             )}
+
+            
           </div>
 
           {previewUrl ? (
@@ -381,6 +464,21 @@ function PreviewApproveSuccess({
             </div>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={onVerifyAnother}
+          className="mx-auto mt-4 flex items-center justify-center gap-2 rounded-md text-[0.85rem] font-[600] transition-colors hover:bg-[#575AEF]"
+          style={{
+            background: "#6568F6",
+            color: "#FFFFFF",
+            padding: "0.45rem 0.8rem",
+            marginTop: "1rem"
+          }}
+        >
+          <RotateCcw size={16} />
+          Verify another document
+        </button>
       </div>
     </motion.div>
   );
@@ -396,44 +494,55 @@ function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35 }}
-      className="mx-auto max-w-[1360px] px-4 py-[96px]"
+      className="mx-auto max-w-[90%] md:max-w-[55%]"
+      style={{ padding: "4rem 0" }}
     >
       <div
-        className="rounded-[24px] border bg-white px-4 py-[82px] text-center sm:px-8"
-        style={{ borderColor: "#DCE1EA" }}
+        className="rounded-md border bg-white  text-center"
+        style={{ borderColor: "#DCE1EA", padding: "2rem 0" }}
       >
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-          className="mx-auto flex h-[110px] w-[110px] items-center justify-center rounded-[28px]"
+          className="mx-auto flex h-15 w-15 items-center justify-center rounded-md"
           style={{ background: "#ECECFF" }}
         >
           <div
-            className="h-[48px] w-[48px] rounded-full border-[6px] border-t-transparent"
+            className="h-8 w-8 rounded-full border-[3px] border-t-transparent"
             style={{ borderColor: "#6568F6", borderTopColor: "transparent" }}
           />
         </motion.div>
 
         <h1
-          className="mt-[48px] text-[38px] font-extrabold leading-[1.1]"
-          style={{ color: "#191B2A", letterSpacing: "-0.03em" }}
+          className="text-[1.6rem] font-[600] leading-[1.1]"
+          style={{
+            color: "#191B2A",
+            letterSpacing: "-0.03em",
+            marginTop: "1rem",
+          }}
         >
           Waiting for owner approval
         </h1>
         <p
-          className="mx-auto mt-[25px] max-w-[760px] text-[23px] font-semibold leading-[1.5]"
-          style={{ color: "#6F7686" }}
+          className="mx-auto max-w-[560px] text-[1rem] font-[500] leading-[1.5]"
+          style={{ color: "#6F7686", marginTop: "0.2rem" }}
         >
           We've sent an OTP to the document owner. Once they enter the code,
           your preview will open automatically.
         </p>
 
-        <div className="mx-auto mt-[48px] max-w-[620px]">
-          <div className="mb-[18px] flex items-center justify-between text-[20px] font-extrabold">
+        <div className="mx-auto max-w-[520px]" style={{ marginTop: "0.6rem" }}>
+          <div
+            className="flex items-center justify-between text-[1.1rem] font-[500]"
+            style={{ marginBottom: "0.1rem" }}
+          >
             <span style={{ color: "#6F7686" }}>Owner verification</span>
             <span style={{ color: "#6568F6" }}>82%</span>
           </div>
-          <div className="h-[16px] overflow-hidden rounded-full" style={{ background: "#F0F2FA" }}>
+          <div
+            className="h-[12px] overflow-hidden rounded-full"
+            style={{ background: "#F0F2FA" }}
+          >
             <motion.div
               initial={{ width: "58%" }}
               animate={{ width: "82%" }}
@@ -444,15 +553,18 @@ function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
           </div>
         </div>
 
-        <div className="mt-[48px] space-y-[22px] text-[21px] font-bold">
+        <div
+          className="space-y-[22px] text-[1rem] font-[500]"
+          style={{ marginTop: "0.8rem" }}
+        >
           <StatusLine active label="OTP sent to owner" />
           <StatusLine active muted label="Owner received notification" />
           <StatusLine loading label="Verifying owner OTP..." />
         </div>
 
         <p
-          className="mt-[55px] text-[18px] font-bold"
-          style={{ color: "#6F7686" }}
+          className="mt-[55px] text-[1rem] font-[500]"
+          style={{ color: "#6F7686", marginTop: "0.8rem" }}
         >
           This request expires in {formatExpiryMinutes(payload?.expires_at)}.
           Don't close this page.
@@ -465,7 +577,7 @@ function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
 function OwnerOtpEntry({
   request,
   otp,
-  error,
+  errorMessage,
   isSubmitting,
   onOtpChange,
   onSubmit,
@@ -474,7 +586,7 @@ function OwnerOtpEntry({
 }: {
   request?: PreviewRequestResponse;
   otp: string;
-  error: boolean;
+  errorMessage: string;
   isSubmitting: boolean;
   onOtpChange: (value: string) => void;
   onSubmit: () => void;
@@ -490,34 +602,40 @@ function OwnerOtpEntry({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35 }}
-      className="mx-auto max-w-[900px] px-4 py-[96px]"
+      className="mx-auto max-w-[90%] md:max-w-[55%]"
+      style={{ padding: "4rem 0" }}
     >
       <div
-        className="rounded-[24px] border bg-white px-[28px] py-[54px] text-center sm:px-[64px]"
-        style={{ borderColor: "#DCE1EA" }}
+        className="rounded-md border bg-white  text-center"
+        style={{ borderColor: "#DCE1EA", padding: "2rem" }}
       >
         <div
-          className="mx-auto flex h-[86px] w-[86px] items-center justify-center rounded-[22px]"
-          style={{ background: "#ECECFF" }}
+          className="mx-auto flex h-12 w-12 items-center justify-center rounded-md"
+          style={{ background: "#ECECFF", marginBottom: "1rem" }}
         >
-          <KeyRound size={40} strokeWidth={2.3} style={{ color: "#6568F6" }} />
+          <KeyRound size={20} strokeWidth={2.3} style={{ color: "#6568F6" }} />
         </div>
 
         <h1
-          className="mt-[30px] text-[34px] font-extrabold leading-[1.15]"
-          style={{ color: "#191B2A", letterSpacing: "-0.03em" }}
+          className="text-[1.5rem] font-[600] leading-[1.15]"
+          style={{
+            color: "#191B2A",
+            letterSpacing: "-0.03em",
+            marginBottom: "0.2rem",
+          }}
         >
           Enter owner OTP
         </h1>
         <p
-          className="mx-auto mt-[14px] max-w-[640px] text-[19px] font-semibold leading-[1.5]"
-          style={{ color: "#6F7686" }}
+          className="mx-auto  max-w-[740px] md:max-w-[540px] text-[0.9rem] font-[500] leading-[1.5]"
+          style={{ color: "#6F7686", marginBottom: "0.7rem" }}
         >
           Enter the 6 digit code sent to the owner
-          {payload?.owner_mobile_hint ? ` at ${payload.owner_mobile_hint}` : ""}.
+          {payload?.owner_mobile_hint ? ` at ${payload.owner_mobile_hint}` : ""}
+          .
         </p>
 
-        <div className="mx-auto mt-[36px] max-w-[430px]">
+        <div className="mx-auto max-w-[95%] md:max-w-[40%]" style={{ marginBottom: "1rem" }}>
           <input
             ref={inputRef}
             value={otp}
@@ -528,16 +646,17 @@ function OwnerOtpEntry({
             inputMode="numeric"
             autoComplete="one-time-code"
             placeholder="000000"
-            className="h-[72px] w-full rounded-[16px] border bg-white text-center text-[34px] font-extrabold outline-none transition-colors"
+            className="h-[72px] w-full rounded-md border bg-white text-center text-[2rem] font-[600] outline-none transition-colors"
             style={{
               borderColor: "#DCE1EA",
               color: "#191B2A",
               letterSpacing: "0.35em",
+              marginBottom: "0.8rem",
             }}
           />
 
           <div
-            className="mt-[18px] flex items-center justify-center gap-2 text-[15px] font-bold"
+            className="flex items-center justify-center gap-2 text-[15px] font-bold"
             style={{ color: "#6F7686" }}
           >
             <Clock size={17} />
@@ -545,9 +664,12 @@ function OwnerOtpEntry({
           </div>
         </div>
 
-        {error && (
-          <p className="mt-4 text-[14px] font-bold" style={{ color: "var(--revoked)" }}>
-            Error in verifying OTP
+        {errorMessage && (
+          <p
+            className="text-[14px] font-bold"
+            style={{ color: "var(--revoked)", marginBottom: "0.4rem" }}
+          >
+            {errorMessage}
           </p>
         )}
 
@@ -555,22 +677,27 @@ function OwnerOtpEntry({
           <button
             onClick={onSubmit}
             disabled={otp.length !== 6 || isSubmitting}
-            className="cta-shine flex flex-1 items-center justify-center gap-3 rounded-[14px] py-[18px] text-[21px] font-extrabold"
+            className="cta-shine flex flex-1 items-center justify-center gap-2 rounded-md text-[0.8rem] font-[600]"
             style={{
               background: "#6568F6",
               color: "#FFFFFF",
               opacity: otp.length !== 6 || isSubmitting ? 0.7 : 1,
+              padding: "0.3rem 0rem",
             }}
           >
-            <CheckCircle2 size={27} />
+            <CheckCircle2 size={18} />
             {isSubmitting ? "Verifying..." : "Verify OTP"}
           </button>
           <button
             onClick={onBack}
-            className="flex items-center justify-center gap-3 rounded-[14px] border px-[28px] py-[18px] text-[21px] font-extrabold"
-            style={{ borderColor: "#DCE1EA", color: "#6F7686" }}
+            className="flex items-center justify-center gap-2 rounded-md border  text-[0.8rem] font-[600]"
+            style={{
+              borderColor: "#DCE1EA",
+              color: "#6F7686",
+              padding: "0.3rem 0.6rem",
+            }}
           >
-            <ArrowLeft size={26} />
+            <ArrowLeft size={18} />
             Back
           </button>
         </div>
@@ -592,20 +719,20 @@ function StatusLine({
 }) {
   return (
     <div
-      className="flex items-center justify-center gap-[16px]"
+      className="flex items-center justify-center gap-3"
       style={{ color: loading ? "#C4C8D4" : active ? "#6F7686" : "#A8AEBC" }}
     >
       {loading ? (
         <motion.span
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="h-[23px] w-[23px] rounded-full border-[3px] border-t-transparent"
+          className="h-5 w-5 rounded-full border-[3px] border-t-transparent"
           style={{ borderColor: "#C9CEFF", borderTopColor: "transparent" }}
         />
       ) : (
         <CheckCircle2
-          size={28}
-          strokeWidth={2.2}
+          size={20}
+          strokeWidth={2}
           style={{ color: muted ? "#8DDFC2" : "#10B981" }}
         />
       )}

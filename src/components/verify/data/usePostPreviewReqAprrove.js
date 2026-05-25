@@ -6,10 +6,20 @@ const usePostPreviewReqApprove = () => {
   const [data, error, isLoading, callPostPreviewReqApprove, setSuccessData, setError] =
     useAPICall(undefined, "");
 
-  const defaultFallback = () => {
+  const getErrorMessage = (errorResponse) => {
+    const payload = errorResponse?.response?.data || errorResponse;
+    return (
+      payload?.error?.errors?.[0]?.detail ||
+      payload?.error?.detail ||
+      payload?.detail ||
+      "Error in verifying OTP"
+    );
+  };
+
+  const defaultFallback = (errorResponse) => {
     // setError(en.something_went_wrong);
     setSuccessData(undefined);
-    setError("Error in verifying");
+    setError(getErrorMessage(errorResponse));
   };
 
   const statusObj = [

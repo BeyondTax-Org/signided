@@ -17,6 +17,7 @@ type Tab = "uvc" | "pdf";
 
 export interface VerifyApiResult {
   status: "verified" | "expired" | "revoked" | "not-found";
+  verification_source?: Tab;
   uvc_code?: string;
   fingerprint_sha256?: string;
   document_title?: string;
@@ -67,6 +68,7 @@ const supportCards = [
 
 export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
   const [tab, setTab] = useState<Tab>("uvc");
+  const [pendingSource, setPendingSource] = useState<Tab>("uvc");
   const navigate = useNavigate();
   const [uploadSignedData, uploadSignedError, uploadSignedDocLoading, postUploadSignedDoc] =
     usePostUploadSignedDoc();
@@ -86,17 +88,22 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
 
     navigate("/verify", {
       state: {
-        result: response as VerifyApiResult,
+        result: {
+          ...(response as VerifyApiResult),
+          verification_source: pendingSource,
+        },
         showLoading: true,
       },
     });
-  }, [navigate, uploadSignedData]);
+  }, [navigate, pendingSource, uploadSignedData]);
 
   function handleVerifyUvc(uvcCode: string) {
+    setPendingSource("uvc");
     postUploadSignedDoc({ uvc_code: uvcCode });
   }
 
   function handleVerifyPdf(file: File) {
+    setPendingSource("pdf");
     const formData = new FormData();
     formData.append("pdf", file);
     postUploadSignedDoc(formData);

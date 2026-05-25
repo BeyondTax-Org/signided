@@ -38,8 +38,8 @@ const useAPICall = (defaultData, defaultError) => {
           let statusID = statusObj.findIndex((status) => {
             return (
               res.data.status_code === status?.status_code &&
-              (res.data.status_txt || "").toLowerCase() ===
-                status?.status_txt.toLowerCase()
+              (res.data.status_txt || res.data.status_text || "").toLowerCase() ===
+                (status?.status_txt || status?.status_text || "").toLowerCase()
             );
           });
 
@@ -53,7 +53,7 @@ const useAPICall = (defaultData, defaultError) => {
             }
           } else {
             console.log("status not found");
-            defaultFallback();
+            defaultFallback(res?.data);
           }
         }
         // wrong structure
@@ -67,7 +67,7 @@ const useAPICall = (defaultData, defaultError) => {
         console.log("API error");
         console.log({ err });
         setError(err);
-        defaultFallback();
+        defaultFallback(err);
       })
       .finally(() => {
         //turning the loader off

@@ -9,10 +9,9 @@ import {
   FileText,
   Fingerprint,
   Lock,
-  RotateCcw,
+  ShieldAlert,
   ShieldCheck,
   Tag,
-  UserRound,
 } from "lucide-react";
 import { useVerify } from "./verify-context";
 import type { QuickResult } from "@/api/types";
@@ -22,6 +21,7 @@ export function ResultCard({ result }: { result: QuickResult }) {
   const { dispatch } = useVerify();
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
+  const [summaryCopied, setSummaryCopied] = useState(false);
 
   const fingerprint = result.fingerprint || "";
   const isVerified = result.status === "verified";
@@ -34,30 +34,86 @@ export function ResultCard({ result }: { result: QuickResult }) {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  function copyVerificationSummary() {
+    const summaryLines = [
+      "Verification summary",
+      `Status: ${result.status === "verified" ? "Verified" : result.status}`,
+      `Document: ${result.docTitle || "Untitled document"}`,
+      `Signed on: ${result.signedOn || "Unavailable"}`,
+      `Purpose: ${result.purpose || "Unavailable"}`,
+      `Fingerprint: ${fingerprint || "Unavailable"}`,
+    ];
+
+    if (result.uvcCode) {
+      summaryLines.push(`Verification code: ${result.uvcCode}`);
+    }
+
+    navigator.clipboard.writeText(summaryLines.join("\n"));
+    setSummaryCopied(true);
+    setTimeout(() => setSummaryCopied(false), 2000);
+  }
+
   if (!isVerified) {
+    const failedByFile = result.verificationSource === "pdf";
+    const failureTitle = failedByFile
+      ? "No record found for this file"
+      : "No record found for this code";
+    const failureMessage = failedByFile
+      ? "We couldn't find a signing record matching this uploaded file. Double-check the file and try again - or ask the document issuer for the correct signed PDF."
+      : "We couldn't find a signing record matching this verification code. Double-check the code and try again - or ask the document issuer for the correct UVC.";
+
     return (
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
-        className="mx-auto max-w-[720px] rounded-[20px] border bg-white p-8 text-center"
-        style={{ borderColor: "#DCE1EA" }}
+        className="mx-auto flex w-full max-w-[80%] flex-col items-center rounded-md border bg-white text-center md:max-w-[50%]"
+        style={{ borderColor: "#DCE1EA", padding: "2rem", marginTop: "4rem" }}
       >
-        <h2 className="text-[28px] font-extrabold" style={{ color: "#191B2A" }}>
-          Verification failed
-        </h2>
-        <p className="mt-3 text-[16px] font-semibold" style={{ color: "#6F7686" }}>
-          We could not verify this document. Please check the code or PDF and try
-          again.
-        </p>
-        <button
-          onClick={() => dispatch({ type: "RESET" })}
-          className="mt-8 inline-flex items-center gap-2 rounded-[12px] border px-5 py-3 text-[15px] font-bold"
-          style={{ borderColor: "#DCE1EA", color: "#191B2A" }}
+        <div
+          className="flex h-15 w-15 items-center justify-center rounded-md sm:h-12 sm:w-12"
+          style={{ background: "#FCEAE6", color: "#F37A32" }}
         >
-          <RotateCcw size={17} />
-          Try again
-        </button>
+          <ShieldAlert size={20} strokeWidth={2.2} />
+        </div>
+        <h2
+          className="mt-10 text-[clamp(1.2rem,4vw,0.8rem)] font-[600] leading-tight"
+          style={{
+            color: "#191B2A",
+            marginTop: "0.8rem",
+            marginBottom: "0.5rem",
+          }}
+        >
+          {failureTitle}
+        </h2>
+        <p
+          className=" max-w-[580px] text-[clamp(0.75rem,2vw,0.8rem)] font-semibold leading-[1.45]"
+          style={{ color: "#6F7686", marginBottom: "0.5rem" }}
+        >
+          {failureMessage}
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <button
+            onClick={() => {
+              dispatch({ type: "RESET" });
+              navigate("/");
+            }}
+            className="inline-flex  items-center justify-center rounded-md  text-[0.9rem] font-[500] transition-colors hover:bg-[#575AEF]"
+            style={{
+              background: "#6568F6",
+              color: "#FFFFFF",
+              padding: "0.3rem 0.5rem",
+            }}
+          >
+            Try again
+          </button>
+          <button
+            className="inline-flex  items-center justify-center  text-[0.9rem] font-[500] transition-colors hover:text-[#191B2A]"
+            style={{ color: "#6F7686", padding: "0.3rem 0.5rem" }}
+          >
+            Report an issue
+          </button>
+        </div>
       </motion.div>
     );
   }
@@ -69,39 +125,46 @@ export function ResultCard({ result }: { result: QuickResult }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className="mx-auto max-w-[1360px] px-4 py-[92px]"
+      className="mx-auto max-w-[90%] md:max-w-[50%]"
+      style={{ padding: "4rem 0" }}
     >
       <div
-        className="overflow-hidden rounded-[24px] border bg-white"
+        className="overflow-hidden rounded-md border bg-white"
         style={{ borderColor: "#DCE1EA" }}
       >
         <div
-          className="flex items-center gap-[34px] px-[64px] py-[50px]"
-          style={{ background: "#E8F8F2" }}
+          className="flex items-center gap-[1rem]"
+          style={{ background: "#E8F8F2", padding: "1rem 2rem" }}
         >
           <ShieldCheck
-            size={58}
-            strokeWidth={2.4}
+            size={24}
+            strokeWidth={2}
             style={{ color: "#10B981", flexShrink: 0 }}
           />
           <div>
             <span
-              className="inline-flex rounded-full border px-[26px] py-[9px] text-[16px] font-extrabold leading-none"
+              className="inline-flex rounded-full border text-[0.55rem] font-[500] leading-none"
               style={{
                 borderColor: "#10B981",
                 color: "#10B981",
+                padding: "0.25rem 0.45rem",
+                marginBottom: "0.6rem",
               }}
             >
               VERIFIED
             </span>
             <h1
-              className="mt-[18px] text-[31px] font-extrabold leading-[1.15]"
-              style={{ color: "#191B2A", letterSpacing: "-0.03em" }}
+              className="text-[1.1rem] font-[600] leading-[1.15]"
+              style={{
+                color: "#191B2A",
+                letterSpacing: "-0.03em",
+                marginBottom: "0.2rem",
+              }}
             >
               This document is verified
             </h1>
             <p
-              className="mt-[13px] text-[20px] font-semibold leading-[1.45]"
+              className="text-[0.75rem] font-[500] leading-[1.45]"
               style={{ color: "#6F7686" }}
             >
               The signature record is valid and the document has not been
@@ -110,65 +173,69 @@ export function ResultCard({ result }: { result: QuickResult }) {
           </div>
         </div>
 
-        <div className="px-[64px] py-[52px]">
-          <div className="space-y-[33px]">
+        <div className="" style={{ padding: "1.5rem 2rem" }}>
+          <div className="space-y-2">
             <MetaRow
-              icon={<Fingerprint size={31} />}
+              icon={<Fingerprint size={20} />}
               label="Document fingerprint"
               value={fingerprint || "Unavailable"}
               action={
                 fingerprint ? (
                   <button
                     onClick={copyFingerprint}
-                    className="flex h-10 w-10 items-center justify-center rounded-md transition-colors"
+                    className="flex h-4 w-4 items-center justify-center rounded-md transition-colors"
                     style={{ color: "#6F7686" }}
                     title="Copy fingerprint"
                   >
-                    {copied ? <Check size={25} /> : <Copy size={25} />}
+                    {copied ? <Check size={20} /> : <Copy size={20} />}
                   </button>
                 ) : null
               }
             />
             <MetaRow
-              icon={<Calendar size={31} />}
+              icon={<Calendar size={20} />}
               label="Signed on"
               value={result.signedOn || "Unavailable"}
             />
             <MetaRow
-              icon={<Tag size={31} />}
+              icon={<Tag size={20} />}
               label="Purpose"
               value={result.purpose || "Unavailable"}
             />
             <MetaRow
-              icon={<FileText size={31} />}
+              icon={<FileText size={20} />}
               label="Document"
               value={result.docTitle || "Untitled document"}
             />
-            {result.signerInitials && (
+            {/* {result.signerInitials && (
               <MetaRow
-                icon={<UserRound size={31} />}
+                icon={<UserRound size={20} />}
                 label="Owner"
                 value={result.signerInitials}
               />
-            )}
+            )} */}
           </div>
 
           {canPreview && (
             <>
               <div
-                className="mt-[54px] flex items-center gap-[26px] rounded-[16px] border px-[34px] py-[28px]"
-                style={{ background: "#F2F1FF", borderColor: "#D3D2FF" }}
+                className="mt-[54px] flex items-center gap-[1rem] rounded-md border "
+                style={{
+                  background: "#F2F1FF",
+                  borderColor: "#D3D2FF",
+                  padding: "0.6rem 0.8rem",
+                }}
               >
-                <Eye size={37} strokeWidth={2.4} style={{ color: "#6568F6" }} />
+                <Eye size={20} strokeWidth={2} style={{ color: "#6568F6" }} />
                 <div>
                   <h3
-                    className="text-[22px] font-extrabold"
+                    className="text-[0.85rem] font-[600]"
                     style={{ color: "#191B2A" }}
                   >
                     Want to visually verify?
                   </h3>
                   <p
-                    className="mt-[12px] text-[18px] font-semibold leading-[1.5]"
+                    className="mt-[10px] text-[0.75rem] font-[500] leading-[1.5]"
                     style={{ color: "#6F7686" }}
                   >
                     Request a secure, read-only preview. The document owner must
@@ -179,19 +246,21 @@ export function ResultCard({ result }: { result: QuickResult }) {
 
               <button
                 onClick={() => dispatch({ type: "REQUEST_PREVIEW" })}
-                className="cta-shine mt-[24px] flex w-full items-center justify-center gap-3 rounded-[14px] py-[18px] text-[22px] font-extrabold transition-all duration-200 hover:-translate-y-[1px]"
+                className="cta-shine flex w-full items-center justify-center gap-3 rounded-md text-[0.9rem] font-[600] transition-all duration-200 hover:-translate-y-[1px]"
                 style={{
                   background: "#6568F6",
                   color: "#FFFFFF",
+                  marginTop: "0.8rem",
+                  padding: "0.4rem 0rem",
                 }}
               >
-                <Eye size={29} />
+                <Eye size={20} />
                 Preview This Document
               </button>
             </>
           )}
 
-          {result.uvcCode && (
+          {/* {result.uvcCode && (
             <div
               className="mt-[24px] rounded-[12px] px-4 py-3 text-center text-[14px] font-bold"
               style={{ background: "#F6F7F9", color: "#6F7686" }}
@@ -199,9 +268,12 @@ export function ResultCard({ result }: { result: QuickResult }) {
               Verification code:{" "}
               <span style={{ color: "#191B2A" }}>{result.uvcCode}</span>
             </div>
-          )}
+          )} */}
 
-          <div className="mt-[34px] flex flex-wrap items-center justify-center gap-x-[34px] gap-y-3 text-[18px] font-bold">
+          <div
+            className="flex flex-wrap items-center justify-center gap-x-[28px] gap-y-3 text-[0.75rem] font-[500]"
+            style={{ marginTop: "0.6rem" }}
+          >
             <button
               onClick={() => {
                 dispatch({ type: "RESET" });
@@ -212,18 +284,25 @@ export function ResultCard({ result }: { result: QuickResult }) {
               Verify another document
             </button>
             <span style={{ color: "#DCE1EA" }}>•</span>
-            <button style={{ color: "#6F7686" }}>
-              Copy verification summary
+            <button
+              onClick={copyVerificationSummary}
+              style={{ color: summaryCopied ? "#10B981" : "#6F7686" }}
+            >
+              {summaryCopied ? "Summary copied" : "Copy verification summary"}
             </button>
           </div>
         </div>
 
         <div
-          className="flex items-center gap-4 border-t px-[64px] py-[26px]"
-          style={{ borderColor: "#DCE1EA", color: "#6F7686" }}
+          className="flex items-center gap-2 border-t "
+          style={{
+            borderColor: "#DCE1EA",
+            color: "#6F7686",
+            padding: "0.8rem 2rem",
+          }}
         >
-          <Lock size={22} />
-          <p className="text-[17px] font-semibold">
+          <Lock size={14} />
+          <p className="text-[0.7rem] font-[500]">
             Document previews require explicit approval from the document owner
             via OTP. No data is shared without consent.
           </p>
@@ -245,16 +324,19 @@ function MetaRow({
   action?: ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between gap-5">
-      <div className="flex items-start gap-[24px]">
+    <div className="flex items-center md:justify-between gap-5">
+      <div
+        className="flex items-start gap-2.5"
+        style={{ marginBottom: "0.8rem" }}
+      >
         <div style={{ color: "#6F7686" }}>{icon}</div>
         <div>
-          <p className="text-[19px] font-semibold" style={{ color: "#6F7686" }}>
+          <p className="text-[0.75rem] font-[500] " style={{ color: "#6F7686" }}>
             {label}
           </p>
           <p
-            className="mt-[6px] text-[21px] font-extrabold leading-[1.3]"
-            style={{ color: "#191B2A" }}
+            className="text-[0.75rem] font-[600] leading-[1.3]"
+            style={{ color: "#191B2A", marginTop: "0.1rem" }}
           >
             {value}
           </p>

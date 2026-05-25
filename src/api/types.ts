@@ -2,6 +2,7 @@ export type VerifyStatus = "verified" | "expired" | "revoked" | "not-found";
 
 export interface QuickResult {
   status: VerifyStatus;
+  verificationSource?: "uvc" | "pdf";
   uvcCode?: string;
   fingerprint?: string;
   signedOn?: string;

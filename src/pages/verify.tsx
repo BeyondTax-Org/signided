@@ -44,11 +44,13 @@ function formatPurpose(value?: string) {
 }
 
 function mapApiResult(result: VerifyApiResult): QuickResult {
-  const signerEmail = result.signers?.find((signer) => signer.signer_email)
-    ?.signer_email;
+  const signerEmail = result.signers?.find(
+    (signer) => signer.signer_email,
+  )?.signer_email;
 
   return {
     status: result.status as VerifyStatus,
+    verificationSource: result.verification_source,
     uvcCode: result.uvc_code,
     fingerprint: result.fingerprint_sha256
       ? `SHA-256: ${result.fingerprint_sha256}`
@@ -71,14 +73,14 @@ function VerifyContent() {
   const routeState = location.state as VerifyLocationState | null;
   const apiResult = routeState?.result;
   const [showRouteLoading, setShowRouteLoading] = useState(
-    Boolean(routeState?.showLoading && apiResult)
+    Boolean(routeState?.showLoading && apiResult),
   );
   const [helpOpen, setHelpOpen] = useState(false);
 
   useEffect(() => {
     if (!apiResult) return;
     setShowRouteLoading(Boolean(routeState?.showLoading));
-    const timeout = window.setTimeout(() => setShowRouteLoading(false), 1200);
+    const timeout = window.setTimeout(() => setShowRouteLoading(false), 2600);
     return () => window.clearTimeout(timeout);
   }, [apiResult, routeState?.showLoading]);
 
@@ -96,10 +98,14 @@ function VerifyContent() {
     const mappedResult = mapApiResult(apiResult);
 
     return (
-      <>
+      <div
+        className="flex min-h-screen flex-col"
+        style={{ background: "#FAFBFD" }}
+      >
         <SiteHeader />
-        <main className="min-h-[60vh]" style={{ background: "#FAFBFD" }}>
+        <main className="flex-1" style={{ background: "#FAFBFD" }}>
           <AnimatePresence mode="wait">
+            {/* <LoadingState key="route-loading" /> */}
             {showRouteLoading ? (
               <LoadingState key="route-loading" />
             ) : state.step === "preview-request" ? (
@@ -120,14 +126,14 @@ function VerifyContent() {
           </AnimatePresence>
         </main>
         <SiteFooter />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <main className="min-h-[60vh]">
+      <main className="flex-1">
         <AnimatePresence mode="wait">
           {state.step === "input" && (
             <VerifyForm
@@ -146,27 +152,47 @@ function VerifyContent() {
             state.step === "expired" ||
             state.step === "revoked") &&
             state.result && (
-              <div key="result" className="px-6 py-16" style={{ background: "var(--muted)" }}>
+              <div
+                key="result"
+                className="px-6 py-16"
+                style={{ background: "var(--muted)" }}
+              >
                 <ResultCard result={state.result} />
               </div>
             )}
           {state.step === "preview-request" && (
-            <div key="prev-req" className="px-6 py-16" style={{ background: "var(--muted)" }}>
+            <div
+              key="prev-req"
+              className="px-6 py-16"
+              style={{ background: "var(--muted)" }}
+            >
               <PreviewRequest />
             </div>
           )}
           {state.step === "preview-waiting" && (
-            <div key="prev-wait" className="px-6 py-16" style={{ background: "var(--muted)" }}>
+            <div
+              key="prev-wait"
+              className="px-6 py-16"
+              style={{ background: "var(--muted)" }}
+            >
               <PreviewWaiting />
             </div>
           )}
           {state.step === "preview-approved" && (
-            <div key="prev-ok" className="px-6 py-16" style={{ background: "var(--muted)" }}>
+            <div
+              key="prev-ok"
+              className="px-6 py-16"
+              style={{ background: "var(--muted)" }}
+            >
               <PreviewApproved />
             </div>
           )}
           {state.step === "preview-viewer" && (
-            <div key="prev-view" className="px-6 py-16" style={{ background: "var(--muted)" }}>
+            <div
+              key="prev-view"
+              className="px-6 py-16"
+              style={{ background: "var(--muted)" }}
+            >
               <PreviewViewer />
             </div>
           )}
@@ -174,7 +200,7 @@ function VerifyContent() {
       </main>
       <SiteFooter />
       <CodeHelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
-    </>
+    </div>
   );
 }
 
