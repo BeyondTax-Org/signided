@@ -154,9 +154,9 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
         >
           <div
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md"
-            style={{ background: "#ECECFF" }}
+            style={{ background: "#FEF3C7" }}
           >
-            <Eye size={20} strokeWidth={2} style={{ color: "#6568F6" }} />
+            <Eye size={20} strokeWidth={2} style={{ color: "#B45309" }} />
           </div>
           <div>
             <h1
@@ -208,7 +208,7 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
               >
                 <span
                   className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[0.7rem] font-[600]"
-                  style={{ background: "#ECECFF", color: "#6568F6" }}
+                  style={{ background: "#FEF3C7", color: "#B45309" }}
                 >
                   {index + 1}
                 </span>
@@ -317,7 +317,7 @@ export function PreviewRequest({ result, onBack }: PreviewRequestProps) {
               disabled={requestDisabled}
               className="cta-shine flex flex-1 items-center justify-center gap-2 rounded-md text-[0.8rem] font-[600]"
               style={{
-                background: "#6568F6",
+                background: "#B45309",
                 color: "#FFFFFF",
                 opacity: requestDisabled ? 0.72 : 1,
                 padding: "0.3rem 0rem",
@@ -439,7 +439,7 @@ function PreviewApproveSuccess({
                 target="_blank"
                 rel="noreferrer"
                 className="text-[14px] font-[500]"
-                style={{ color: "#6568F6" }}
+                style={{ color: "#B45309" }}
               >
                 Open in new tab
               </a>
@@ -468,9 +468,9 @@ function PreviewApproveSuccess({
         <button
           type="button"
           onClick={onVerifyAnother}
-          className="mx-auto mt-4 flex items-center justify-center gap-2 rounded-md text-[0.85rem] font-[600] transition-colors hover:bg-[#575AEF]"
+          className="mx-auto mt-4 flex items-center justify-center gap-2 rounded-md text-[0.85rem] font-[600] transition-colors hover:bg-[#92400E]"
           style={{
-            background: "#6568F6",
+            background: "#B45309",
             color: "#FFFFFF",
             padding: "0.45rem 0.8rem",
             marginTop: "1rem"
@@ -505,11 +505,11 @@ function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
           animate={{ rotate: 360 }}
           transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
           className="mx-auto flex h-15 w-15 items-center justify-center rounded-md"
-          style={{ background: "#ECECFF" }}
+          style={{ background: "#FEF3C7" }}
         >
           <div
             className="h-8 w-8 rounded-full border-[3px] border-t-transparent"
-            style={{ borderColor: "#6568F6", borderTopColor: "transparent" }}
+            style={{ borderColor: "#B45309", borderTopColor: "transparent" }}
           />
         </motion.div>
 
@@ -537,7 +537,7 @@ function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
             style={{ marginBottom: "0.1rem" }}
           >
             <span style={{ color: "#6F7686" }}>Owner verification</span>
-            <span style={{ color: "#6568F6" }}>82%</span>
+            <span style={{ color: "#B45309" }}>82%</span>
           </div>
           <div
             className="h-[12px] overflow-hidden rounded-full"
@@ -548,7 +548,7 @@ function OwnerWaiting({ request }: { request?: PreviewRequestResponse }) {
               animate={{ width: "82%" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="h-full rounded-full"
-              style={{ background: "#6568F6" }}
+              style={{ background: "#B45309" }}
             />
           </div>
         </div>
@@ -611,9 +611,9 @@ function OwnerOtpEntry({
       >
         <div
           className="mx-auto flex h-12 w-12 items-center justify-center rounded-md"
-          style={{ background: "#ECECFF", marginBottom: "1rem" }}
+          style={{ background: "#FEF3C7", marginBottom: "1rem" }}
         >
-          <KeyRound size={20} strokeWidth={2.3} style={{ color: "#6568F6" }} />
+          <KeyRound size={20} strokeWidth={2.3} style={{ color: "#B45309" }} />
         </div>
 
         <h1
@@ -679,7 +679,7 @@ function OwnerOtpEntry({
             disabled={otp.length !== 6 || isSubmitting}
             className="cta-shine flex flex-1 items-center justify-center gap-2 rounded-md text-[0.8rem] font-[600]"
             style={{
-              background: "#6568F6",
+              background: "#B45309",
               color: "#FFFFFF",
               opacity: otp.length !== 6 || isSubmitting ? 0.7 : 1,
               padding: "0.3rem 0rem",
@@ -727,7 +727,7 @@ function StatusLine({
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           className="h-5 w-5 rounded-full border-[3px] border-t-transparent"
-          style={{ borderColor: "#C9CEFF", borderTopColor: "transparent" }}
+          style={{ borderColor: "rgba(180, 83, 9, 0.15)", borderTopColor: "transparent" }}
         />
       ) : (
         <CheckCircle2

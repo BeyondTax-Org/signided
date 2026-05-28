@@ -10,27 +10,27 @@ const navLinks = [
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  function scrollToSection(
-    event: MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) {
+  function scrollToSection(event: MouseEvent<HTMLAnchorElement>, href: string) {
     if (!href.startsWith("#")) return;
 
     event.preventDefault();
     event.currentTarget.blur();
     setMobileOpen(false);
 
-    window.setTimeout(() => {
-      const target = document.getElementById(href.slice(1));
-      if (!target) return;
+    window.setTimeout(
+      () => {
+        const target = document.getElementById(href.slice(1));
+        if (!target) return;
 
-      const headerOffset = 64;
-      const top =
-        target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        const headerOffset = 64;
+        const top =
+          target.getBoundingClientRect().top + window.scrollY - headerOffset;
 
-      window.scrollTo({ top, behavior: "smooth" });
-      window.history.replaceState(null, "", href);
-    }, mobileOpen ? 240 : 0);
+        window.scrollTo({ top, behavior: "smooth" });
+        window.history.replaceState(null, "", href);
+      },
+      mobileOpen ? 240 : 0,
+    );
   }
 
   return (
@@ -46,7 +46,11 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-14 max-w-[1120px] items-center justify-between ">
         {/* Left: Logo */}
-        <a href="/" className="flex items-center group" style={{marginLeft: "0.3rem"}}>
+        <a
+          href="/"
+          className="flex items-center group"
+          style={{ marginLeft: "0.3rem" }}
+        >
           <img
             src="/brand/signided-by-aiyug-color-light.svg"
             alt="Sign IDed by Aiyug"
@@ -103,9 +107,9 @@ export function SiteHeader() {
             onClick={(event) => scrollToSection(event, "#verify")}
             className="cta-shine rounded-md text-[0.8rem] font-semibold transition-all duration-200 hover:-translate-y-px no-underline"
             style={{
-              background: "#6568F6",
+              background: "#B45309",
               color: "#FFFFFF",
-              boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+              boxShadow: "0 1px 2px rgba(180, 83, 9, 0.2)",
               padding: "0.25rem 0.7rem",
             }}
             onMouseEnter={(e) => {
@@ -129,9 +133,9 @@ export function SiteHeader() {
             onClick={(event) => scrollToSection(event, "#verify")}
             className="cta-shine rounded-md text-[0.8rem] font-semibold transition-all duration-200 hover:-translate-y-px no-underline"
             style={{
-              background: "#6568F6",
+              background: "#B45309",
               color: "#FFFFFF",
-              boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+              boxShadow: "0 1px 2px rgba(180, 83, 9, 0.2)",
               padding: "0.25rem 0.7rem",
             }}
           >
@@ -170,10 +174,13 @@ export function SiteHeader() {
             style={{
               // background: "var(--background)",
               // borderBottom: "1px solid var(--border)",
-              margin: "0.1rem 1rem"
+              margin: "0.1rem 1rem",
             }}
           >
-            <nav className="flex flex-col gap-1 px-6 py-3" style={{marginBottom: "0.4rem"}}>
+            <nav
+              className="flex flex-col gap-1 px-6 py-3"
+              style={{ marginBottom: "0.4rem" }}
+            >
               {navLinks.map((link) => (
                 <a
                   key={link.href}

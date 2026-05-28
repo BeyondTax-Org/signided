@@ -14,9 +14,9 @@ export function HeroSection() {
         <div
           className="inline-flex animate-fade-in items-center gap-2 rounded-full border"
           style={{
-            background: "#E7E9FF",
-            borderColor: "#C9CEFF",
-            color: "#5961F2",
+            background: "#FEF2F2",
+            borderColor: "rgba(180, 83, 9, 0.15)",
+            color: "#B45309",
             padding: "0.35rem 0.65rem",
             marginBottom: "1.5rem",
           }}
@@ -41,7 +41,7 @@ export function HeroSection() {
         >
           Is that signed document
           <br />
-          <span style={{ color: "#6568F6" }}>real</span>?
+          <span style={{ color: "#B45309" }}>real</span>?
           <br />
           <span style={{ fontSize: "clamp(2rem, 10vw, 52px)" }}>
             Verify it in seconds.
@@ -71,9 +71,9 @@ export function HeroSection() {
             href="#verify"
             className="cta-shine inline-flex w-full max-w-[260px] items-center justify-center gap-2.5 rounded-md text-[0.8rem] font-[500] leading-none no-underline transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
             style={{
-              background: "#6568F6",
+              background: "#B45309",
               color: "#FFFFFF",
-              boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+              boxShadow: "0 1px 2px rgba(180, 83, 9, 0.2)",
               padding: "0.55rem 0.7rem",
             }}
           >

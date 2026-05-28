@@ -27,8 +27,8 @@ const verifySteps = [
     description:
       "We match the code to a signing record, verify the cryptographic fingerprint, and confirm it's valid.",
     who: "Automatic" as const,
-    roleBg: "#ECECFF",
-    roleColor: "#6568F6",
+    roleBg: "#FEF3C7",
+    roleColor: "#B45309",
   },
   {
     num: 3,
@@ -71,8 +71,8 @@ const previewSteps = [
 
 const verifyColor = "#10B981";
 const verifyLight = "#E8FAF4";
-const previewColor = "#6568F6";
-const previewLight = "#ECECFF";
+const previewColor = "#B45309";
+const previewLight = "#FEF3C7";
 
 export function HiwSection() {
   return (
@@ -171,7 +171,7 @@ export function HiwSection() {
               <span
                 className="rounded-full text-center text-[0.72rem] font-[600] leading-[1.25] sm:text-[0.8rem] sm:leading-none"
                 style={{
-                  background: "#ECECFF",
+                  background: "#FEF3C7",
                   color: previewColor,
                   padding: "0.35rem 0.7rem",
                 }}
@@ -248,11 +248,11 @@ export function HiwSection() {
             style={{
               background: previewColor,
               color: "#FFFFFF",
-              boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+              boxShadow: "0 1px 2px rgba(180, 83, 9, 0.2)",
               padding: "0.4rem 0.7rem"
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#575AEF";
+              e.currentTarget.style.background = "#92400E";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = previewColor;

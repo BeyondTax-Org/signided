@@ -54,8 +54,8 @@ const supportCards = [
     icon: Fingerprint,
     title: "Fingerprint",
     desc: "SHA-256 hash that proves the document hasn't been modified.",
-    bg: "#ECECFF",
-    color: "#6568F6",
+    bg: "#FEF3C7",
+    color: "#B45309",
   },
   {
     icon: Eye,
@@ -183,7 +183,7 @@ export function VerifyForm({ onOpenHelp, initialCode }: VerifyFormProps) {
                 {tab === t.key && (
                   <span
                     className="absolute bottom-0 left-0 h-[3px] w-full"
-                    style={{ background: "#6568F6" }}
+                    style={{ background: "#B45309" }}
                   />
                 )}
               </button>

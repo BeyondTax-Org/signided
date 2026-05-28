@@ -75,13 +75,13 @@ export function FeaturesGrid() {
           >
             <div
               className="flex h-10 w-10 items-center justify-center rounded-md md:h-[32%] md:w-[20%]"
-              style={{ background: "#ECECFF", marginBottom: "1.1rem" }}
+              style={{ background: "#FEF3C7", marginBottom: "1.1rem" }}
             >
               <feature.icon
                 size={20}
                 strokeWidth={2}
                 aria-hidden="true"
-                style={{ color: "#6568F6" }}
+                style={{ color: "#B45309" }}
               />
             </div>
             <h3

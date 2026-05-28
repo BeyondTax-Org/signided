@@ -56,7 +56,7 @@ export function UvcInput({
           signed document.
         </p>
         <div
-          className="flex h-[54px] items-center overflow-hidden rounded-md border bg-white transition-all duration-200 focus-within:border-[#6568F6] focus-within:shadow-[0_0_0_4px_rgba(101,104,246,0.12)] sm:h-[60px]"
+          className="flex h-[54px] items-center overflow-hidden rounded-md border bg-white transition-all duration-200 focus-within:border-[#B45309] focus-within:shadow-[0_0_0_4px_rgba(180,83,9,0.12)] sm:h-[60px]"
           style={{
             borderColor: error ? "var(--revoked)" : "#DCE1EA",
             borderWidth: "1.5px",
@@ -100,7 +100,7 @@ export function UvcInput({
           type="button"
           onClick={onOpenHelp}
           className="flex items-center gap-1.5 text-[0.7rem] font-[500] transition-colors cursor-pointer"
-          style={{ color: "#6568F6", marginBottom: "0.9rem" }}
+          style={{ color: "#B45309", marginBottom: "0.9rem" }}
         >
           <CircleHelp size={14} strokeWidth={2.2} />
           Where is this?
@@ -112,17 +112,17 @@ export function UvcInput({
         disabled={isSubmitting}
         className="cta-shine flex w-full items-center justify-center gap-2 rounded-md text-[1rem] font-[600] transition-all duration-200 hover:-translate-y-[1px] cursor-pointer"
         style={{
-          background: "#6568F6",
+          background: "#B45309",
           color: "#FFFFFF",
-          boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+          boxShadow: "0 1px 2px rgba(180, 83, 9, 0.2)",
           opacity: isSubmitting ? 0.72 : 1,
           padding: "0.7rem"
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = "#575AEF";
+          e.currentTarget.style.background = "#92400E";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = "#6568F6";
+          e.currentTarget.style.background = "#B45309";
         }}
       >
         <Search size={18} strokeWidth={2} />
