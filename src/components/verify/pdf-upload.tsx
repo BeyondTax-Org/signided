@@ -71,8 +71,8 @@ export function PdfUpload({
         }}
         className="flex min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-md border-2 border-dashed px-4 py-6 text-center transition-all duration-200 sm:min-h-[200px] sm:px-6 sm:py-8"
         style={{
-          borderColor: file ? "#10B981" : isDragging ? "#6568F6" : "#E1E5EE",
-          background: file ? "#F4FCF8" : isDragging ? "#F4F4FF" : "#FBFBFC",
+          borderColor: file ? "#10B981" : isDragging ? "#B45309" : "#E1E5EE",
+          background: file ? "#F4FCF8" : isDragging ? "rgba(180, 83, 9, 0.08)" : "#FBFBFC",
           marginBottom: "1.2rem"
         }}
       >
@@ -153,17 +153,17 @@ export function PdfUpload({
         disabled={isSubmitting}
         className="cta-shine flex w-full items-center justify-center gap-2 rounded-md text-[1rem] font-[600] transition-all duration-200 hover:-translate-y-[1px] cursor-pointer"
         style={{
-          background: "#6568F6",
+          background: "#B45309",
           color: "#FFFFFF",
-          boxShadow: "0 1px 2px rgba(62, 66, 168, 0.2)",
+          boxShadow: "0 1px 2px rgba(180, 83, 9, 0.2)",
           opacity: isSubmitting ? 0.72 : 1,
           padding: "0.7rem",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = "#575AEF";
+          e.currentTarget.style.background = "#92400E";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = "#6568F6";
+          e.currentTarget.style.background = "#B45309";
         }}
       >
         <FileText size={18} strokeWidth={2} />

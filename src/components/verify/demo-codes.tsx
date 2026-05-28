@@ -22,7 +22,7 @@ export function DemoCodes() {
       className="mx-auto flex w-full flex-wrap items-center justify-center gap-1.5 rounded-md sm:w-fit"
       style={{ background: "#F4F5F8", marginTop: "1.5rem", marginBottom: "5rem", padding: "0.3rem 0.8rem"}}
     >
-      <Sparkles size={19} strokeWidth={2.15} style={{ color: "#6568F6" }} />
+      <Sparkles size={19} strokeWidth={2.15} style={{ color: "#B45309" }} />
       <span
         className="ml-1 text-[0.85rem] font-[500]"
         style={{ color: "#6F7686" }}

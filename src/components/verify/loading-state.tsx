@@ -26,7 +26,7 @@ export function LoadingState() {
           <LoaderCircle
             size={40}
             strokeWidth={2}
-            style={{ color: "#6568F6" }}
+            style={{ color: "#B45309" }}
           />
         </motion.div>
 

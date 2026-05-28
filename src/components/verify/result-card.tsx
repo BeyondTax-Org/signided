@@ -98,9 +98,9 @@ export function ResultCard({ result }: { result: QuickResult }) {
               dispatch({ type: "RESET" });
               navigate("/");
             }}
-            className="inline-flex  items-center justify-center rounded-md  text-[0.9rem] font-[500] transition-colors hover:bg-[#575AEF]"
+            className="inline-flex  items-center justify-center rounded-md  text-[0.9rem] font-[500] transition-colors hover:bg-[#92400E]"
             style={{
-              background: "#6568F6",
+              background: "#B45309",
               color: "#FFFFFF",
               padding: "0.3rem 0.5rem",
             }}
@@ -221,12 +221,12 @@ export function ResultCard({ result }: { result: QuickResult }) {
               <div
                 className="mt-[54px] flex items-center gap-[1rem] rounded-md border "
                 style={{
-                  background: "#F2F1FF",
-                  borderColor: "#D3D2FF",
+                  background: "rgba(180, 83, 9, 0.08)",
+                  borderColor: "#FEF3C7",
                   padding: "0.6rem 0.8rem",
                 }}
               >
-                <Eye size={20} strokeWidth={2} style={{ color: "#6568F6" }} />
+                <Eye size={20} strokeWidth={2} style={{ color: "#B45309" }} />
                 <div>
                   <h3
                     className="text-[0.85rem] font-[600]"
@@ -248,7 +248,7 @@ export function ResultCard({ result }: { result: QuickResult }) {
                 onClick={() => dispatch({ type: "REQUEST_PREVIEW" })}
                 className="cta-shine flex w-full items-center justify-center gap-3 rounded-md text-[0.9rem] font-[600] transition-all duration-200 hover:-translate-y-[1px]"
                 style={{
-                  background: "#6568F6",
+                  background: "#B45309",
                   color: "#FFFFFF",
                   marginTop: "0.8rem",
                   padding: "0.4rem 0rem",
@@ -279,7 +279,7 @@ export function ResultCard({ result }: { result: QuickResult }) {
                 dispatch({ type: "RESET" });
                 navigate("/");
               }}
-              style={{ color: "#6568F6" }}
+              style={{ color: "#B45309" }}
             >
               Verify another document
             </button>

@@ -48,9 +48,9 @@ export function SiteFooter() {
               href="#verify"
               className="rounded-lg text-[12px] font-[500] no-underline transition-colors"
               style={{
-                background: "rgba(238, 241, 250, 0.85)",
-                color: "#6568F6",
-                border: "1px solid #6568F6",
+                background: "rgba(180, 83, 9, 0.08)",
+                color: "#B45309",
+                border: "1px solid #B45309",
                 padding: "0.1rem 0.5rem"
               }}
             >
